@@ -83,6 +83,22 @@ Schemas are included inline in the file. In the future, there may be a way to ex
 
 Schemas have a version number to support schema evolution.
 
+### Extensibility through preserving the property bag
+
+In order to support interchange beteween canvases when features don't overlap, canvases need to preserve nodes and relations that it doesn't support.
+
+In practice, that looks something like this:
+
+1. Canvas A supporting Feature X creates a canvas with a Feature X node in it and exports it as an Open Canvas file.
+2. Canvas B, which does not support Feature X, opens the Open Canvas file, and some edits are made to the canvas.
+3. Canvas B exports the canvas to an Open Canvas file. The nodes for Feature X should still be in the Open Canvas file, unchanged.
+
+NOTE: This is perhaps the most onerous part of supporting Open Canvas; implementing canvases have to store data that they don't need or recognize.
+
+### Extensibility through fallbacks
+
+The base node type supports an optional `fallback` property as a string. If a canvas wishes to visualize a node that it doesn't implement, the canvas can render a fallback element on the canvas at the element's x,y position using the string.
+
 ### Extensibility through schema extension
 
 Schemas can extend one another.
@@ -98,12 +114,6 @@ Schemas are defined in JSONSchema format.
 ```
 
 For example, a `@tldraw/arrow` schema could extend a `@ocwg/arrow` schema, adding properties that are only applicable to TLDraw arrow.
-
-### Extensibility through fallbacks
-
-The base node type supports an optional `fallback` property as a string. If a canvas wishes to visualize a node that it doesn't implement, the canvas can render a fallback element on the canvas at the element's x,y position using the string.
-
-### Principle #1: Preserve Property Bags
 
 ## Core Node Schemas
 
