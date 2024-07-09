@@ -15,10 +15,10 @@ The JSON structure includes `nodes`, `relations`, and `schemas`, and a version n
 
 ```json
 {
-  "schema_version": "1.0",
-  "nodes": {},
-  "relations": {},
-  "schemas": {}
+  "schema_version": "1.0", // this could be implied
+  "nodes": [],
+  "relations": [],
+  "schemas": []
 }
 ```
 
@@ -33,33 +33,37 @@ All Nodes must implement the following properties:
 ```ts
 type Node = {
   id: string;
-  schema: string;
-  schema_version: string;
   x: number;
   y: number;
   z?: number;
-  properties?: {
-    [key: string]: any;
-  };
+  properties?: [
+    {
+      schema: string;
+      schema_version: string;
+      [key: string]: any;
+    }
+  ];
   fallback?: string;
 };
 ```
 
 ### Relations
 
-Relations are used to connect Nodes together.
+Relations are used to indicate relationships between Nodes on the canvas. Relations are generally not visible, but rather conceptual.
 
 **Relation Base class**
 
 ```ts
 type Relation = {
   id: string;
-  schema: string;
-  schema_version: string;
   name: string;
-  properties?: {
-    [key: string]: any;
-  };
+  properties?: [
+    {
+      schema: string;
+      schema_version: string;
+      [key: string]: any;
+    }
+  ];
 };
 ```
 
@@ -115,6 +119,8 @@ Schemas are defined in JSONSchema format.
 
 For example, a `@tldraw/arrow` schema could extend a `@ocwg/arrow` schema, adding properties that are only applicable to TLDraw arrow.
 
+- [ ] Flesh out this example
+
 ## Core Node Schemas
 
 These are the node schemas included in the core `@ocwg` namespace.
@@ -135,35 +141,38 @@ Here are a bunch of example Nodes:
 
 ```json
 {
-  "nodes": {
-    "someShapeID11321": {
-      "schema": "@ocwg/text",
-      "schema_version": "1.0",
+  "nodes": [
+    {
+      "id": "someShapeID11321",
       "x": 10,
       "y": 10,
-      "properties": {
+      "properties": [{
+        "schema": "@ocwg/text",
+        "schema_version": "1.0",
         "text": "Hello, world!",
         "color": "#000000"
-      }
+      }]
     },
-    "2435234634t324t3245": {
-      "schema": "@ocwg/asset",
-      "schema_version": "1.0",
+    {
+      "id": "2435234634t324t3245",
       "x": 10,
       "y": 10,
-      "properties": {
+      "properties": [{
+        "schema": "@ocwg/text",
+        "schema_version": "1.0",
         "w": 200,
         "h": 150,
         "mime_type": "text/json",
         "uri": "data://9823fy9283hf2i3yf082ohu3fo2hufi2uh4fk234f8youhi",
-      }
+      }]
     },
-    "oajefioajef83r8y3ehf": {
-      "schema": "@ocwg/rectangle",
-      "schema_version": "1.0",
+    {
+      "id": "oajefioajef83r8y3ehf",
       "x": 10,
       "y": 10,
-      "properties": {
+      "properties": [{
+        "schema": "@ocwg/rectangle",
+        "schema_version": "1.0",
         "width": 200,
         "height": 150,
         "text": "Hello, world!",
@@ -171,25 +180,27 @@ Here are a bunch of example Nodes:
         "stroke_weight": ,
         "fill_color": ,
         "rotation": 90 /* +/-360 degrees */
-      }
+      }]
     },
-    "someShapeID124135": {
-      "schema": "@stately/typed-rectangle",
-      "schema_version": "3.1",
+    {
+      "id": "someShapeID124135",
       "x": 10,
       "y": 10,
-      "properties": {
+      "properties": [{
+        "schema": "@stately/typed-rectangle",
+        "schema_version": "3.1",
         "type": "rectangle",
         "width": 100,
         "height": 200,
-      }
+      }]
     },
-    "someShapeID535": {
-      "schema": "@tldraw/arrow",
-      "schema_version": "1.0",
+    {
+      "id": "someShapeID535",
       "x": 10,
       "y": 10,
-      "properties": {
+      "properties": [{
+        "schema": "@tldraw/arrow",
+        "schema_version": "1.0",
         "start": {
           "x": 1,
           "y": 1,
@@ -203,9 +214,9 @@ Here are a bunch of example Nodes:
           "connected_to": "someShapeID124135",
         },
         "bend": 200,
-      }
+      }]
     }
-  },
+  ]
 }
 ```
 
@@ -220,11 +231,16 @@ Sets can be used to model groups, frames, and many other things. Their basic rep
 Here's an example:
 
 ```json
-"setRelationID1234": {
-  "schema": "@ocwg/set",
-  "schema_version": "1.0",
-  "members": ["someID", "someOtherID"],
-  "name": "group a"
+{
+  "id": "setRelationID1234",
+  "name": "group a",
+  "properties": [
+    {
+      "schema": "@ocwg/set",
+      "schema_version": "1.0",
+      "members": ["someID", "someOtherID"]
+    }
+  ]
 }
 ```
 
@@ -237,12 +253,17 @@ Edge Relations are used to connect two Nodes or Relations together. Edge Relatio
 Here's an example:
 
 ```json
-"edgeRelationID1234": {
-  "schema": "@ocwg/edge",
-  "schema_version": "1.0",
-  "from": "someNodeID124135",
-  "to": "someNodeID11321",
+{
+  "id": "edgeRelationID1234",
   "name": "a named edge",
+  "properties": [
+    {
+      "schema": "@ocwg/edge",
+      "schema_version": "1.0",
+      "from": "someNodeID124135",
+      "to": "someNodeID11321"
+    }
+  ]
 }
 ```
 
@@ -253,18 +274,17 @@ Here's an example:
 Hyper-edges represent many-to-many relationships.
 
 ```json
-"hyperEdgeRelation1234": {
-  "schema": "@ocwg/hyperedge",
-  "schema_version": "1.0",
-  "from": [
-    "someShapeID124135",
-    "someShapeID11321"
-  ],
-  "to": [
-    "someShapeID124135",
-    "someShapeID11321"
-  ],
+{
+  "id": "hyperEdgeRelation1234",
   "name": "a named hyperedge",
+  "properties": [
+    {
+      "schema": "@ocwg/hyperedge",
+      "schema_version": "1.0",
+      "from": ["someShapeID124135", "someShapeID11321"],
+      "to": ["someShapeID124135", "someShapeID11321"]
+    }
+  ]
 }
 ```
 
