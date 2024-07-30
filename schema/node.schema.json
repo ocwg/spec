@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "node.schema.json",
   "title": "node",
   "type": "object",
   "description": "A node in the node list.",
