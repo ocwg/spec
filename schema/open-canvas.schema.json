@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft-04/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Open Canvas",
   "type": "object",
   "description": "The root object for a open-canvas file",
