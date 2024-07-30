@@ -3,5 +3,11 @@
   "title": "node",
   "type": "object",
   "description": "A node in the node list.",
-  "properties": { "id": { "type": "string" } }
+  "required": ["id", "x", "y"],
+  "properties": {
+    "id": { "type": "string" },
+    "x": { "type": "number" },
+    "y": { "type": "number" },
+    "z": { "type": "number" }
+  }
 }
