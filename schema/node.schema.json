@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "node",
+  "type": "object",
+  "description": "A node in the node list.",
+  "properties": { "id": { "type": "string" } }
+}
