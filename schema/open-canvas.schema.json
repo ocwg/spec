@@ -8,13 +8,8 @@
     "nodes": {
       "type": "array",
       "description": "A list of nodes.",
-
       "items": {
-        "type": "object",
-        "properties": {},
-        "additionalProperties": {
-          "$ref": "node.schema.json"
-        }
+        "$ref": "node.schema.json"
       }
     },
     "relations": {
