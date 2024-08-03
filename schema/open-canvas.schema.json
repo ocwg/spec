@@ -4,7 +4,11 @@
   "title": "Open Canvas",
   "type": "object",
   "description": "The root object for a open-canvas file",
+  "required": ["schema_version", "nodes"],
   "properties": {
+    "schema_version": {
+      "type": "string"
+    },
     "nodes": {
       "type": "array",
       "description": "A list of nodes.",
