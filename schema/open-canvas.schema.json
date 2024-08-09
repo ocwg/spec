@@ -18,11 +18,15 @@
     },
     "relations": {
       "type": "array",
-      "description": "A list of relations."
+      "description": "A list of relations.",
+      "items": {
+        "$ref": "relation.schema.json"
+      }
     },
     "schemas": {
       "type": "object",
-      "description": "A dictionary of extended schemas"
+      "description": "A dictionary of extended schemas",
+      "$ref": "schemas.schema.json"
     },
     "resources": {
       "type": "object",
