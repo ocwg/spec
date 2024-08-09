@@ -9,6 +9,28 @@
     "id": { "type": "string" },
     "x": { "type": "number" },
     "y": { "type": "number" },
-    "z": { "type": "number" }
+    "z": { "type": "number" },
+    "properties": {
+      "type": "array",
+      "contains": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "string"
+          },
+          "schema_version": {
+            "type": "string"
+          }
+        },
+        "required": ["schema", "schema_version"]
+      },
+      "items": {
+        "anyOf": [
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
   }
 }
