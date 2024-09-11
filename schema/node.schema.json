@@ -4,12 +4,21 @@
   "title": "node",
   "type": "object",
   "description": "A node in the node list.",
-  "required": ["id", "x", "y"],
+  "required": ["id", "position"],
   "properties": {
     "id": { "type": "string" },
-    "x": { "type": "number" },
-    "y": { "type": "number" },
-    "z": { "type": "number" },
+    "position": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
     "properties": {
       "type": "array",
       "contains": {
