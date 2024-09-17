@@ -184,8 +184,7 @@ Here are a bunch of example Nodes:
     },
     {
       "id": "someShapeID124135",
-      "x": 10,
-      "y": 10,
+      "position": [10, 10],
       "properties": [{
         "schema": "@stately/typed-rectangle",
         "schema_version": "3.1",
