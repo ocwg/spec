@@ -1,13 +1,10 @@
 # Open Canvas Initial Draft Spec
 
-**NOTE:** This is a draft!
 
-## Overview
+⚒️ Work on the initial spec is underway in the [Initial Draft Spec pull request](https://github.com/ocwg/spec/pull/1).
 
-- Trying to balance between visual and conceptual canvases. Nodes provide the core elements for the canvas. Relations provide rich support for creating conceptual relationships between nodes.
-- Not trying to maintain backwards-compatibility with Obsidian's JSON Canvas.
-- Aiming for extensibility via schemas.
-- Enable different canvases to work together without canvases needing to implement or even understand all aspects of the spec.
+📚 Read more at [canvasprotocol.org](https://canvasprotocol.org).
+
 
 ## Structure
 
@@ -288,3 +285,4 @@ Hyper-edges represent many-to-many relationships.
 ```
 
 - The `from[]` and `to[]` arrays can contain Nodes or Relations.
+

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "open-canvas.schema.json",
+  "title": "Open Canvas",
+  "type": "object",
+  "description": "The root object for a open-canvas file",
+  "required": ["schema_version", "nodes"],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "description": "A list of nodes.",
+      "items": {
+        "$ref": "node.schema.json"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "description": "A list of relations.",
+      "items": {
+        "$ref": "relation.schema.json"
+      }
+    },
+    "schemas": {
+      "type": "object",
+      "description": "A dictionary of extended schemas",
+      "$ref": "schemas.schema.json"
+    },
+    "resources": {
+      "type": "object",
+      "description": "A dictionary of resources which can be referenced by nodes and relations."
+    }
+  }
+}
