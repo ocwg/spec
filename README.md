@@ -1,14 +1,28 @@
 # Open Canvas Initial Draft Spec
 
-
 ⚒️ Work on the initial spec is underway in the [Initial Draft Spec pull request](https://github.com/ocwg/spec/pull/1).
 
 📚 Read more at [canvasprotocol.org](https://canvasprotocol.org).
 
+The purpose of this doc is to provide a plain-language description of the specification and walk through key concepts of the Open Canvas format.
+
+## Motivation and Design Goals
+
+The goal of the Open Canvas format is to enable interoperability between different [infinite canvas tools](https://infinitecanvas.tools) by being a simple, compact "transmission" format.
+
+Open Canvas has been designed to meet the following goals:
+
+- **Balance between visual and conceptual canvases.** Nodes provide the core elements for the canvas. Relations provide rich support for creating conceptual relationships between nodes.
+- **Extensibility.** Open Canvas is fully extensibile using custom-defined schemas.
+- **Runtime-independence.** Enable different canvases to work together without canvases needing to implement or even understand all aspects of the spec.
+
+Out of scope:
+
+- **Backwards compatibility with Obsidian's JSON Canvas.** JSON Canvas isn't designed to support the full gamut of functionality supported by Open Canvas.
 
 ## Structure
 
-The JSON structure includes `nodes`, `relations`, and `schemas`, and a version number that defines the shape of the top-level structure and the shapes of the base classes. The following is a valid, though empty open canvas file:
+Open Canvas consists of `nodes`, `relations`, and `resources`, and a version number that defines the shape of the top-level structure and the shapes of the base classes. The following is a valid, though empty open canvas file:
 
 ```json
 {
@@ -285,4 +299,3 @@ Hyper-edges represent many-to-many relationships.
 ```
 
 - The `from[]` and `to[]` arrays can contain Nodes or Relations.
-
