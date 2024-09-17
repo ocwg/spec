@@ -19,6 +19,19 @@
       "minItems": 2,
       "maxItems": 3
     },
+    "size": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "rotation": { "type": "number" },
     "properties": {
       "type": "array",
       "contains": {

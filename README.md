@@ -20,22 +20,27 @@ Out of scope:
 
 - **Backwards compatibility with Obsidian's JSON Canvas.** JSON Canvas isn't designed to support the full gamut of functionality supported by Open Canvas.
 
-## Structure
+## Structure: Nodes, Relations, Resources, Schemas
 
-Open Canvas consists of `nodes`, `relations`, and `resources`, and a version number that defines the shape of the top-level structure and the shapes of the base classes. The following is a valid, though empty open canvas file:
+Conceptually, an infinite canvas can be thought of as `nodes` and `relations`. `nodes` represent all of the visual information on the canvas, while `relations` represent the invisible conceptual relationships between nodes.
+
+In order to enable asset re-use, Open Canvas distinguishes between a `node` with a location on the canvas and the `resource` that the `node` displays.
+
+The structure of an Open Canvas JSON consists of `nodes`, `relations`, and `resources`, with a version number that defines the shape of the top-level structure and the shapes of the base classes. The following is a valid, though empty Open Canvas file:
 
 ```json
 {
   "schema_version": "1.0", // this could be implied
   "nodes": [],
   "relations": [],
+  "resources": [],
   "schemas": []
 }
 ```
 
 ### Nodes
 
-All visible items on the canvas are considered Nodes.
+All visible items on the canvas are referred to as Nodes.
 
 **Node Base Class**
 
@@ -44,12 +49,14 @@ All Nodes must implement the following properties:
 ```ts
 type Node = {
   id: string;
-  x: number;
-  y: number;
-  z?: number;
+  position: [number, number] | [number, number, number]; // x,y or x,y,z
+  size?: [number, number] | [number, number, number]; // w,h or w,h,d
+  rotation?: number; // +/- 360 degrees; if not included, defaults to 0
+  scale?: number; // defaults to 0
+  resource?: string; // id of a resource
   properties?: [
     {
-      schema: string;
+      schema: string; // name of a schema listed in schemas
       schema_version: string;
       [key: string]: any;
     }
@@ -60,7 +67,7 @@ type Node = {
 
 ### Relations
 
-Relations are used to indicate relationships between Nodes on the canvas. Relations are generally not visible, but rather conceptual.
+Relations are used to indicate relationships between Nodes on the canvas. Relations are generally not visible, but rather conceptual. If a relation should be visualized, it should have a corresponding Node.
 
 **Relation Base class**
 
@@ -78,6 +85,75 @@ type Relation = {
 };
 ```
 
+### Resources
+
+Resources are the hypermedia assets that Nodes display. They are stored separately from Nodes to allow for asset reuse and efficiency.
+
+**Resoruce Base class**
+
+```ts
+type Resource = {
+  id: string;
+  uri: string;
+  mimeType?: string;
+};
+```
+
+- [ ] What happens if `id`s collide? Should we just use array indexes instead?
+
+The `uri` for a resource can either be:
+
+- embedded in the file itself
+- a local file relative to the open canvas file
+- a remote URL
+
+**Embedded in the file**
+
+```json
+{
+  "resources": {
+    [
+      "id": "a-rectangle",
+      "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAfSURBVHgBpcixEQAACAIxdP8FfxrtOTpSZoCTWQVlPm0NA5S6X7P2AAAAAElFTkSuQmCC", // 5x5 white png
+      "mimeType": "image/png"
+    ]
+  }
+}
+```
+
+- [ ] is `mimeType` duplicative?
+- [ ] what if `mimeType` and the mimeType specified in `data:` differ?
+
+**Local file relative to the Open Canvas file**
+
+```json
+{
+  "resources": {
+    [
+      "id": "a-rectangle",
+      "uri": "./a-rectangle.png",
+      "mimeType": "image/png"
+    ]
+  }
+}
+```
+
+**A remote URL**
+
+```json
+{
+  "resources": {
+    [
+      "id": "a-rectangle",
+      "uri": "https://somesite.com/a-rectangle.png",
+      "mimeType": "image/png"
+    ]
+  }
+}
+```
+
+- [ ] what if `mimeType` and the mimeType specified in the http response differ?
+
 ## Extensibility
 
 One major challenge of an interchange format for infinite canvases is that no two canvases are exactly alike. There are canvases built for informal whiteboarding, formal diagramming, quick visual sketches, node-and-wire programming, and many, many other use cases. Each of these canvases have radically different feature sets. How can we enable these canvases to work together?
@@ -94,7 +170,7 @@ Put simply: how do we design the specification to be extensible by individual ca
 
 Schemas are used to define the structure of Nodes and Relations. They provide extensibility by supporting different properties for Nodes and Relations.
 
-Schemas are included inline in the file. In the future, there may be a way to externalize schemas to a remote store.
+Schemas are included inline in the file. In the future, there may be a way to externalize schemas to a remote schema registry.
 
 Schemas have a version number to support schema evolution.
 
@@ -120,6 +196,8 @@ Schemas can extend one another.
 
 When extending, properties are simply merged to establish the full schema. This allows extension with meaningful fallbacks: if an implementer doesn't support the extended schema, but does support the base schema, they can render the node using a simpler representation.
 
+- [ ] "merging properties" is probably a bad idea - let the implementer choose which property to use rather than using this inheritance-like behavior
+
 Schemas are defined in JSONSchema format.
 
 ```json
@@ -140,10 +218,6 @@ These are the node schemas included in the core `@ocwg` namespace.
 
 Text Nodes are used to display text on the canvas.
 
-### Assets
-
-Asset Nodes are used to represent files or other assets. They can be embedded or reference external sources. We use `mime-type` to describe the type of the asset and `uri` to describe the location of the asset.
-
 ### Arrows
 
 ### Examples
@@ -155,8 +229,7 @@ Here are a bunch of example Nodes:
   "nodes": [
     {
       "id": "someShapeID11321",
-      "x": 10,
-      "y": 10,
+      "position": [10, 10],
       "properties": [{
         "schema": "@ocwg/text",
         "schema_version": "1.0",
@@ -166,60 +239,52 @@ Here are a bunch of example Nodes:
     },
     {
       "id": "2435234634t324t3245",
-      "x": 10,
-      "y": 10,
+      "position": [10, 10],
+      "size": [200, 150],
       "properties": [{
         "schema": "@ocwg/text",
         "schema_version": "1.0",
-        "w": 200,
-        "h": 150,
         "mime_type": "text/json",
         "uri": "data://9823fy9283hf2i3yf082ohu3fo2hufi2uh4fk234f8youhi",
       }]
     },
     {
       "id": "oajefioajef83r8y3ehf",
-      "x": 10,
-      "y": 10,
+      "position": [10, 10],
+      "size": [200, 150],
+      "rotation": 90, /* +/-360 degrees */
       "properties": [{
         "schema": "@ocwg/rectangle",
         "schema_version": "1.0",
-        "width": 200,
-        "height": 150,
         "text": "Hello, world!",
         "stroke_color": "red",
         "stroke_weight": ,
         "fill_color": ,
-        "rotation": 90 /* +/-360 degrees */
       }]
     },
     {
       "id": "someShapeID124135",
       "position": [10, 10],
+      "size": [200, 150],
       "properties": [{
         "schema": "@stately/typed-rectangle",
         "schema_version": "3.1",
         "type": "rectangle",
-        "width": 100,
-        "height": 200,
       }]
     },
     {
       "id": "someShapeID535",
-      "x": 10,
-      "y": 10,
+      "position": [10, 10],
       "properties": [{
         "schema": "@tldraw/arrow",
         "schema_version": "1.0",
         "start": {
-          "x": 1,
-          "y": 1,
+          "position": [1, 1],
           "terminal": "",
           "connected_to": "someShapeID124135",
         },
         "end": {
-          "x": 100,
-          "y": 100,
+          "position": [10, 10],
           "terminal": "",
           "connected_to": "someShapeID124135",
         },
