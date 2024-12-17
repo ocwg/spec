@@ -366,7 +366,7 @@ So the full type names would be `@ocwg/node/ports`, `@ocwg/node/circle`, `@ocwg/
 
 
 
-### Schemas as List or Map
+### List or Map
 
 A list (`array`) looks like this
 ```json 
@@ -393,7 +393,34 @@ A map (`object`) has this structure
 }
 ```
 
-As schema names must be unique per OCIF document, a map seems to be the clearer and more compact choice.
+* Use a map:
+    * Schema names must be unique per OCIF document, a map seems to be a clearer and more compact choice.
+
+* Use a list:
+    * However, real-world tools will use a JSON parser and on top a domain-specific parser. 
+Consider the case where  two OCIF files are merged manually or otherwise edited.
+Now IDs might be non-unique. 
+A plain JSON parser will throw a generic error along the lines of "JSON object malformed".
+If an array was used, the JSON parser would be fine and the domain specific-parser would say "duplicate ID detected, using first occurrence." 
+This is a more helpful error message and allows opening the OCIF file, although maybe with slightly unintended results.
+
+**Decision**: We use lists.
+
+
+## Type Keyword
+Each extension is represented in JSON as an object of the form
+
+```json
+{
+  "type": "@somename/sometype",
+  "myProperty": "value",
+  "anotherProperty": "value"
+}
+```
+
+So the `type` property is the single reserved property name in the spec. Should we use a less frequently name? Such as `exttype`?
+
+**Decision**: We keep `type`, as it is so short and clearly expresses the intent.
 
 
 # References
