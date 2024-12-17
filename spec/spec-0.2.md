@@ -23,7 +23,7 @@ An interchange file format for canvas-based applications. Visual nodes, structur
 This document is an editor's draft and has no official standing. It is a work in progress and may be updated, replaced, or obsoleted by other documents at any time.
 
 **Legal**: 
-Open Canvas Interchange Format (OCIF) v0.1 © 2024 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
+Open Canvas Interchange Format (OCIF) v0.1 © 2024 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
 
 ## Document Conventions
 - Types:
@@ -65,6 +65,8 @@ See [OCIF Types](#ocif-types) for a catalog.
   * [Schemas](#schemas)
     * [Built-in Schema Mappings](#built-in-schema-mappings)
 * [Extensions](#extensions)
+  * [Defining Extensions](#defining-extensions)
+  * [Exporting Data with Extensions](#exporting-data-with-extensions)
   * [Handling Extension Data](#handling-extension-data)
 * [OCIF Types](#ocif-types)
       * [Angle](#angle)
@@ -87,34 +89,13 @@ See [OCIF Types](#ocif-types) for a catalog.
   * [OCWG URL Structure](#ocwg-url-structure)
   * [Changes](#changes)
     * [From v0.1 to v0.2](#from-v01-to-v02)
+    * [From v0.2.0 to v0.2.1](#from-v020-to-v021)
 * [TODO @@](#todo-)
   * [Discuss](#discuss)
   * [LATER](#later)
   * [Notes to the Editor](#notes-to-the-editor)
 <!-- TOC -->
 
-<!-- hack to render TODO items as issues -->
-<style>
-div > :has(input[type="checkbox"]) { 
-  background-color: #433; 
-  border-left: 8px solid orange; 
-  padding-left: 3em;
-}
-div > :has(input[type="checkbox"]):before {
-    content: "ISSUES";
-    font-family: "Comic Sans MS",cursive;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    display: block;
-    margin-right: 2ex;
-    float: right;
-}
-input[type="checkbox"] {
-   margin-left: -1em;
-}
-</style>
 
 
 
@@ -147,11 +128,6 @@ To make sub-formats explicit, OCIF uses JSON schemas, kept in a fourth part:
 
 
 # File Structure
-
-- [ ] @@ Should nodes in JSON be an array or a map?
-- [ ] @@ Should relations in JSON be an array or a map?
-- [ ] @@ Should resources in JSON be an array or a map?
-
 The OCIF file is a JSON object with the following properties:
 
 | Property    | JSON Type | OCIF Type                       | Required     | Contents                          |
@@ -171,7 +147,7 @@ The OCIF file is a JSON object with the following properties:
 - **nodes**: A list of nodes on the canvas. See [Nodes](#nodes) for details.
 - **relations**: A list of relations between nodes (and relations). See [Relations](#relations) for details.
 - **resources**: A list of resources used by nodes. See [Resources](#resources) for details.
-- **schemas**: A list of schemas entries, which are used for relation types and extensions. See [Schemas](#schemas) for details.
+- **schemas**: A list of schema entries, which are used for relation types and extensions. See [Schemas](#schemas) for details.
 
 
 **Example:** \
@@ -232,8 +208,8 @@ A _Node_ is an `object` with the following properties:
   - The default for z-axis is 0, when importing 2D as 3D.
   - When importing 3D as 2D, the z-axis is ignored (but can be left as-is). When a position is changed, the z-axis CAN be set to 0. Yes, this implies that full round-tripping is not always possible. 
 
-- **size**: The size of the node in dimensions. I.e. this is **x-axis** ("width", at position `0`), **y-axis** ("height", at position `1`), and **z-axis** ("depth", at position `2`).
-    - Size might be omitted, if a linked resource defines the size. E.g. raster images such as PNG an JPEG define a size in pixels. SVG can have a `viewbox` defined, but may also omit it. Text can be wrapped at any width, so a size property is clearly required. In general, a size property is really useful as a fall-back to display at least a kind of rectangle, if the resource cannot be displayed as intended. Size can only be omitted, if _all_ resource representations define a size.
+- **size**: The size of the node in dimensions. I.e. this is **x-axis** ("width" at position `0`), **y-axis** ("height" at position `1`), and **z-axis** ("depth" at position `2`).
+    - Size might be omitted if a linked resource defines the size. E.g., raster images such as PNG an JPEG define their size in pixels. SVG can have a `viewbox` defined, but may also omit it. Text can be wrapped at any width, so a size property is clearly required. In general, a size property is really useful as a fall-back to display at least a kind of rectangle, if the resource cannot be displayed as intended. Size can only be omitted if _all_ resource representations define a size.
 
 
 - **data**: Additional properties of the node. 
@@ -243,13 +219,13 @@ See [extensions](#extensions).
 - **resource**: A reference to a resource, which can be an image, video, or audio file. See [resources](#resources).
     - Resource can be empty, in which case a node is acting as a transform for other nodes.
 
-- **rotation**: The 2D rotation of the node in degrees. The rotation is around the center of the node. The rotation center is the positioned point, i.e. top-left. z-Axis is not modified.
+- **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-Axis is not modified.
 
 - **scale**: Allows to re-scale a given node. This is particularly useful if a [parent-child](#parent-child-relation)
 
 
 ## Ports Extension
-This is an [extension](#extensions) for a  node. To be placed inside the `data` `array`. It provides the familiar concept of _ports_ to a node. A port is a point, which allows to geometrically control where, e.g. arrows are attached to a shape.
+This is an [extension](#extensions) for a node. To be placed inside the `data` `array`. It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g. arrows are attached to a shape.
 
 - Name: `@ocwg/node/ports`
 - URI: `https://spec.canvasprotocol.org/node/ports/0.2`
@@ -292,7 +268,7 @@ A node (n1) with two ports (p1, p2)
 
 
 ## Relative Constraints Extension
-Relative constraints are used to define, e.g. the relative positioning of nodes.
+Relative constraints are used to define, e.g., the relative positioning of nodes.
 
 - Name: `@ocwg/node/relative`
 - URI: `https://spec.canvasprotocol.org/rel/relative/0.2`
@@ -309,7 +285,7 @@ It defines a _source_ node, which is used as a reference for the relative positi
 - **source**: The ID of the source node, which is used as a reference for the relative positioning.
 - **position**: The relative position of the target node to the source node.
 The numbers given in the array are vector-added to the position of the source node.
-
+- **rotation**: The relative rotation of the target node to the source node. The rotation is added to the rotation of the source node.
 
 
 
@@ -325,37 +301,27 @@ Every relation has the following properties:
 | Property | JSON Type | OCIF Type                   | Required     | Contents                              |
 |----------|-----------|-----------------------------|--------------|---------------------------------------|
 | `id`     | `string`  | [ID](#id)                   | **required** | A unique identifier for the relation. |
-| `type`   | `string`  | [Schema Name](#schema-name) | **required** | The type of the relation.             |
 | `data`   | `array`   | [Extension](#extensions)    | optional     | Additional data for the relation.     |
 
-**NOTE**: Relations are more generic than nodes.
-All nodes in OCIF share a common, built-in, fixed type, but relations each have a distinct type.
-Technically, they are defined as a JSON object with only three reserved properties: `id`, `type` and `data`.
-All other properties are specific for each relation type. 
-_In addition_, each relation can have any number of extensions in the `data` array. 
-Each extension -- like in [nodes](#nodes) -- has a `type` property.
-So don't confuse relation type with extension type.
+Similar to nodes, there is a built-in base relation, which can use extensions.
+Contrary to nodes, the base extension has no pre-defined properties except the `id` and `data` properties.
+Thus, relations are very flexible.
 
 - **id**:
-A unique identifier for the relation.
-Must be unique within an OCIF file. 
-See [ID](#ocif-types) type for details.
-
-- **type**:
-Defines the kind of relation in use. 
-A _type_ must always map to a URI.
-The value of `type` MUST either be a _URI_ (see [URI](#ocif-types)) or a name.
-If a name is used, that name must be present in the [schemas](#schemas) section, where it is mapped to a URI.
-The used type defines the structure of the relation object, besides the fixed `id`, `type` and `data` properties. 
-
-- **data**: 
-Additional data for the relation.
-Each array entry is an _extension object_.
-See [extensions](#extensions).
+  A unique identifier for the relation.
+  Must be unique within an OCIF file.
+  See [ID](#ocif-types) type for details.
+ 
+- **data**:
+  Additional data for the relation.
+  Each array entry is an _extension object_, which is the same for nodes and relations.
+  See [extensions](#extensions).
+  
+ 
 
 
 
-In the remainder of this section, the current list of relation types is explained.
+In the remainder of this section, the current list of relation extension types (also just called _relation types_) is explained.
 In addition to the relation types defined here, anybody can define and use their own relation types.
 If this is your first read of the spec, skip over the details of the relation types and come back to them later.
 
@@ -404,7 +370,7 @@ It has the following properties:
 - **from**: The ID of the source element.
 - **to**: The ID of the target element.
 - **directed**: A boolean flag indicating if the edge is directed. If `true`, the edge is directed from the source to the target. If `false`, the edge is undirected. Default is `true`.
-- **rel**: The type of relation represented by the edge. This is optional, but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows to represent an RDF triple (subject,predicate,object) as (from,rel,to). 
+- **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject,predicate,object) as (from,rel,to). 
 
 
 ## Hyperedge Relation
@@ -416,8 +382,8 @@ Hyperedges can also be used to model simple bi-edges.
 
 Conceptually, a hyper-edge is an entity, which has a number of _endpoints_. 
 For each endpoint, we allow defining the directionality of the connection.
-The endpoints are explicitly defined as an ordered list, i.e. endpoints can be addressed by their position in the list.
-Such a model allow to model all kinds of hyper-edges, even rather obscure one.
+The endpoints are explicitly defined as an ordered list, i.e., endpoints can be addressed by their position in the list.
+Such a model allows representing all kinds of hyper-edges, even rather obscure one.
 
 A hyper-edge in OCIF has the following properties:
 
@@ -430,7 +396,7 @@ A hyper-edge in OCIF has the following properties:
 - **endpoints**: See below.
 - **weight**: A floating-point number, which can be used to model the strength of the connection, as a whole. More general than endpoint-specific weights, and often sufficient.
 <!--
-Edge weight is a common requirement and no extensions is needed for this simple property
+Edge weight is a common requirement, and no extensions are needed for this simple property
 -->
 - **rel**: See [Edge Relation](#edge-relation)
 
@@ -448,7 +414,7 @@ Each endpoint is an object with the following properties:
 - **direction**: See below
 - **weight**: A floating-point number, which can be used to model the strength of the connection, for this endpoint.
 <!--
-Edge weight is a common requirement and no extensions is needed for this simple property
+Edge weight is a common requirement, and no extensions are needed for this simple property
 -->
 
 **Direction**  
@@ -464,7 +430,7 @@ This allows representing cases such as:
 - An edge with only incoming or only outgoing endpoints.
 
 **Example**  
-An hyperedge relation connecting two node as input (n1,n2) with one node as output (n3).
+An hyperedge relation connecting two nodes as input (n1,n2) with one node as output (n3).
 ```json
 {
   "type": "@ocwg/rel/hyperedge",
@@ -495,7 +461,7 @@ A group is modeled as a relation with a list of its members.
 **Semantics**  
 - Groups can contain groups as members. Thus, all semantics apply recursively.
 - When a group is deleted, all members are deleted as well.
-- When a group is 'ungrouped', the group itself is deleted, but its members remain.
+- When a group is 'ungrouped,' the group itself is deleted, but its members remain.
 - When a member is deleted, it is removed from the group. 
  
 
@@ -516,8 +482,8 @@ It can be used to model inheritance, containment, or other hierarchical relation
 - **parent**: The ID of the parent node. There SHOULD be only one parent per child. 
 - **child**: The ID of the child node. A parent can have multiple children (expressed my multiple parent-child relations).
 - **inherit**: A boolean flag indicating if the child should inherit properties from the parent. Default is `false`. 
-  - Exact semantics of inheritance are defined by the application. 
-  - In general, when looking for JSON properties of a node, and finding them undefined, an app should look for the same value in the parent node.
+  - The Exact semantics of inheritance are defined by the application. 
+  - In general, when looking for JSON properties of a node and finding them undefined, an app should look for the same value in the parent node.
   This chain of parents should be followed until root is reached or a cycle is detected.
 
 
@@ -544,7 +510,7 @@ They are stored separately from Nodes to allow for asset reuse and efficiency.
 
 Resources can be referenced by nodes or relations. 
 They are stored in the `resources` property of the OCIF file. 
-Typical resources are, e.g. SVG images, text documents, or media files.
+Typical resources are, e.g., SVG images, text documents, or media files.
 
 - Each entry in `resources` is an array of _representation_ objects. 
 - The order of representations is significant. The first representation is the default representation.
@@ -644,7 +610,7 @@ Schemas are stored either inline in the `schemas` property of an OCIF document o
 
 - [ ] @@ Provide custom tooling for schema validation
 
-Each entry in `schemas` is an object with the following properties:
+Each entry in the `schemas` array is an object with the following properties:
 
 | Property   | JSON Type | OCIF Type                   | Required     | Contents                                 |
 |------------|-----------|:----------------------------|--------------|------------------------------------------|
@@ -668,24 +634,32 @@ Each entry in `schemas` is an object with the following properties:
 
 To summarize, these schema definitions are possible:
 
-| Schema        | `uri`        | `schema`        | `location`    | `name`   |
-|---------------|--------------|-----------------|---------------|----------|
-| Inline Schema | **required** | the JSON schema | --            | optional |
-| External      | **required** | --              | relative path | optional |
-| Remote        | **required** | --              | absolute URI  | optional |
+| Schema        | `uri`        | `schema`        | `location`                   | `name`   |
+|---------------|--------------|-----------------|------------------------------|----------|
+| Inline Schema | **required** | the JSON schema | --                           | optional |
+| External      | **required** | --              | relative path                | optional |
+| Remote        | **required** | --              | -- (URI is used)             | optional |
+| Remote        | **required** | --              | absolute URI (overrides URI) | optional |
 
 
 
 By defining a mapping of URIs to names, the OCIF file becomes more readable and easier to maintain.
 
 **Example**  
-A typical schema entry
+A schema array with two schemas: 
 ```json 
 {
-  "schemas": {
-    "@ocwg/node/ports": { "uri": "https://spec.canvasprotocol.com/node/ports" },
-    "@example/circle": { "uri": "https://example.com/ns/ocif-node/circle/1.0"}
-  }
+  "schemas": [
+    {
+      "uri": "https://spec.canvasprotocol.com/node/ports/0.2",
+      "name": "@ocwg/node/ports"
+    },
+    {
+      "uri": "https://example.com/ns/ocif-node/circle/1.0",
+      "location": "schemas/circle.json",
+      "name": "@example/circle"
+    }
+  ]
 }
 ```
 
@@ -699,29 +673,31 @@ Any [Schema Name](#schema-name) of the form
 Here `0.2` is the current version of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
 
 Built-in Entries, where the syntax `{var}` denotes placeholders.
-```json 
+```json
 {
-  "schemas": {
-    "@ocwg/node/{ext}":           { "uri": "https://spec.canvasprotocol.com/node/{ext}/0.2"               },
-    "@ocwg/rel/{rel-type}":       { "uri": "https://spec.canvasprotocol.com/rel/{rel-type}/0.2"           },
-    "@ocwg/rel/{rel-type}/{ext}": { "uri": "https://spec.canvasprotocol.com/rel/{rel-type}/0.2/{ext}/0.2" }
-  }
+  "schemas": [
+    { "name": "@ocwg/node/{ext-type}", "uri": "https://spec.canvasprotocol.com/node/{ext-type}/0.2" },
+    { "name": "@ocwg/rel/{ext-type}", "uri": "https://spec.canvasprotocol.com/rel/{ext-type}/0.2" }
+  ]
 }
 ```
-This mappings SHOULD be materialized into the OCIF Json schema.
+
+
+
+These mappings SHOULD be materialized into the OCIF JSON schema.
 
 # Extensions
 No two canvas applications are alike: 
 There are apps for informal whiteboarding, formal diagramming, quick visual sketches, node-and-wire programming, and many other use cases. 
-Each of these apps have radically different feature sets. 
+Each of these apps has radically different feature sets. 
 Extensions are an integral part of OCIF. 
-They allow to add custom data to nodes, relations, and resources.
+They allow adding custom data to nodes, relations, and resources.
 
 - An extension is a JSON object (used as a "property bag") with one mandatory property: `type`.
 Thus, `type` is a reserved property key. 
 All other property keys can be used by the extension.
 - Arbitrary, nested JSON structures are allowed.
-- Extensions SHOULD define how the base properties play together with the extension properties, and with other (known) extensions.
+- Extensions SHOULD define how the base properties play together with the extension properties and with other (known) extensions.
 - Nodes and relations can have multiple extensions within their `data` array.
 - Each extension is an object with a `type` property.
 
@@ -730,12 +706,37 @@ All other property keys can be used by the extension.
 | `type`   | `string`  | [Schema Name](#schema-name) or [URI](#uri) | **required** | Type of extension |
 
 
-- **type**: The type of the extension. This is a URI or a simple name. 
+- **type**: The type of the extension. This is a URI or a simple name.
+  If a name is used, that name must be present in the [schemas](#schemas) section, where it is mapped to a URI.
+
 
 For an example of an extension, see the [appendix](#appendix), [Node Extension: Circle](#node-extension-circle).
 
+## Defining Extensions
+An extensions MUST have a URI (as its ID) and a document describing the extension.
+
+It SHOULD have a version number, as part of its URI.
+SHOULD have a proposed name, and SHOULD have a JSON schema.
+
+The proposed structure is to use a directory in a git repository. 
+The directory path should contain a name and version number.
+Within the repo, there SHOULD be two files:
+
+- README.md, which describes the extension.
+- schema.json, which contains the JSON schema for the extension.
+    - This schema MUST use the same URI as the extension.
+    - It SHOULD have a `description` property, describing briefly the purpose of the extension.
+
+As an example, look at the [Circle Extension](#node-extension-circle) in the appendix.
+
+## Exporting Data with Extensions
+When exporting an OCIF file using extensions, the application SHOULD use inline or external schemas for the extensions.
+Remote schemas CAN be used to save space in the OCIF file.
+
+
 ## Handling Extension Data
-In order to support interchange between canvases when features don't overlap, canvases need to preserve nodes and relations that they don't support:
+To support interchange between canvases when features don't overlap,
+canvas apps need to preserve nodes and relations that they don't support:
 
 - Canvas A supporting Feature X creates a canvas with a Feature X node in it and exports it as OCIF.
 - Canvas B, which does not support Feature X, opens the OCIF file, and some edits are made to the canvas.
@@ -746,12 +747,15 @@ In the following sections, extensions defined within this specification are list
 
 
 
+
+
+
 # OCIF Types
 The _JSON types_ are just: `object`, `array`, `string`, `number`, `boolean`, `null`.
 OCIF defines more precise types, e.g. _ID_ is a JSON string with additional semantic (must be unique within a document).
 We also use the syntax `ID[]` to refer to a JSON `array`, in which each member is an _ID_.
 
-Here is the catalog of types uses throughout the document:
+Here is the catalog of types used throughout the document:
 
 #### Angle
 A `number` that represents an angle in degrees, from -360 to 360.
@@ -761,7 +765,7 @@ Numbers outside the range of -360 to 360 are allowed, but they are normalized to
 #### ID
 A `string` that represents a unique identifier. 
 It must be unique among all IDs used in an OCIF document.
-The ID-space is shared among nodes, relations, and resources.
+The ID space is shared among nodes, relations, and resources.
 
 #### MIME Type
 A `string` that represents the _MIME Type_ for a resource. 
@@ -822,7 +826,7 @@ A `string` that represents a Uniform Resource Identifier (URI) as defined in [RF
     - [purl.org](https://purl.archive.org/) provides a free service for stable, resolvable URIs. This requires URIs to start with `purl.org`. 
   - A schema can solely exist in an OCIF file, in the [schemas](#schemas) entry. This is useful for private schemas or for testing.
 
-  - **Recommendation**: As a good practice, "Cool URIs" (see [references](#references))  should provide services for humans and machines. Given a request to `https://example.com/schema`, the server  can decide based on the HTTP `Accept`-header:
+  - **Recommendation**: As a good practice, "Cool URIs" (see [references](#references)) should provide services for humans and machines. Given a request to `https://example.com/schema`, the server can decide based on the HTTP `Accept`-header:
       - `application/json` -> Send JSON schema via a redirect to, e.g. `https://example.com/schema.json`
       - `text/html` -> Send a human-readable HTML page via a redirect to, e.g. `https://example.com/schema.html`.
     - See [OCWG URI Structure](#ocwg-url-structure) for a proposed URI structure for OCIF resources.
@@ -946,7 +950,7 @@ A circle has a port at the geometric "top" position.
 - `https://canvasprotocol.org` - info site
 
 
-- `https://spec.canvasprotocol.org` - specification; REDIRECT to latest version, e.g. `https://spec.canvasprotocol.org/0.2`
+- `https://spec.canvasprotocol.org` - specification; REDIRECT to the latest version, e.g. `https://spec.canvasprotocol.org/0.2`
 - `https://spec.canvasprotocol.org/0.2` - OCIF specification version; this is also its [URI](#uri)
   - `Accept='application/json'` -> REDIRECT to `https://spec.canvasprotocol.org/0.2/schema.json`
   - `Accept='text/html'` -> REDIRECT to `https://spec.canvasprotocol.org/0.2/spec.md`
@@ -964,20 +968,20 @@ A circle has a port at the geometric "top" position.
 - `https://spec.canvasprotocol.org/rel/group/0.2/schema.md` - the Markdown document for the _group_ relation type in version 0.2
 
 
-- `https://spec.canvasprotocol.org/rel/group/0.2/background/0.1` - the (fictive) _background_ extension (in version 0.1) for the _group_ relation type (which is in version 0.2); this is also the [URI](#uri) for the extension
-- `https://spec.canvasprotocol.org/rel/group/0.2/background/0.1/schema.json` - the JSON schema of the _background_ extension for the _group_ relation type
-- `https://spec.canvasprotocol.org/rel/group/0.2/background/0.1/schema.md` - the Markdown document for the _background_ extension for the _group_ relation type
-
-
 - [ ] @@ Can this setup be done using GitHub pages?
 
 
 
 ## Changes
 ### From v0.1 to v0.2
-- Root property `schema_version` renamed to `ocif` -- this is simpler and serves as a kind of "magic" signature, i.e, a JSON document with an "ocif" property near the top is likely an OCIF file.
+- Root property `schema_version` renamed to `ocif` -- this is simpler and serves as a kind of "magic" signature, i.e., a JSON document with an "ocif" property near the top is likely an OCIF file.
 - Renamed node `properties` to `data` -- this is simpler and more generic.
 - Relation property `name` renamed to `type`.
+
+### From v0.2.0 to v0.2.1
+- Relation types and relation extensions merged into one. There is now a base relation, which has extensions. 
+- Node rotation center fixed.
+- Schema object to a schema array, see [design decision](../design/ocwg-design-decisions.md#list-or-map).
 
 - - -
 
@@ -995,16 +999,14 @@ A circle has a port at the geometric "top" position.
 - [ ] more examples
 
 ## Discuss
-- [ ] Relation types vs. relation extensions. This is confusing :-)
-- [ ] ports -- as node extension
 - [ ] node id uniqueness when nesting canvases
 
 ## LATER
 - [ ] add top level extension data for different canvas apps
 - [ ] Have a wikipedia article defining the "canvas app" -> https://github.com/orgs/ocwg/discussions/39
    - [ ] link article in [introduction](#introduction) 
-- [ ] tldraw as a running example  -> full mapping defined in another file -> https://github.com/orgs/ocwg/discussions/40 
-- [ ] Add layer relation type (what is the difference to group?)
+- [ ] tldraw as a running example -> full mapping defined in another file -> https://github.com/orgs/ocwg/discussions/40 
+- [ ] Add a layer relation type (what is the difference to group?)
 
 ## Notes to the Editor
 - All URIs should have the same, consistent structure
@@ -1015,3 +1017,4 @@ A circle has a port at the geometric "top" position.
   - All examples start with `**Example:**`
   - Order of columns is always: Property, JSON Type, OCIF Type, Required, Contents, Default
     - Empty columns can be omitted
+
