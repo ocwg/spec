@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "node.schema.json",
+  "title": "node",
+  "type": "object",
+  "description": "A node in the node list.",
+  "required": ["id", "position"],
+  "properties": {
+    "id": { "type": "string" },
+    "position": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "size": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "rotation": { "type": "number" },
+    "properties": {
+      "type": "array",
+      "contains": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "type": "string"
+          },
+          "schema_version": {
+            "type": "string"
+          }
+        },
+        "required": ["schema", "schema_version"]
+      },
+      "items": {
+        "anyOf": [
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  }
+}

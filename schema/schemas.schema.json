@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas.schema.json",
+  "title": "schema",
+  "type": "object",
+  "description": "inline definition of extended node schemas",
+  "required": [],
+  "propertyNames": {
+    "pattern": "^@"
+  },
+  "patternProperties": {
+    "^@": {
+      "type": "object",
+      "properties": {
+        "$schema": { "type": "string" }
+      },
+      "required": ["$schema"]
+    }
+  }
+}
