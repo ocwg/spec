@@ -221,7 +221,7 @@ See [extensions](#extensions).
 
 - **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-Axis is not modified.
 
-- **scale**: Allows to re-scale a given node. This is particularly useful if a [parent-child](#parent-child-relation)
+- **scale**: Allows to re-scale a given node. This is particularly useful if a [parent-child](#parent-child-relation) relation applies to the node and child nodes need a consistent scale transform.
 
 
 ## Ports Extension
