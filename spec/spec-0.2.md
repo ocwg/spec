@@ -260,7 +260,7 @@ A node (n1) with two ports (p1, p2)
     },
     {
       "id": "p2",
-      "position": [300, 300]
+      "position": [100, 200]
     }
   ]
 }
