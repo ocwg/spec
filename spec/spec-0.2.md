@@ -225,7 +225,7 @@ See [extensions](#extensions).
 
 
 ## Ports Extension
-This is an [extension](#extensions) for a node. To be placed inside the `data` `array`. It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g. arrows are attached to a shape.
+This is an [extension](#extensions) for a node. To be placed inside the `data` `array`. It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g., arrows are attached to a shape.
 
 - Name: `@ocwg/node/ports`
 - URI: `https://spec.canvasprotocol.org/node/ports/0.2`
@@ -237,9 +237,14 @@ The _Ports Extension_ has the following properties:
 |----------|-----------|-----------|--------------|-----------------------------------|---------|
 | `ports`  | `array`   | [ID](#id) | **required** | IDs of nodes acting as ports.     |         |
 
+Each node SHOULD appear only in **one** ports array.
+A port cannot be used by multiple nodes as a port.
 
 **Example:**   
-A node (n1) with two ports (p1, p2)
+A node (n1) with two ports (p1, p2).
+Note that p1 and p2 are normal nodes.
+It's node n1 which uses p1 and p2 as its ports.
+An arrow can now start at node p1 (which is a port of n1) and end at node n2 (which is not a port in this example).
 ```json
 {
   "nodes": [
@@ -250,7 +255,7 @@ A node (n1) with two ports (p1, p2)
       "data": [
         {
           "type": "@ocwg/node/ports",
-          "ports": ["n2", "n3"]
+          "ports": ["p1", "p2"]
         }
       ]
     },
@@ -261,10 +266,15 @@ A node (n1) with two ports (p1, p2)
     {
       "id": "p2",
       "position": [100, 200]
+    },
+    {
+      "id": "n2",
+      "position": [800, 800]
     }
   ]
 }
 ```
+
 
 
 ## Relative Constraints Extension
