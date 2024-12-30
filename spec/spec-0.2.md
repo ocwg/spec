@@ -220,7 +220,7 @@ See [extensions](#extensions).
 - **resource**: A reference to a resource, which can be an image, video, or audio file. See [resources](#resources).
     - Resource can be empty, in which case a node is acting as a transform for other nodes.
 
-- **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-Axis is not modified.
+- **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-axis is not modified.
 
 - **scale**: Allows to re-scale a given node. This is particularly useful if a [parent-child](#parent-child-relation) relation applies to the node and child nodes need a consistent scale transform.
 
