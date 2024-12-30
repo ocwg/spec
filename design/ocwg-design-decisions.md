@@ -1,6 +1,6 @@
 # Design Decision Document
 For designing an extensible interchange format for canvas apps, we took
-several design decisions. These are self-imposed requirements.
+several design decisions. They result in self-imposed requirements.
 
 <!-- TOC -->
 * [Design Decision Document](#design-decision-document)
@@ -27,6 +27,9 @@ several design decisions. These are self-imposed requirements.
     * [Schemas as List or Map](#schemas-as-list-or-map)
   * [References](#references)
 <!-- TOC -->
+
+The design decisions document tries to capture the consensus reached in the discussions, both the GitHub discussions and the bi-weekly calls.
+Some decisions are still not represented in the spec.
 
 ## Open Issues
 -- currently none --
@@ -80,7 +83,7 @@ Discussed in [2](https://github.com/orgs/ocwg/discussions/2).
 ### Zwibbler
 See [References](#references) for a sheet on properties and node types.
 
-
+- [ ] @@TODO add Zwibbler properties here inline
 
 
 
@@ -102,9 +105,13 @@ representation + content type) as inspiration to model resources.
 
 ### Resource Structure
 We need to be able to refer to resources using a locally stable ID.
+We support textual and binary content, as "Resources are Web-like".
+Therefore, we also use a MIME-Type.
+
 Taking the requirements "Resources are Web-like", "Offline" and
-"Graceful Degration" into account, we get this
-minimal structure for resources:
+"Graceful Degradation" into account, we can use this structure for resources:
+
+**UML Diagram**
 
 ![](resource-structure.svg)
 
@@ -136,7 +143,7 @@ Canvas tools often support some special content formats, e.g.,
 free-hand drawings. We might want to define a content for this, so that
 it can be exchanged.
 
-Idea: Represent the actual path useing the SVG
+Idea: Represent the actual path using the SVG
 [PathElement](https://www.w3.org/TR/SVG/paths.html#PathElement) syntax,
 i.e. the "d" attribute with a compact syntax such as "M 100 100 L 300
 100 L 200 300 z".
@@ -186,7 +193,7 @@ considered.
         String id
     }
     interface Representation {
-        String contentType
+        String mimeType
     }
 
     interface InlineTextContent {
@@ -316,7 +323,7 @@ implies
     "representations": [
         {
             "id": "resource-1",
-            "contentType": "text/plain",
+            "mimeType": "text/plain",
             "content": "Hello"
         }
     ]
