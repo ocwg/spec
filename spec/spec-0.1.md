@@ -1,5 +1,11 @@
 # Open Canvas Initial Draft Spec
 
+> **This DEPRECATED version:** \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.1 \
+**Latest version:** \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.2 \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See [spec 0.2](spec-0.2.md) in this repo.
+ 
 ⚒️ Work on the initial spec is underway in the [Initial Draft Spec pull request](https://github.com/ocwg/spec/pull/1).
 
 📚 Read more at [canvasprotocol.org](https://canvasprotocol.org).
