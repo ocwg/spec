@@ -350,7 +350,7 @@ A set has the following properties in its `data` object:
 |-----------|-----------|-------------|--------------|---------------------------|
 | `members` | `array`   | [ID](#id)[] | **required** | IDs of members of the set |
 
-- **members**: A list of IDs of nodes or resources that are part of the set.
+- **members**: A list of IDs of nodes or relations that are part of the set.
 Resources cannot be part of a set.
 
 **Example:** A set relation with three members:
