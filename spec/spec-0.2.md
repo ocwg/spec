@@ -488,7 +488,7 @@ It can be used to model inheritance, containment, or other hierarchical relation
 |-----------|-----------|-----------|--------------|---------------------------|:--------|
 | `parent`  | `string`  | [ID](#id) | **required** | ID of the parent node.    |         |
 | `child`   | `string`  | [ID](#id) | **required** | ID of the child node.     |         |
-| `ìnherit` | `boolean` |           | optional     | Inherit properties.       | `false` |
+| `inherit` | `boolean` |           | optional     | Inherit properties.       | `false` |
 
 - **parent**: The ID of the parent node. There SHOULD be only one parent per child. 
 - **child**: The ID of the child node. A parent can have multiple children (expressed my multiple parent-child relations).
