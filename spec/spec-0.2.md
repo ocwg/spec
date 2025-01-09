@@ -23,7 +23,7 @@ An interchange file format for canvas-based applications. Visual nodes, structur
 This document is an editor's draft and has no official standing. It is a work in progress and may be updated, replaced, or obsoleted by other documents at any time.
 
 **Legal**: 
-Open Canvas Interchange Format (OCIF) v0.1 © 2024 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
+Open Canvas Interchange Format (OCIF) v0.2 © 2024 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
 
 ## Document Conventions
 - Types:
@@ -154,7 +154,7 @@ The OCIF file is a JSON object with the following properties:
 A minimal OCIF file, no visible items
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.1"
+  "ocif": "https://canvasprotocol.org/ocif/0.2"
 }
 ```
 
@@ -162,7 +162,7 @@ A minimal OCIF file, no visible items
 A small OCIF file, with one node and one resource
 ```json
 { 
-  "ocif": "https://canvasprotocol.org/ocif/0.1",
+  "ocif": "https://canvasprotocol.org/ocif/0.2",
   "nodes": [
     { 
       "id": "n1",
