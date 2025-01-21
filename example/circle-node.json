@@ -1,0 +1,33 @@
+// A node extension for representing circles
+{
+  "ocif": "https://canvasprotocol.org/ocif/0.2",
+  "nodes": [{
+    "id": "n1",
+    "position": [100, 100],
+    "size": [50, 50],
+    "resource": "r1",
+    "data": [{
+      "type": "@ocwg/circle",
+      "radius": 50
+    }]
+  }],
+  "resources": [{
+    "id": "r1",
+    "representations": [{
+      "mime-type": "text/plain",
+      "content": "Hello, World!"
+    }]
+  }],
+  "relations": [], // Sets, edges, hyper-edges, etc
+  "schemas": [{
+    "uri": "https://spec.canvasprotocol.com/node/circle/0.2",
+    "name": "@ocwg/circle",
+    "schema": {
+      "properties": {
+        "radius": { "type": "integer" }
+      },
+      "required": ["radius"]
+    }
+  }]
+}
+
