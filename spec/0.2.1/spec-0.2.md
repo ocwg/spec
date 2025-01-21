@@ -191,7 +191,7 @@ A _Node_ is an `object` with the following properties:
 |------------|-----------|--------------------|--------------|-------------------------------------|-----------|
 | `id`       | `string`  | [ID](#id)          | **required** | A unique identifier for the node.   | n/a       |
 | `position` | `array`   | number[]           | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]     |
-| `size`     | `array`   | number[]           | recommended  | The size of the node per dimension. | n/a       |
+| `size`     | `array`   | number[]           | recommended  | The size of the node per dimension. | `[100,100]` |
 | `resource` | `string`  | [ID](#id)          | optional     | The resource to display             |           |
 | `data`     | `array`   | array of Extension | optional     | Extended node data                  |           |
 | `rotation` | `number`  | [Angle](#angle)    | optional     | +/- 360 degrees                     | `0`       |
@@ -225,7 +225,7 @@ See [extensions](#extensions).
 - **scale**: Allows to re-scale a given node. This is particularly useful if a [parent-child](#parent-child-relation) relation applies to the node and child nodes need a consistent scale transform.
 
 
-## Ports Extension
+## Ports Extension -> Not part of core
 This is an [extension](#extensions) for a node. To be placed inside the `data` `array`. It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g., arrows are attached to a shape.
 
 - Name: `@ocwg/node/ports`
@@ -278,7 +278,7 @@ An arrow can now start at node p1 (which is a port of n1) and end at node n2 (wh
 
 
 
-## Relative Constraints Extension
+## Relative Constraints Extension -> Not part of core
 Relative constraints are used to define, e.g., the relative positioning of nodes.
 
 - Name: `@ocwg/node/relative`
@@ -298,6 +298,90 @@ It defines a _source_ node, which is used as a reference for the relative positi
 The numbers given in the array are vector-added to the position of the source node.
 - **rotation**: The relative rotation of the target node to the source node. The rotation is added to the rotation of the source node.
 
+
+## Text
+Really just an undecorated visual node showing an asset of type text,
+
+## Arrow 
+Properties:
+
+- strokeWidth (line width)
+- strokeColor
+- start (x,y)
+- end (x,y)
+
+- startMarker: undirected, outgoing, incoming
+- endMarker: undirected, outgoing, incoming
+
+Marker direction from the perspective of the arrow.
+Undirected just end flat.
+Outgoing has an arrow at the end.
+
+```
+
+==========================
+==========================    undirected end
+==========================
+
+
+                     \
+                      \
+=======================\                       
+========================>    outgoing end                   
+=======================/
+                      /
+                     /                       
+
+=======================/                       
+======================<      incoming end                 
+=======================\                       
+```
+
+## Image
+An image node is a visual node showing an image asset.
+
+## Freehand -> Not in core
+Like path, but with variable width, to represent e.g. pressure sensitivity.
+See library _perfect freehand_.
+
+## Path
+Properties:
+
+- strokeWidth (line width)
+- strokeColor
+- fillColor
+- path data: like SVG path data `d` attribute (can be closed)
+  - moveTo
+  - lineTo
+  - cubicBezier
+  - quadraticBezier
+  - arc
+
+Canvas can simplify rendering of curves (cubic/quadratic bezier, arc) to straight lines.
+
+## Rectangle
+core node has already position, size, rotation, scale
+
+Properties:
+
+- strokeWidth (line width)
+- strokeColor
+- fillColor
+
+These are meant to customize the built-in default stroke.
+
+## Oval
+Can also be a circle.
+
+Recommended:
+
+- size [default: 100,100]
+
+Properties:
+
+- strokeWidth (line width)
+- strokeColor
+- fillColor
 
 
 
@@ -337,7 +421,7 @@ In addition to the relation types defined here, anybody can define and use their
 If this is your first read of the spec, skip over the details of the relation types and come back to them later.
 
 
-## Set Relation
+## Set Relation -> In Core
 A set relation is a relation, which groups nodes together.
 
 - **URI**: `https://spec.canvasprotocol.org/rel/set/0.2`
@@ -362,7 +446,7 @@ Resources cannot be part of a set.
 ```
 
 
-## Edge Relation
+## Edge Relation  -> In Core
 An edge relates two elements (nodes and/or relation, mixing types is allowed). 
 It supports directed and undirected bi-edges.
 
@@ -384,7 +468,7 @@ It has the following properties:
 - **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject,predicate,object) as (from,rel,to). 
 
 
-## Hyperedge Relation
+## Hyperedge Relation  -> Not part of core
 A hyperedge is a relation, which connects any number of nodes.
 Hyperedges can also be used to model simple bi-edges.
 
@@ -454,9 +538,11 @@ An hyperedge relation connecting two nodes as input (n1,n2) with one node as out
 ```
 
 
-## Group Relation
+## Group Relation -> In Core
 A group relation is a relation, which groups nodes together.
 It implies stronger semantics than a [set relation](#set-relation).
+
+NOTE: Stronger semantics than set.
 
 - Name: `@ocwg/rel/group`
 - URI: `https://spec.canvasprotocol.org/rel/group/0.2`
@@ -477,7 +563,7 @@ A group is modeled as a relation with a list of its members.
  
 
 
-## Parent-Child Relation
+## Parent-Child Relation  -> Not part of core
 A parent-child relation models a hierarchical relationship between nodes.
 It can be used to model inheritance, containment, or other hierarchical relationships.
 
