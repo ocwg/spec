@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "set-rel",
+  "description": "Set relation extension",
+  "type": "object",
+  "properties": {
+    "members": {
+      "type": "array",
+      "description": "IDs of members of the set",
+      "items": {
+        "description": "node ID or relation ID",
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "members"
+  ]
+}

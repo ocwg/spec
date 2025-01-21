@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "set-rel",
+  "description": "Set relation extension",
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "string",
+      "description": "ID of source element."
+    },
+    "to": {
+      "type": "string",
+      "description": "ID of target element."
+    },
+    "directed": {
+      "type": "boolean",
+      "description": "Is the edge directed?",
+      "default": true
+    },
+    "rel": {
+      "type": "string",
+      "description": "Represented relation type"
+    }
+  },
+  "required": [
+    "members"
+  ]
+}
