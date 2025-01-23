@@ -81,21 +81,20 @@ Open Canvas Interchange Format (OCIF) v0.3-draft © 2025 by Open Canvas Working 
       * [Schema Entry](#schema-entry)
       * [Schema Name](#schema-name)
       * [URI](#uri)
-* [Practical Recommendations](#practical-recommendations)
+* [Practical Recommendations](#practical-recommendations-)
+  * [How To Write an Extension](#how-to-write-an-extension)
 * [References](#references)
 * [Appendix](#appendix)
   * [Built-in Schema Entries](#built-in-schema-entries)
+  * [Known extensions and suggested short names](#known-extensions-and-suggested-short-names)
   * [Examples](#examples)
     * [Node Extension: Circle](#node-extension-circle)
     * [Advanced Examples](#advanced-examples)
-  * [OCWG URL Structure](#ocwg-url-structure)
+  * [OCWG URL Structure (Planned)](#ocwg-url-structure-planned)
   * [Changes](#changes)
     * [From v0.2.1 to v0.3-draft](#from-v021-to-v03-draft)
     * [From v0.2.0 to v0.2.1](#from-v020-to-v021)
     * [From v0.1 to v0.2](#from-v01-to-v02)
-* [TODO @@](#todo-)
-  * [Discuss](#discuss)
-  * [LATER](#later)
   * [Notes to the Editor](#notes-to-the-editor)
 <!-- TOC -->
 
@@ -430,8 +429,6 @@ The rendering of resources inside a path is not defined by OCIF, but by the canv
     - `Z`: Close the path
   - The starting point of the path is the top-left corner of the node, i.e. the positioned point.
 
-- [ ] TODO
-
 NOTE: Canvas apps can simplify rendering of curves (cubic/quadratic bezier, arc) to straight lines.
 
 JSON schema: [path-node.json](core/path-node.json)
@@ -676,8 +673,6 @@ Schemas are used to define
 
 Schemas are stored either inline in the `schemas` property of an OCIF document or externally/remote. See [assets](#assets) for storage options.
 
-- [ ] @@ Provide custom tooling for schema validation
-
 Each entry in the `schemas` array is an object with the following properties:
 
 | Property   | JSON Type | OCIF Type                   | Required     | Contents                                 |
@@ -739,25 +734,35 @@ A schema array with two schemas:
 ```
 
 ### Built-in Schema Mappings
-To simplify the use of OCIF, a set of built-in schema mappings is defined.
+To simplify the use of OCIF, a set of built-in schema mappings is defined:
 
-Any [Schema Name](#schema-name) of the form  
-`@ocwg/rel/`_suffix_ maps to a schema [URI](#uri)  
-`https://spec.canvasprotocol.org/rel/` _suffix_ `/0.2`
+1) Any [Schema Name](#schema-name) of the form  
+
+- `@ocwg/rel/`_suffix_ 
+
+maps to a schema [URI](#uri)  
+
+- `https://spec.canvasprotocol.org/0.3/core/` _suffix_ `-rel.json`.
+
+2) A schema URI of the form
+
+- `@ocwg/node/`_suffix_
+
+maps to a schema URI
+
+- `https://spec.canvasprotocol.org/0.3/core/` _suffix_ `-node.json`.
 
 Here `0.2` is the current version of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
 
-Built-in Entries, where the syntax `{var}` denotes placeholders.
+Built-in Entries, where the syntax `{var}` denotes placeholders:
 ```json
 {
   "schemas": [
-    { "name": "@ocwg/node/{ext-type}", "uri": "https://spec.canvasprotocol.com/node/{ext-type}/0.2" },
-    { "name": "@ocwg/rel/{ext-type}", "uri": "https://spec.canvasprotocol.com/rel/{ext-type}/0.2" }
+    { "name": "@ocwg/node/${ext-type}", "uri": "https://spec.canvasprotocol.com/0.3/core/${ext-type}-node.json" },
+    { "name": "@ocwg/rel/${ext-type}",  "uri": "https://spec.canvasprotocol.com/0.3/core/${ext-type}-rel.json" }
   ]
 }
 ```
-
-
 
 These mappings SHOULD be materialized into the OCIF JSON schema.
 
@@ -842,6 +847,8 @@ A `string` that represents a unique identifier.
 It must be unique among all IDs used in an OCIF document.
 The ID space is shared among nodes, relations, and resources.
 
+NOTE: An OCIF file itself can be use as a resource representation. Thus, a node can show a (then nested) other OCIF file. The ID uniqueness applies only within each OCIF file, not across document boundaries.
+
 #### MIME Type
 A `string` that represents the _MIME Type_ for a resource.
 Typical examples in a canvas are `text/plain`, `text/html`, `image/svg+xml`, `image/png`, `image/jpeg`, `video/mp4`.
@@ -875,19 +882,14 @@ A `string` that represents a Uniform Resource Identifier (URI) as defined in [RF
 
 
 
-# Practical Recommendations
+# Practical Recommendations 
 
 - The proposed MIME-type for OCIF files is `application/ocif+json`.
-
-
-- [ ] IANA registration
-
-
+<!-- see https://github.com/ocwg/spec/issues/13 -->
 
 - The recommended file extension for OCIF files is `.ocif.json`.
   This launches JSON-aware applications by default on most systems.
   The extension `.ocif` is also allowed.
-
 
 - Parsing:
     - If [IDs](#id) collide, the first defined ID should be used.
@@ -910,6 +912,19 @@ A `string` that represents a Uniform Resource Identifier (URI) as defined in [RF
 
 
 
+## How To Write an Extension
+If you need to store some extra data at a node for your canvas app, and none of the existing extensions fit, you can define your own extension.
+Here is a step-by-step guide:
+
+- Define the properties of the extension.
+- Craft a JSON schema for the extension. Large language models are a great help
+    - Define the semantics of the extension.
+    - Define the URI of the extension.
+    - Define the JSON schema of the extension.
+
+
+
+
 
 # References
 - https://www.canvasprotocol.org/ (OCWG homepage)
@@ -928,21 +943,36 @@ A `string` that represents a Uniform Resource Identifier (URI) as defined in [RF
 
 
 ## Built-in Schema Entries
-The materialized list of schema entries, as explained in [built-in schema mappings](#built-in-schema-mappings):
+The materialized list of schema entries, as explained in [built-in schema mappings](#built-in-schema-mappings).
+Note that core extensions have no version number of their own (in the short name).
+They are versioned together with the OCIF spec.
+The following block can be assumed to be present in every OCIF document.
+It is valid to additionally copy it in.
 
 ```json
 {
-  "@ocwg/node/ports/0.3": { "uri": "https://spec.canvasprotocol.org/0.3/ext.json#node-ports" },
-  "@ocwg/node/relative/0.2": { "uri": "https://spec.canvasprotocol.org/node/relative/0.2" },
-  "@ocwg/rel/edge/0.2": { "uri": "https://spec.canvasprotocol.org/rel/edge/0.2" },
-  "@ocwg/rel/group/0.2": { "uri": "https://spec.canvasprotocol.org/rel/group/0.2" },
-  "@ocwg/rel/hyperedge/0.2": { "uri": "https://spec.canvasprotocol.org/rel/hyperedge/0.2" },
-  "@ocwg/rel/parent-child/0.2": { "uri": "https://spec.canvasprotocol.org/rel/parent-child/0.2" }, 
-  "@ocwg/rel/set/0.1": { "uri": "https://spec.canvasprotocol.org/rel/set/0.1" }
+  "@ocwg/node/arrow": { "uri": "https://spec.canvasprotocol.org/0.3/core/arrow-node.json" },
+  "@ocwg/node/oval":  { "uri": "https://spec.canvasprotocol.org/0.3/core/oval-node.json" },
+  "@ocwg/node/path":  { "uri": "https://spec.canvasprotocol.org/0.3/core/path-node.json" },
+  "@ocwg/node/rect":  { "uri": "https://spec.canvasprotocol.org/0.3/core/rect-node.json" },
+  "@ocwg/rel/edge":   { "uri": "https://spec.canvasprotocol.org/0.3/core/edge-rel.json" },
+  "@ocwg/rel/group":  { "uri": "https://spec.canvasprotocol.org/0.3/core/group-rel.json" },
+  "@ocwg/rel/set":    { "uri": "https://spec.canvasprotocol.org/0.3/core/set-rel.json" }
 }
 ```
 
-[NOTE: `https://spec.canvasprotocol.org` points to `https://raw.githubusercontent.com/ocwg/spec/refs/heads/main/spec/`]
+## Known extensions and suggested short names
+The following block *cannot* be assumed to be present in every OCIF document.
+All used extensions must be linked in the schema section.
+
+```json
+{
+  "@ocwg/rel/hyperedge/0.3": { "uri": "https://spec.canvasprotocol.org/0.3/extensions/hyperedge-rel.json" },
+  "@ocwg/rel/parent-child/0.3": { "uri": "https://spec.canvasprotocol.org/0.3/extensions/parent-child-rel.json" },
+  "@ocwg/node/ports/0.3": { "uri": "https://spec.canvasprotocol.org/0.3/extensions/ports-node.json" },
+  "@ocwg/node/relative/0.3": { "uri": "https://spec.canvasprotocol.org/0.3/extensions/relative-node.json" }
+}
+```
 
 ## Examples
 
@@ -1022,30 +1052,19 @@ A circle has a port at the geometric "top" position.
 
 
 
-## OCWG URL Structure
+## OCWG URL Structure (Planned)
 - `https://canvasprotocol.org` - info site
+ 
+- `https://spec.canvasprotocol.org` - specification; REDIRECT to the latest version, e.g. `https://spec.canvasprotocol.org/0.3/spec.md`
+ 
+- `https://spec.canvasprotocol.org/0.3/spec.md` - OCIF specification version; this is also its [URI](#uri). Links in the text to the schema.
 
+- `https://spec.canvasprotocol.org/0.3/schema.json` - General OCIF JSON schema
 
-- `https://spec.canvasprotocol.org` - specification; REDIRECT to the latest version, e.g. `https://spec.canvasprotocol.org/0.2`
-- `https://spec.canvasprotocol.org/0.2` - OCIF specification version; this is also its [URI](#uri)
-    - `Accept='application/json'` -> REDIRECT to `https://spec.canvasprotocol.org/0.2/schema.json`
-    - `Accept='text/html'` -> REDIRECT to `https://spec.canvasprotocol.org/0.2/spec.md`
-- `https://spec.canvasprotocol.org/0.2/schema.json` - General OCIF JSON schema
-- `https://spec.canvasprotocol.org/0.2/spec.html` - General OCIF specification as markdown file
-
-
-- `https://spec.canvasprotocol.org/node/ports/0.2` - the _ports_ extension for nodes in version 0.2; this is also its [URI](#uri)
-- `https://spec.canvasprotocol.org/node/ports/0.2/schema.json` - the JSON schema of the _ports_ extension for nodes in version 0.2
-- `https://spec.canvasprotocol.org/spec.html#node-ports/0.2/schema.md` - the Markdown document for the _ports_ extension for nodes in version 0.2
-
-
-- `https://spec.canvasprotocol.org/rel/group/0.2` - the _group_ relation type in version 0.2; this is also its [URI](#uri)
-- `https://spec.canvasprotocol.org/rel/group/0.2/schema.json` - the JSON schema of the _group_ relation type in version 0.2
-- `https://spec.canvasprotocol.org/rel/group/0.2/schema.md` - the Markdown document for the _group_ relation type in version 0.2
-
-
-- [ ] @@ Can this setup be done using GitHub pages?
-
+- Extension URIs (some selected exemplars): 
+  - `https://spec.canvasprotocol.org/0.3/core/rect-node.json` - URI for the rectangle node extension 
+  - `https://spec.canvasprotocol.org/0.3/core/edge-rel.json` - URI for the rectangle relation extension (core) 
+  - `https://spec.canvasprotocol.org/0.3/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.2; this is also its [URI](#uri)
 
 
 ## Changes
@@ -1055,6 +1074,8 @@ A circle has a port at the geometric "top" position.
 - Added default sizes for nodes
 - Added node extensions for rectangle, oval, arrow, and path
 - Documented text and image usage in nodes
+- Clarified ID uniqueness
+- Updated URI structure (less fancy, easier to implement)
 
 ### From v0.2.0 to v0.2.1
 - Relation types and relation extensions merged into one. There is now a base relation, which has extensions.
@@ -1068,20 +1089,6 @@ A circle has a port at the geometric "top" position.
 
 
 - - -
-
-# TODO @@
-- [ ] more pictures (see /design)
-- [ ] more examples
-
-## Discuss
-- [ ] node id uniqueness when nesting canvases
-
-## LATER
-- [ ] add top level extension data for different canvas apps
-- [ ] Have a wikipedia article defining the "canvas app" -> https://github.com/orgs/ocwg/discussions/39
-    - [ ] link article in [introduction](#introduction)
-- [ ] tldraw as a running example -> full mapping defined in another file -> https://github.com/orgs/ocwg/discussions/40
-- [ ] Add a layer relation type (what is the difference to group?)
 
 ## Notes to the Editor
 - All URIs should have the same, consistent structure
