@@ -104,6 +104,12 @@ Open Canvas Interchange Format (OCIF) v0.3-draft © 2025 by Open Canvas Working 
 
 # Introduction
 This document describes the Open Canvas Interchange Format (OCIF), which allows canvas-applications to exchange their data.
+
+**Other Documents**  
+For more information about the goals and requirements considered for this spec, see the [Goals](../design/goals.md), [Requirements](../design/requirements.md) and [Design Decisions](../design/design-decisions.md) documents.
+**For practical advice on how to use OCIF, see the [OCIF Cookbook](cookbook.md).**
+
+**Canvas**  
 A canvas in this context is a spatial view, on which visual items are placed.
 Often, these items have been placed and sized manually.
 
@@ -125,7 +131,6 @@ In this spec, we define a canvas as consisting of three main parts:
 To make sub-formats explicit, OCIF uses JSON schemas, kept in a fourth part:
 
 - **[Schemas](#schemas)**: Definitions of the structure of nodes and relations.
-
 
 
 
