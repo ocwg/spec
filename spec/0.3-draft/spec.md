@@ -240,7 +240,8 @@ See [Resources](#resources) for details on text resources.
   "nodes": [
     {
       "id": "n1",
-      "position": [ 300, 200 ]
+      "position": [ 300, 200 ],
+      "resource": "r1"
     }
   ],
   "resources": [
@@ -1064,7 +1065,7 @@ A circle has a port at the geometric "top" position.
 - Extension URIs (some selected exemplars): 
   - `https://spec.canvasprotocol.org/0.3/core/rect-node.json` - URI for the rectangle node extension 
   - `https://spec.canvasprotocol.org/0.3/core/edge-rel.json` - URI for the rectangle relation extension (core) 
-  - `https://spec.canvasprotocol.org/0.3/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.2; this is also its [URI](#uri)
+  - `https://spec.canvasprotocol.org/0.3/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.3; this is also its [URI](#uri)
 
 
 ## Changes
