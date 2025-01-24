@@ -501,6 +501,19 @@ A set has the following properties in its `data` object:
 }
 ```
 
+**Example:** A node using the set relation would look like this:
+```json
+{
+  "id": "nodeA",
+  "data": [
+    {
+      "type": "@ocwg/set",
+      "members": ["n1", "n2", "n3"]
+    }
+  ]
+}
+```
+
 JSON schema: [set-rel.json](core/set-rel.json)
 
 
