@@ -1,0 +1,295 @@
+{
+  "ocif": "https://canvasprotocol.org/ocif/0.3",
+  "nodes": [
+    {
+      "id": "n1",
+      "position": [0, 0],
+      "size": [150, 150],
+      "resource": "r1",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#FF5733",
+          "strokeWidth": 4,
+          "fillColor": "#C13D26"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "position": [160, 0],
+      "size": [150, 150],
+      "resource": "r2",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#33FF57",
+          "strokeWidth": 4,
+          "fillColor": "#269E3D"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "position": [320, 0],
+      "size": [150, 150],
+      "resource": "r3",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#3357FF",
+          "strokeWidth": 4,
+          "fillColor": "#263DA6"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "position": [480, 0],
+      "size": [150, 150],
+      "resource": "r4",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#FF33A1",
+          "strokeWidth": 4,
+          "fillColor": "#A1266E"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "position": [0, 160],
+      "size": [150, 150],
+      "resource": "r5",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#FFC733",
+          "strokeWidth": 4,
+          "fillColor": "#C19B26"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "position": [160, 160],
+      "size": [150, 150],
+      "resource": "r6",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#8D33FF",
+          "strokeWidth": 4,
+          "fillColor": "#6626A6"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "position": [320, 160],
+      "size": [150, 150],
+      "resource": "r7",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#33FFF6",
+          "strokeWidth": 4,
+          "fillColor": "#269EB5"
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "position": [480, 160],
+      "size": [150, 150],
+      "resource": "r8",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#FFB733",
+          "strokeWidth": 4,
+          "fillColor": "#C18A26"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "position": [0, 320],
+      "size": [150, 150],
+      "resource": "r9",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#33FFB7",
+          "strokeWidth": 4,
+          "fillColor": "#269E85"
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "position": [160, 320],
+      "size": [150, 150],
+      "resource": "r10",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#A1FF33",
+          "strokeWidth": 4,
+          "fillColor": "#6EA626"
+        }
+      ]
+    },
+    {
+      "id": "n11",
+      "position": [320, 320],
+      "size": [150, 150],
+      "resource": "r11",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#FF338D",
+          "strokeWidth": 4,
+          "fillColor": "#A62663"
+        }
+      ]
+    },
+    {
+      "id": "n12",
+      "position": [480, 320],
+      "size": [150, 150],
+      "resource": "r12",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#33A1FF",
+          "strokeWidth": 4,
+          "fillColor": "#2672A6"
+        }
+      ]
+    },
+    {
+      "id": "n13",
+      "position": [0, 480],
+      "size": [150, 150],
+      "resource": "r13",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#F633FF",
+          "strokeWidth": 4,
+          "fillColor": "#B526C1"
+        }
+      ]
+    },
+    {
+      "id": "n14",
+      "position": [160, 480],
+      "size": [150, 150],
+      "resource": "r14",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#FF9E33",
+          "strokeWidth": 4,
+          "fillColor": "#C17826"
+        }
+      ]
+    },
+    {
+      "id": "n15",
+      "position": [320, 480],
+      "size": [150, 150],
+      "resource": "r15",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#33FF73",
+          "strokeWidth": 4,
+          "fillColor": "#269E53"
+        }
+      ]
+    },
+    {
+      "id": "n16",
+      "position": [480, 480],
+      "size": [150, 150],
+      "resource": "r16",
+      "data": [
+        {
+          "type": "@ocwg/node/rect",
+          "strokeColor": "#FF33E4",
+          "strokeWidth": 4,
+          "fillColor": "#A626AB"
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "r1",
+      "representations": [{ "mime-type": "text/plain", "content": "Hello" }]
+    },
+    {
+      "id": "r2",
+      "representations": [{ "mime-type": "text/plain", "content": "World" }]
+    },
+    {
+      "id": "r3",
+      "representations": [{ "mime-type": "text/plain", "content": "Fun Day" }]
+    },
+    {
+      "id": "r4",
+      "representations": [{ "mime-type": "text/plain", "content": "Great" }]
+    },
+    {
+      "id": "r5",
+      "representations": [{ "mime-type": "text/plain", "content": "Bright" }]
+    },
+    {
+      "id": "r6",
+      "representations": [{ "mime-type": "text/plain", "content": "Cool" }]
+    },
+    {
+      "id": "r7",
+      "representations": [{ "mime-type": "text/plain", "content": "Ocean" }]
+    },
+    {
+      "id": "r8",
+      "representations": [{ "mime-type": "text/plain", "content": "Sunset" }]
+    },
+    {
+      "id": "r9",
+      "representations": [{ "mime-type": "text/plain", "content": "Grass" }]
+    },
+    {
+      "id": "r10",
+      "representations": [{ "mime-type": "text/plain", "content": "Fresh" }]
+    },
+    {
+      "id": "r11",
+      "representations": [{ "mime-type": "text/plain", "content": "Love" }]
+    },
+    {
+      "id": "r12",
+      "representations": [{ "mime-type": "text/plain", "content": "Sky" }]
+    },
+    {
+      "id": "r13",
+      "representations": [{ "mime-type": "text/plain", "content": "Dream" }]
+    },
+    {
+      "id": "r14",
+      "representations": [{ "mime-type": "text/plain", "content": "Orange" }]
+    },
+    {
+      "id": "r15",
+      "representations": [{ "mime-type": "text/plain", "content": "Leaf" }]
+    },
+    {
+      "id": "r16",
+      "representations": [{ "mime-type": "text/plain", "content": "Star" }]
+    }
+  ]
+}
