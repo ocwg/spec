@@ -2,9 +2,9 @@
 **OCWG Working Draft, 21 January 2024**
 
 **This version:** \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3-draft \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3 \
 **Latest version:** \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3-draft \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3 \
 **Previous version:** \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://github.com/ocwg/spec/blob/initial-draft/README.md \
 **Feedback:** \
@@ -28,7 +28,7 @@ An interchange file format for canvas-based applications. Visual nodes, structur
 This document is an editor's draft and has no official standing. It is a work in progress and may be updated, replaced, or obsoleted by other documents at any time.
 
 **Legal**:
-Open Canvas Interchange Format (OCIF) v0.3-draft © 2025 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
+Open Canvas Interchange Format (OCIF) v0.3 © 2025 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
 
 ## Document Conventions
 - Types:
@@ -97,7 +97,7 @@ Open Canvas Interchange Format (OCIF) v0.3-draft © 2025 by Open Canvas Working 
     * [Advanced Examples](#advanced-examples)
   * [OCWG URL Structure (Planned)](#ocwg-url-structure-planned)
   * [Changes](#changes)
-    * [From v0.2.1 to v0.3-draft](#from-v021-to-v03-draft)
+    * [From v0.2.1 to v0.3](#from-v021-to-v03)
     * [From v0.2.0 to v0.2.1](#from-v020-to-v021)
     * [From v0.1 to v0.2](#from-v01-to-v02)
   * [Notes to the Editor](#notes-to-the-editor)
@@ -111,8 +111,8 @@ Open Canvas Interchange Format (OCIF) v0.3-draft © 2025 by Open Canvas Working 
 This document describes the Open Canvas Interchange Format (OCIF), which allows canvas-applications to exchange their data.
 
 **Other Documents**  
-For more information about the goals and requirements considered for this spec, see the [Goals](../design/goals.md), [Requirements](../design/requirements.md) and [Design Decisions](../design/design-decisions.md) documents.
-**For practical advice on how to use OCIF, see the [OCIF Cookbook](cookbook.md).**
+For more information about the goals and requirements considered for this spec, see the [Goals](../../design/goals.md), [Requirements](../../design/requirements.md) and [Design Decisions](../../design/design-decisions.md) documents.
+**For practical advice on how to use OCIF, see the [OCIF Cookbook](../cookbook.md).**
 
 **Canvas**  
 A canvas in this context is a spatial view, on which visual items are placed.
@@ -1092,7 +1092,7 @@ A circle has a port at the geometric "top" position.
 
 
 ## Changes
-### From v0.2.1 to v0.3-draft
+### From v0.2.1 to v0.3
 - Split in core (for interoperability) and extensions (for interchange)
 - Added JSON schemas
 - Added default sizes for nodes
