@@ -10,7 +10,12 @@
 **Feedback:** \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://github.com/orgs/ocwg/discussions \
 **Editor:** \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr. Max Völkel, ITMV https://maxvoelkel.de,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr. Max Völkel, ITMV https://maxvoelkel.de \
+**Authors (alphabetically):** \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aaron Franke, \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maikel van de Lisdonk, \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jess Martin, \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Orion Reed 
 
 Copyright © 2024, 2025 the Contributors to the Open Canvas Working Group (OCWG).
 
