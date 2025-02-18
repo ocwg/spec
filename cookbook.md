@@ -19,11 +19,11 @@ If you are developing a canvas app, consider supporting OCIF as an import and ex
 
 
 ### Using OCIF Core
-The OCIF core provides the building blocks which the working group found to be shared by many canvas apps. Technically, the OCIF core uses already the node and relation extension mechanism.
+The OCIF core provides the building blocks which the working group found to be shared by many canvas apps. Technically, the OCIF core also uses the node and relation extension mechanism.
 
 
 ### Using OCIF Extensions
-Usage of non-core extensions is technically almost identically to the core extensions. The only difference is the schema. Non-core extensions SHOULD provide their schema, either within the OCIF document or at the extension URI. Extensions can be defined and used in the same OCIF document, without any prior announcement or registration process. 
+Usage of non-core extensions is technically almost identical to the core extensions. The only difference is the schema. Non-core extensions SHOULD provide their schema, either within the OCIF document or at the extension URI. Extensions can be defined and used in the same OCIF document, without any prior announcement or registration process. 
 
 
 ### Transclusion
