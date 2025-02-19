@@ -340,7 +340,7 @@ Outgoing has an arrow at the end.
 ## Image
 An image node is a visual node showing an image asset.
 
-## Freehand -> Not in core
+## Freehand
 Like path, but with variable width, to represent e.g. pressure sensitivity.
 See library _perfect freehand_.
 
