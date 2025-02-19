@@ -173,15 +173,17 @@ In OCIF, it looks like this:
       }]
     },
     { "id": "arrow-1",
-      "strokeColor": "#FFFFFF",
-      /* right side of Berlin */
-      "start": [ 200, 125],
-      /* center of Germany */
-      "end": [ 350, 130 ],
-      "startMarker": "none",
-      "endMarker": "arrowhead",
-      /* link to relation which is shown by this arrow */
-      "relation": "relation-1"
+      "data": [{ "type": "@ocwg/node/arrow",
+                 "strokeColor": "#FFFFFF",
+                 /* right side of Berlin */
+                 "start": [ 200, 125],
+                 /* center of Germany */
+                 "end": [ 350, 130 ],
+                 "startMarker": "none",
+                 "endMarker": "arrowhead",
+                 /* link to relation which is shown by this arrow */
+                 "relation": "relation-1"
+      }], 
     }
   ],
   "relations": [
