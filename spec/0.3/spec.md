@@ -79,6 +79,7 @@ Open Canvas Interchange Format (OCIF) v0.3 © 2025 by Open Canvas Working Group 
   * [Handling Extension Data](#handling-extension-data)
 * [OCIF Types](#ocif-types)
   * [Angle](#angle)
+  * [Color](#color)
   * [ID](#id)
   * [MIME Type](#mime-type)
   * [Node](#node)
