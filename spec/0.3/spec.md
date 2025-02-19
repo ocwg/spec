@@ -1,5 +1,5 @@
 # Open Canvas Interchange Format (OCIF)
-**OCWG Working Draft, 19 February 2024**
+**OCWG Candidate Recommendation, 19 February 2024**
 
 **This version:** \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3 \
