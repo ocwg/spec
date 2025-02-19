@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "relative-constraints",
+  "title": "@ocwg/node/relative",
   "description": "Relative constraints for nodes",
   "type": "object",
   "properties": {

@@ -3,7 +3,7 @@
 
 Copyright © 2025 the Contributors to the Open Canvas Working Group (OCWG). 
 
-Versioning Policy: Currently, all extensions in this document are at version **0.3-draft**.
+Versioning Policy: Currently, all extensions in this document are at version **0.3**.
 
 
 ## Abstract
@@ -25,11 +25,11 @@ Open Canvas Interchange Format (OCIF) v0.2 © 2024 by Open Canvas Working Group 
   * [Status of this Document](#status-of-this-document)
     * [Table of Contents](#table-of-contents)
 * [Node Extensions](#node-extensions)
-  * [Ports Node](#ports-node-)
+  * [Ports Node](#ports-node)
   * [Relative Node](#relative-node)
 * [Relation Extensions](#relation-extensions)
-  * [Hyperedge Relation](#hyperedge-relation-)
-  * [Parent-Child Relation](#parent-child-relation-)
+  * [Hyperedge Relation](#hyperedge-relation)
+  * [Parent-Child Relation](#parent-child-relation)
 * [Changes](#changes)
 <!-- TOC -->
 
@@ -38,11 +38,11 @@ Open Canvas Interchange Format (OCIF) v0.2 © 2024 by Open Canvas Working Group 
 These are  [extension](spec.md#extensions) that can be added to nodes in an OCIF document.
 To be placed inside the `data` `array`.
 
-## Ports Node 
-It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g., arrows are attached to a shape.
-
+## Ports Node
 - Name: `@ocwg/node/ports`
-- URI: `https://spec.canvasprotocol.org/node/ports/0.3`
+- URI: `https://spec.canvasprotocol.org/0.3/extensions/ports-node.json`
+
+It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g., arrows are attached to a shape.
 
 Any node can act as a port. The 'container' node uses the _Ports Extension_ to define which nodes it uses as ports.
 The _Ports Extension_ has the following properties:
@@ -92,10 +92,10 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 
 
 ## Relative Node
-Relative constraints are used to define, e.g., the relative positioning of nodes.
-
 - Name: `@ocwg/node/relative`
-- URI: `https://spec.canvasprotocol.org/rel/relative/0.2`
+- URI: `https://spec.canvasprotocol.org/0.3/extensions/relative-node.json`
+
+Relative constraints are used to define, e.g., the relative positioning of nodes.
 
 The node on which this extension is placed is the _target node_.
 It defines a _source_ node, which is used as a reference for the relative positioning.
@@ -120,12 +120,12 @@ JSON schema: [relative-node.json](extensions/relative-node.json)
 # Relation Extensions
 
 
-## Hyperedge Relation 
+## Hyperedge Relation
+- Name: `@ocwg/rel/hyperedge`
+- URI: `https://spec.canvasprotocol.org/0.3/extensions/hyperedge-rel.json`
+
 A hyperedge is a relation, which connects any number of nodes.
 Hyperedges can also be used to model simple bi-edges.
-
-- Name: `@ocwg/rel/hyperedge`
-- URI: `https://spec.canvasprotocol.org/rel/hyperedge/0.2`
 
 Conceptually, a hyper-edge is an entity, which has a number of _endpoints_.
 For each endpoint, we allow defining the directionality of the connection.
@@ -192,12 +192,12 @@ An hyperedge relation connecting two nodes as input (n1,n2) with one node as out
 JSON schema: [hyperedge-rel.json](extensions/hyperedge-rel.json)
 
 
-## Parent-Child Relation 
+## Parent-Child Relation
+- Name: `@ocwg/rel/parent-child`
+- URI: `https://spec.canvasprotocol.org/0.3/extensions/parent-child-rel.json`
+
 A parent-child relation models a hierarchical relationship between nodes.
 It can be used to model inheritance, containment, or other hierarchical relationships.
-
-- Name: `@ocwg/rel/parent-child`
-- URI: `https://spec.canvasprotocol.org/rel/parent-child/0.2`
 
 | Property  | JSON Type | OCIF Type        | Required     | Contents               | Default |
 |-----------|-----------|------------------|--------------|------------------------|:--------|

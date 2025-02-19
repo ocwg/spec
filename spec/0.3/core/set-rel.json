@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "set-rel",
+  "title": "@ocwg/rel/set",
   "description": "Set relation extension",
   "type": "object",
   "properties": {

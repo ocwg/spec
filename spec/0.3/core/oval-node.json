@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "oval-node",
+  "title": "@ocwg/node/oval",
   "description": "Oval node extension",
   "type": "object",
   "properties": {

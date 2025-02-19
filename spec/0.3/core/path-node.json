@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "path-node",
+  "title": "@ocwg/node/path",
   "description": "Path node extension",
   "type": "object",
   "properties": {

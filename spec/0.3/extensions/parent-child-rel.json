@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "parent-child",
+  "title": "@ocwg/rel/parent-child",
   "description": "Parent-child relationship extension. A parent-child relation models a hierarchical relationship between nodes. It can be used to model inheritance, containment, or other hierarchical relationships.",
   "type": "object",
   "properties": {

@@ -1,16 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "set-rel",
-  "description": "Set relation extension",
+  "title": "@ocwg/rel/edge",
+  "description": "Edge relation extension",
   "type": "object",
   "properties": {
-    "from": {
+    "start": {
       "type": "string",
-      "description": "ID of source element."
+      "description": "ID of start (source) element."
     },
-    "to": {
+    "end": {
       "type": "string",
-      "description": "ID of target element."
+      "description": "ID of end (target) element."
     },
     "directed": {
       "type": "boolean",
@@ -19,10 +19,14 @@
     },
     "rel": {
       "type": "string",
-      "description": "Represented relation type"
+      "description": "Represented relation type. Can be a URI to represent the predicate of an RDF triple."
+    },
+    "node": {
+      "type": "string",
+      "description": "The ID of a node that visually represents the edge."
     }
   },
   "required": [
-    "members"
+    "start", "end"
   ]
 }

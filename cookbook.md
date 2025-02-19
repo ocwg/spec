@@ -28,7 +28,7 @@ Usage of non-core extensions is technically almost identical to the core extensi
 
 ### Transclusion
 **Goal**  
-One visual node shows the resource of another visual node.
+One visual node shows the [resource](spec/0.3/spec.md#resources) of another visual node.
 This concept is also known as _transclusion_.
 
 We have two roles:
@@ -36,7 +36,7 @@ We have two roles:
 - a _holder_ node -- the node showing the content of the original node.
 
 **Solution**  
-We use a parent-child relation to indicate that the holder node is a child of the original node.
+We use a [parent-child relation](spec/0.3/extensions.md#parent-child-relation) to indicate that the holder node is a child of the original node.
 The original node (the parent) is included in the holder node (the child).
 Or in other words: The child inherits the properties (the resource) of the parent.
 
@@ -88,15 +88,7 @@ Node A could additionally specify a different size, if it wants to show the cont
 
 
 ### Developing OCIF Extensions
-An OCIF extension consists of two parts:
-
-- a text describing the intended semantics, and
-- a JSON schema that defines the structure of the extension data.
-
-NOTE: Some extensions (e.g. ocif/node-set and ocif/node-group) have the exact same structure and differ only in semantics. The text describing what the extension does is the only difference between them. 
-
-To publish an extensions, a version number should be included.
-It is good practice to use a directory structure that reflects the version number of the extension.
-Within the directory, the text is usually stored as a markdown file, which links to the JSON schema.
-
-NOTE: The OCIF extensions document bundles several OCIF extensions into one document, but this might change in the future.
+OCIF extensions ([see spec](spec.md#)) allow to define custom "property bags" for visual nodes or relations.
+If the built-in types (technically also using the extension mechanism) are not enough, you should define your own extension.
+Keep in mind that nodes and relations can use several extensions at the same time, so only the missing pieces need to be defined in your extension.
+The spec defines how to define custom extensions.

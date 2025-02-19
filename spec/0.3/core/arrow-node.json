@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "arrow-node",
+  "title": "@ocwg/node/arrow",
   "description": "Arrow node extension",
   "type": "object",
   "properties": {
@@ -38,19 +38,21 @@
       "type": "string",
       "enum": [
         "none",
-        "incoming",
-        "outgoing"
+        "arrowhead"
       ],
-      "description": "The marker at the start of the arrow. Directions from the perspective of the arrow."
+      "description": "The marker at the start of the arrow."
     },
     "endMarker": {
       "type": "string",
       "enum": [
         "none",
-        "incoming",
-        "outgoing"
+        "arrowhead"
       ],
-      "description": "The marker at the end of the arrow. Directions from the perspective of the arrow."
+      "description": "The marker at the end of the arrow."
+    },
+    "relation" : {
+      "type": "string",
+      "description": "The ID of the relation defining the semantics of the arrow."
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "hyperedge-rel",
+  "title": "@ocwg/rel/hyperedge",
   "description": "Hyperedge relation extension",
   "type": "object",
   "properties": {
@@ -9,16 +9,6 @@
       "items": {
         "type": "object",
         "properties": {
-          //Property	JSON Type	OCIF Type	Required	Contents	Default
-          //id	string	ID	required	ID of attached entity (node or relation)
-          //direction	string	Direction	optional	Direction of the connection.	undir
-          //weight	number		optional	Weight of the edge	1.0
-          //id: states which node (or relation) is attached to the edge
-          //direction: See below
-          //weight: A floating-point number, which can be used to model the strength of the connection, for this endpoint.
-          //Direction
-          //An enum with three values:
-          //
           "id": {
             "type": "string",
             "description": "ID of attached entity (node or relation)"
