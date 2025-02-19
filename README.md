@@ -1,6 +1,6 @@
 # Open Canvas Initial Draft Spec
 
-⚒️ Work on the initial spec is underway. The [current 0.2 spec](./spec/spec-0.2.md) is live.
+⚒️ Work on the initial spec is underway. The [current 0.3 spec](./spec/0.3/spec.md) is live.
 We welcome any feedback and implementations.
 
 📚 Read more at [canvasprotocol.org](https://canvasprotocol.org).
