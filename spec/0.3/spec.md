@@ -188,13 +188,16 @@ In OCIF, it looks like this:
   ],
   "relations": [
     { "id": "relation-1",
-      "start": "berlin-node",
-      "end": "germany-node",
-      /* WikiData 'is capital of'. 
-         We could also omit this or just put the string 'is capital of' here. */
-      "rel": "https://www.wikidata.org/wiki/Property:P1376",
-      /* link back to the visual node representing this relation */
-      "node": "arrow-1"
+      "data": [{
+        "type": "@ocwg/rel/edge",
+        "start": "berlin-node",
+        "end": "germany-node",
+        /* WikiData 'is capital of'. 
+           We could also omit this or just put the string 'is capital of' here. */
+        "rel": "https://www.wikidata.org/wiki/Property:P1376",
+        /* link back to the visual node representing this relation */
+        "node": "arrow-1"
+      }],
     }
   ],
   "resources": [
