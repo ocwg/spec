@@ -6,7 +6,7 @@
 **Latest version:** \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3 \
 **Previous version:** \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://github.com/ocwg/spec/blob/initial-draft/README.md \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.2 \
 **Feedback:** \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://github.com/orgs/ocwg/discussions \
 **Editor:** \
