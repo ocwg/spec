@@ -1,0 +1,34 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://github.com/ocwg/spec/blob/main/spec/0.3/spec.md",
+      "permanent": false
+    },
+    {
+      "source": "/:version/spec.md",
+      "destination": "https://github.com/ocwg/spec/blob/main/spec/:version/spec.md",
+      "permanent": true
+    },
+    {
+      "source": "/:version/schema.json",
+      "destination": "https://github.com/ocwg/spec/blob/main/spec/:version/schema.json",
+      "permanent": true
+    },
+    {
+      "source": "/:version/extensions.md",
+      "destination": "https://github.com/ocwg/spec/blob/main/spec/:version/extensions.md",
+      "permanent": true
+    },
+    {
+      "source": "/:version/core/:extension.json",
+      "destination": "https://github.com/ocwg/spec/blob/main/spec/:version/core/:extension.json",
+      "permanent": true
+    },
+    {
+      "source": "/:version/extensions/:extension.json",
+      "destination": "https://github.com/ocwg/spec/blob/main/spec/:version/extensions/:extension.json",
+      "permanent": true
+    }
+  ]
+} 
