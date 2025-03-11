@@ -61,7 +61,7 @@ Node A could additionally specify a different size, if it wants to show the cont
   ],
   "relations": [
     {
-      "type": "@ocwg/rel/parent-child",
+      "type": "@ocif/rel/parent-child",
       "parent": "B",
       "child": "A",
       "inherit": true

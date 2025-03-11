@@ -1,5 +1,5 @@
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.3",
+  "ocif": "https://canvasprotocol.org/ocif/0.4",
   "nodes": [
     {
       "id": "n1",
@@ -8,7 +8,7 @@
       "resource": "r1",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#FF5733",
           "strokeWidth": 4,
           "fillColor": "#C13D26"
@@ -22,7 +22,7 @@
       "resource": "r2",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#33FF57",
           "strokeWidth": 4,
           "fillColor": "#269E3D"
@@ -36,7 +36,7 @@
       "resource": "r3",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#3357FF",
           "strokeWidth": 4,
           "fillColor": "#263DA6"
@@ -50,7 +50,7 @@
       "resource": "r4",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#FF33A1",
           "strokeWidth": 4,
           "fillColor": "#A1266E"
@@ -64,7 +64,7 @@
       "resource": "r5",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#FFC733",
           "strokeWidth": 4,
           "fillColor": "#C19B26"
@@ -78,7 +78,7 @@
       "resource": "r6",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#8D33FF",
           "strokeWidth": 4,
           "fillColor": "#6626A6"
@@ -92,7 +92,7 @@
       "resource": "r7",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#33FFF6",
           "strokeWidth": 4,
           "fillColor": "#269EB5"
@@ -106,7 +106,7 @@
       "resource": "r8",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#FFB733",
           "strokeWidth": 4,
           "fillColor": "#C18A26"
@@ -120,7 +120,7 @@
       "resource": "r9",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#33FFB7",
           "strokeWidth": 4,
           "fillColor": "#269E85"
@@ -134,7 +134,7 @@
       "resource": "r10",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#A1FF33",
           "strokeWidth": 4,
           "fillColor": "#6EA626"
@@ -148,7 +148,7 @@
       "resource": "r11",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#FF338D",
           "strokeWidth": 4,
           "fillColor": "#A62663"
@@ -162,7 +162,7 @@
       "resource": "r12",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#33A1FF",
           "strokeWidth": 4,
           "fillColor": "#2672A6"
@@ -176,7 +176,7 @@
       "resource": "r13",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#F633FF",
           "strokeWidth": 4,
           "fillColor": "#B526C1"
@@ -190,7 +190,7 @@
       "resource": "r14",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#FF9E33",
           "strokeWidth": 4,
           "fillColor": "#C17826"
@@ -204,7 +204,7 @@
       "resource": "r15",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#33FF73",
           "strokeWidth": 4,
           "fillColor": "#269E53"
@@ -218,7 +218,7 @@
       "resource": "r16",
       "data": [
         {
-          "type": "@ocwg/node/rect",
+          "type": "@ocif/node/rect",
           "strokeColor": "#FF33E4",
           "strokeWidth": 4,
           "fillColor": "#A626AB"

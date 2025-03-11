@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.1",
+  "ocif": "https://canvasprotocol.org/ocif/0.4",
   "nodes": [
     {
       "id": "shape:054132af-4d2f-48ed-b239-f5129dd35288",
-      "schema": "@ocwg/node",
+      "schema": "@ocif/node",
       "schema_version": "0.1",
       "position": [122.34441018202554, -276.51955082999257]
     }
