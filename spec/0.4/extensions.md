@@ -14,7 +14,7 @@ See the [OCIF Core Specification](./spec) for the core features of OCIF.
 This document is an editor's draft and has no official standing. It is a work in progress and may be updated, replaced, or obsoleted by other documents at any time.
 
 **Legal**:
-Open Canvas Interchange Format (OCIF) v0.2 © 2024 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
+Open Canvas Interchange Format (OCIF) v0.4 © 2025 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
 
 
 ### Table of Contents
