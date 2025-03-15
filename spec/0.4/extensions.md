@@ -39,7 +39,7 @@ To be placed inside the `data` `array`.
 
 ## Ports Node
 - Name: `@ocif/node/ports`
-- URI: `https://spec.canvasprotocol.org/0.3/extensions/ports-node.json`
+- URI: `https://spec.canvasprotocol.org/0.4/extensions/ports-node.json`
 
 It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g., arrows are attached to a shape.
 
