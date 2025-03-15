@@ -92,7 +92,7 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 
 ## Relative Node
 - Name: `@ocif/node/relative`
-- URI: `https://spec.canvasprotocol.org/0.3/extensions/relative-node.json`
+- URI: `https://spec.canvasprotocol.org/0.4/extensions/relative-node.json`
 
 Relative constraints are used to define, e.g., the relative positioning of nodes.
 
@@ -121,7 +121,7 @@ JSON schema: [relative-node.json](extensions/relative-node.json)
 
 ## Hyperedge Relation
 - Name: `@ocif/rel/hyperedge`
-- URI: `https://spec.canvasprotocol.org/0.3/extensions/hyperedge-rel.json`
+- URI: `https://spec.canvasprotocol.org/0.4/extensions/hyperedge-rel.json`
 
 A hyperedge is a relation, which connects any number of nodes.
 Hyperedges can also be used to model simple bi-edges.
@@ -193,7 +193,7 @@ JSON schema: [hyperedge-rel.json](extensions/hyperedge-rel.json)
 
 ## Parent-Child Relation
 - Name: `@ocif/rel/parent-child`
-- URI: `https://spec.canvasprotocol.org/0.3/extensions/parent-child-rel.json`
+- URI: `https://spec.canvasprotocol.org/0.4/extensions/parent-child-rel.json`
 
 A parent-child relation models a hierarchical relationship between nodes.
 It can be used to model inheritance, containment, or other hierarchical relationships.

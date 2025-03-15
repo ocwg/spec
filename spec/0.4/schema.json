@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "OCIF core 0.3",
+  "title": "OCIF core 0.4",
   "description": "The schema for the Open Component Interconnect Format (OCIF) Core document structure.",
   "type": "object",
   "properties": {
@@ -80,9 +80,7 @@
           }
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "relation": {
       "type": "object",
@@ -97,9 +95,7 @@
           "description": "Additional data for the relation."
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "resource": {
       "type": "object",
@@ -117,10 +113,7 @@
           }
         }
       },
-      "required": [
-        "id",
-        "representations"
-      ]
+      "required": ["id", "representations"]
     },
     "representation": {
       "type": "object",
@@ -161,12 +154,8 @@
           "description": "An optional short name for the schema."
         }
       },
-      "required": [
-        "uri"
-      ]
+      "required": ["uri"]
     }
   },
-  "required": [
-    "ocif"
-  ]
+  "required": ["ocif"]
 }
