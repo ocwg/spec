@@ -1,5 +1,4 @@
 # OCIF Extensions
-**OCWG Working Draft, 21 January 2025**
 
 Copyright © 2025 the Contributors to the Open Canvas Working Group (OCWG). 
 
