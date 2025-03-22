@@ -1226,9 +1226,9 @@ A circle has a port at the geometric "top" position.
 - `https://spec.canvasprotocol.org/v0.3/schema.json` - General OCIF JSON schema
 
 - Extension URIs (some selected exemplars):
-  - `https://spec.canvasprotocol.org/v0.3/core/node-rect.json` - URI for the rectangle node extension
-  - `https://spec.canvasprotocol.org/v0.3/core/rel-edge.json` - URI for the rectangle relation extension (core)
-  - `https://spec.canvasprotocol.org/v0.3/extensions/node-ports.json` - The _ports_ extension schema for nodes in version 0.3; this is also its [URI](#uri)
+  - `https://spec.canvasprotocol.org/v0.3/core/rect-node.json` - URI for the rectangle node extension
+  - `https://spec.canvasprotocol.org/v0.3/core/edge-rel.json` - URI for the rectangle relation extension (core)
+  - `https://spec.canvasprotocol.org/v0.3/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.3; this is also its [URI](#uri)
 
 ## Changes
 
