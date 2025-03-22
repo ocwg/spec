@@ -1,5 +1,5 @@
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.4",
   "nodes": [
     {
       "id": "n1",
@@ -28,7 +28,7 @@
   "relations": [],
   "schemas": [
     {
-      "uri": "https://spec.canvasprotocol.com/node/circle/0.2",
+      "uri": "https://spec.canvasprotocol.org/node/circle/0.2",
       "name": "@ocif/circle",
       "schema": {
         "properties": {

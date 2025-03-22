@@ -1,5 +1,5 @@
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.4",
   "nodes": [
     {
       "id": "n1",
