@@ -2,6 +2,7 @@
 / https://github.com/ocwg/spec/blob/main/spec/v0.4/spec.md 302
 
 # Version-specific spec and schema files
+/:version https://github.com/ocwg/spec/blob/main/spec/:version/spec.md 301
 /:version/spec.md https://github.com/ocwg/spec/blob/main/spec/:version/spec.md 301
 /:version/schema.json https://github.com/ocwg/spec/blob/main/spec/:version/schema.json 301
 /:version/extensions.md https://github.com/ocwg/spec/blob/main/spec/:version/extensions.md 301

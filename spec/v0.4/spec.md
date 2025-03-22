@@ -1218,13 +1218,9 @@ A circle has a port at the geometric "top" position.
 ## OCWG URL Structure (Planned)
 
 - `https://canvasprotocol.org` - info site
-
 - `https://spec.canvasprotocol.org` - specification; REDIRECT to the latest version, e.g. `https://spec.canvasprotocol.org/v0.4/spec.md`
-
 - `https://spec.canvasprotocol.org/v0.4/spec.md` - OCIF specification version; this is also its [URI](#uri). Links in the text to the schema.
-
 - `https://spec.canvasprotocol.org/v0.4/schema.json` - General OCIF JSON schema
-
 - Extension URIs (some selected exemplars):
   - `https://spec.canvasprotocol.org/v0.4/core/rect-node.json` - URI for the rectangle node extension
   - `https://spec.canvasprotocol.org/v0.4/core/edge-rel.json` - URI for the rectangle relation extension (core)
@@ -1235,6 +1231,8 @@ A circle has a port at the geometric "top" position.
 ### From v0.3 to v0.4
 
 - Changed @ocwg to @ocif
+- Prefaced all version numbers with `v` as in `v0.4`
+- Added release instructions
 
 ### From v0.2.1 to v0.3
 
