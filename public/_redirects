@@ -1,5 +1,5 @@
 # Redirect root to latest version of spec
-/ https://github.com/ocwg/spec/blob/main/spec/0.3/spec.md 302
+/ https://github.com/ocwg/spec/blob/main/spec/v0.4/spec.md 302
 
 # Version-specific spec and schema files
 /:version https://github.com/ocwg/spec/blob/main/spec/:version/spec.md 301

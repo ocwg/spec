@@ -3,11 +3,11 @@
 **OCWG Candidate Recommendation, 19 February 2024**
 
 **This version:** \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3 \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/v0.3 \
 **Latest version:** \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.3 \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/v0.3 \
 **Previous version:** \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/0.2 \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://spec.canvasprotocol.org/v0.2 \
 **Feedback:** \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://github.com/orgs/ocwg/discussions \
 **Editor:** \
@@ -245,9 +245,9 @@ The OCIF file is a JSON object with the following properties:
 - **OCIF**: The _Open Canvas Interchange Format_ schema URI.
   - The URI SHOULD contain the version number of the schema, either as a version number or as a date (preferred).
   - Known versions:
-    - `https://spec.canvasprotocol.org/0.1` Retrospectively assigned URI for the first draft at https://github.com/ocwg/spec/blob/initial-draft/README.md
-    - `https://spec.canvasprotocol.org/0.2` This is a preliminary version, as described in this draft, for experiments
-    - `https://spec.canvasprotocol.org/0.3` This is the first stable version.
+    - `https://spec.canvasprotocol.org/v0.1` Retrospectively assigned URI for the first draft at https://github.com/ocwg/spec/blob/initial-draft/README.md
+    - `https://spec.canvasprotocol.org/v0.2` This is a preliminary version, as described in this draft, for experiments
+    - `https://spec.canvasprotocol.org/v0.3` This is the first stable version.
 - **nodes**: A list of nodes on the canvas. See [Nodes](#nodes) for details.
 - **relations**: A list of relations between nodes (and relations). See [Relations](#relations) for details.
 - **resources**: A list of resources used by nodes. See [Resources](#resources) for details.
@@ -401,7 +401,7 @@ TIP: Additional node extensions can be used. E.g., an [Oval](#oval)) could be us
 ## Rectangle
 
 - Name: `@ocwg/node/rect`
-- URI: `https://spec.canvasprotocol.org/0.3/core/rect-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.3/core/rect-node.json`
 
 A rectangle is a visual node [extension](#extensions), to define the visual appearance of a node as a rectangle.
 A core node has already a position, size, rotation, scale.
@@ -430,7 +430,7 @@ JSON schema: [rect-node.json](core/rect-node.json)
 ## Oval
 
 - Name: `@ocwg/node/oval`
-- URI: `https://spec.canvasprotocol.org/0.3/core/oval-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.3/core/oval-node.json`
 
 An oval is a visual node extension, to define the visual appearance of a node as an oval.
 An oval in a square bounding box is a circle.
@@ -443,7 +443,7 @@ JSON schema: [oval-node.json](core/oval-node.json)
 ## Arrow
 
 - Name: `@ocwg/node/arrow`
-- URI: `https://spec.canvasprotocol.org/0.3/core/arrow-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.3/core/arrow-node.json`
 
 An arrow is a visual node that connects two point coordinates.
 It should be rendered as a straight line, with optional direction markers at the start and end.
@@ -506,7 +506,7 @@ JSON schema: [arrow-node.json](core/arrow-node.json)
 ## Path
 
 - Name: `@ocwg/node/path`
-- URI: `https://spec.canvasprotocol.org/0.3/core/path-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.3/core/path-node.json`
 
 A path is a visual node extension, to define the visual appearance of a node as a path.
 The rendering of resources inside a path is not defined by OCIF, but by the canvas app.
@@ -576,7 +576,7 @@ If this is your first read of the spec, skip over the details of the relation ty
 ## Set Relation
 
 - Name: `@ocwg/rel/set`
-- URI: `https://spec.canvasprotocol.org/0.3/core/set-rel.json`
+- URI: `https://spec.canvasprotocol.org/v0.3/core/set-rel.json`
 
 A set relation is a relation, which groups nodes together.
 
@@ -617,7 +617,7 @@ JSON schema: [set-rel.json](core/set-rel.json)
 ## Group Relation
 
 - Name: `@ocwg/rel/group`
-- URI: `https://spec.canvasprotocol.org/0.3/core/group-rel.json`
+- URI: `https://spec.canvasprotocol.org/v0.3/core/group-rel.json`
 
 A group relation is a relation, which groups nodes together.
 It implies stronger semantics than a [set relation](#set-relation).
@@ -642,7 +642,7 @@ JSON schema: [group-rel.json](core/group-rel.json)
 ## Edge Relation
 
 - Name: `@ocwg/rel/edge`
-- URI: `https://spec.canvasprotocol.org/0.3/core/edge-rel.json`
+- URI: `https://spec.canvasprotocol.org/v0.3/core/edge-rel.json`
 
 An edge relates two elements (nodes and/or relation, mixing types is allowed).
 It supports directed and undirected bi-edges.
@@ -831,7 +831,7 @@ A schema array with two schemas:
 {
   "schemas": [
     {
-      "uri": "https://spec.canvasprotocol.com/node/ports/0.2",
+      "uri": "https://spec.canvasprotocol.org/node/ports/0.2",
       "name": "@ocwg/node/ports"
     },
     {
@@ -853,7 +853,7 @@ To simplify the use of OCIF, a set of built-in schema mappings is defined:
 
 maps to a schema [URI](#uri)
 
-- `https://spec.canvasprotocol.org/0.3/core/` _suffix_ `-rel.json`.
+- `https://spec.canvasprotocol.org/v0.3/core/` _suffix_ `-rel.json`.
 
 2. A schema URI of the form
 
@@ -861,7 +861,7 @@ maps to a schema [URI](#uri)
 
 maps to a schema URI
 
-- `https://spec.canvasprotocol.org/0.3/core/` _suffix_ `-node.json`.
+- `https://spec.canvasprotocol.org/v0.3/core/` _suffix_ `-node.json`.
 
 Here `0.3` is the current version of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
 
@@ -872,11 +872,11 @@ Built-in Entries, where the syntax `{var}` denotes placeholders:
   "schemas": [
     {
       "name": "@ocwg/node/${ext-type}",
-      "uri": "https://spec.canvasprotocol.com/0.3/core/${ext-type}-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.3/core/${ext-type}-node.json"
     },
     {
       "name": "@ocwg/rel/${ext-type}",
-      "uri": "https://spec.canvasprotocol.com/0.3/core/${ext-type}-rel.json"
+      "uri": "https://spec.canvasprotocol.org/v0.3/core/${ext-type}-rel.json"
     }
   ]
 }
@@ -1089,25 +1089,25 @@ It is valid to additionally copy it in.
 ```json
 {
   "@ocwg/node/arrow": {
-    "uri": "https://spec.canvasprotocol.org/0.3/core/arrow-node.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/core/arrow-node.json"
   },
   "@ocwg/node/oval": {
-    "uri": "https://spec.canvasprotocol.org/0.3/core/oval-node.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/core/oval-node.json"
   },
   "@ocwg/node/path": {
-    "uri": "https://spec.canvasprotocol.org/0.3/core/path-node.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/core/path-node.json"
   },
   "@ocwg/node/rect": {
-    "uri": "https://spec.canvasprotocol.org/0.3/core/rect-node.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/core/rect-node.json"
   },
   "@ocwg/rel/edge": {
-    "uri": "https://spec.canvasprotocol.org/0.3/core/edge-rel.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/core/edge-rel.json"
   },
   "@ocwg/rel/group": {
-    "uri": "https://spec.canvasprotocol.org/0.3/core/group-rel.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/core/group-rel.json"
   },
   "@ocwg/rel/set": {
-    "uri": "https://spec.canvasprotocol.org/0.3/core/set-rel.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/core/set-rel.json"
   }
 }
 ```
@@ -1121,16 +1121,16 @@ For an updated list of known extensions, see the [catalog.md](../../catalog.md).
 ```json
 {
   "@ocwg/rel/hyperedge/0.3": {
-    "uri": "https://spec.canvasprotocol.org/0.3/extensions/hyperedge-rel.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/extensions/hyperedge-rel.json"
   },
   "@ocwg/rel/parent-child/0.3": {
-    "uri": "https://spec.canvasprotocol.org/0.3/extensions/parent-child-rel.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/extensions/parent-child-rel.json"
   },
   "@ocwg/node/ports/0.3": {
-    "uri": "https://spec.canvasprotocol.org/0.3/extensions/ports-node.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/extensions/ports-node.json"
   },
   "@ocwg/node/relative/0.3": {
-    "uri": "https://spec.canvasprotocol.org/0.3/extensions/relative-node.json"
+    "uri": "https://spec.canvasprotocol.org/v0.3/extensions/relative-node.json"
   }
 }
 ```
@@ -1219,16 +1219,16 @@ A circle has a port at the geometric "top" position.
 
 - `https://canvasprotocol.org` - info site
 
-- `https://spec.canvasprotocol.org` - specification; REDIRECT to the latest version, e.g. `https://spec.canvasprotocol.org/0.3/spec.md`
+- `https://spec.canvasprotocol.org` - specification; REDIRECT to the latest version, e.g. `https://spec.canvasprotocol.org/v0.3/spec.md`
 
-- `https://spec.canvasprotocol.org/0.3/spec.md` - OCIF specification version; this is also its [URI](#uri). Links in the text to the schema.
+- `https://spec.canvasprotocol.org/v0.3/spec.md` - OCIF specification version; this is also its [URI](#uri). Links in the text to the schema.
 
-- `https://spec.canvasprotocol.org/0.3/schema.json` - General OCIF JSON schema
+- `https://spec.canvasprotocol.org/v0.3/schema.json` - General OCIF JSON schema
 
 - Extension URIs (some selected exemplars):
-  - `https://spec.canvasprotocol.org/0.3/core/rect-node.json` - URI for the rectangle node extension
-  - `https://spec.canvasprotocol.org/0.3/core/edge-rel.json` - URI for the rectangle relation extension (core)
-  - `https://spec.canvasprotocol.org/0.3/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.3; this is also its [URI](#uri)
+  - `https://spec.canvasprotocol.org/v0.3/core/rect-node.json` - URI for the rectangle node extension
+  - `https://spec.canvasprotocol.org/v0.3/core/edge-rel.json` - URI for the rectangle relation extension (core)
+  - `https://spec.canvasprotocol.org/v0.3/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.3; this is also its [URI](#uri)
 
 ## Changes
 
