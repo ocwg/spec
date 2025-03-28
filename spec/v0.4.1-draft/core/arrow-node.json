@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/node/arrow",
+  "description": "Arrow node extension",
+  "type": "object",
+  "properties": {
+    "strokeWidth": {
+      "type": "number",
+      "description": "The line width."
+    },
+    "strokeColor": {
+      "type": "string",
+      "description": "The color of the stroke."
+    },
+    "fillColor": {
+      "type": "string",
+      "description": "The color of the fill."
+    },
+    "start": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "The start point."
+    },
+    "end": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "The end point."
+    },
+    "startMarker": {
+      "type": "string",
+      "enum": ["none", "arrowhead"],
+      "description": "The marker at the start of the arrow."
+    },
+    "endMarker": {
+      "type": "string",
+      "enum": ["none", "arrowhead"],
+      "description": "The marker at the end of the arrow."
+    },
+    "relation": {
+      "type": "string",
+      "description": "The ID of the relation defining the semantics of the arrow."
+    }
+  }
+}

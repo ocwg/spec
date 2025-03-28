@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/rel/edge",
+  "description": "Edge relation extension",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "description": "ID of start (source) element."
+    },
+    "end": {
+      "type": "string",
+      "description": "ID of end (target) element."
+    },
+    "directed": {
+      "type": "boolean",
+      "description": "Is the edge directed?",
+      "default": true
+    },
+    "rel": {
+      "type": "string",
+      "description": "Represented relation type. Can be a URI to represent the predicate of an RDF triple."
+    },
+    "node": {
+      "type": "string",
+      "description": "The ID of a node that visually represents the edge."
+    }
+  },
+  "required": ["start", "end"]
+}

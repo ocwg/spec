@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/node/relative",
+  "description": "Relative constraints for nodes",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "ID of the source node. The ID of the source node, which is used as a reference for the relative positioning."
+    },
+    "position": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Relative position of the target. The numbers given in the array are vector-added to the position of the source node."
+    },
+    "rotation": {
+      "type": "number",
+      "description": "Relative angle of the target. The rotation is added to the rotation of the source node."
+    }
+  },
+  "required": ["source"]
+}

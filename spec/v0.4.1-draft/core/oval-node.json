@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/node/oval",
+  "description": "Oval node extension",
+  "type": "object",
+  "properties": {
+    "strokeWidth": {
+      "type": "number",
+      "description": "The line width."
+    },
+    "strokeColor": {
+      "type": "string",
+      "description": "The color of the stroke."
+    },
+    "fillColor": {
+      "type": "string",
+      "description": "The color of the fill."
+    }
+  }
+}
