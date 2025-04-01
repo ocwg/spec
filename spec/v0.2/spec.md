@@ -145,7 +145,7 @@ The OCIF file is a JSON object with the following properties:
 - **resources**: A list of resources used by nodes. See [Resources](#resources) for details.
 - **schemas**: A list of schema entries, which are used for relation types and extensions. See [Schemas](#schemas) for details.
 
-**Example:** \
+**Example** \
 A minimal OCIF file, no visible items
 
 ```json
@@ -154,7 +154,7 @@ A minimal OCIF file, no visible items
 }
 ```
 
-**Example:** \
+**Example** \
 A small OCIF file, with one node and one resource
 
 ```json
@@ -235,7 +235,7 @@ The _Ports Extension_ has the following properties:
 | -------- | --------- | --------- | ------------ | ----------------------------- | ------- |
 | `ports`  | `array`   | [ID](#id) | **required** | IDs of nodes acting as ports. |         |
 
-**Example:**  
+**Example** \
 A node (n1) with two ports (p1, p2)
 
 ```json
@@ -392,7 +392,7 @@ Edge weight is a common requirement, and no extensions are needed for this simpl
 -->
 - **rel**: See [Edge Relation](#edge-relation)
 
-**Endpoint**  
+**Endpoint** \
 Each endpoint is an object with the following properties:
 
 | Property    | JSON Type | OCIF Type | Required     | Contents                                 | Default |
@@ -408,7 +408,7 @@ Each endpoint is an object with the following properties:
 Edge weight is a common requirement, and no extensions are needed for this simple property
 -->
 
-**Direction**  
+**Direction** \
 An enum with three values:
 
 - `in` (edge is going **into** the hyper-edge),
@@ -421,7 +421,7 @@ This allows representing cases such as:
 - An edge with no endpoints
 - An edge with only incoming or only outgoing endpoints.
 
-**Example**  
+**Example** \
 An hyperedge relation connecting two nodes as input (n1,n2) with one node as output (n3).
 
 ```json
@@ -528,7 +528,7 @@ Either `content` or `location` MUST be present. If `content` is used, `location`
   This is the actual data of the resource as a string.
   Can be base64-encoded.
 
-**Summary**  
+**Summary** \
 Valid resource representations are
 
 |                 | `location`                      | `mime-type`                                                | `content`          |
@@ -629,7 +629,7 @@ To summarize, these schema definitions are possible:
 
 By defining a mapping of URIs to names, the OCIF file becomes more readable and easier to maintain.
 
-**Example**  
+**Example** \
 A schema array with two schemas:
 
 ```json
@@ -652,8 +652,8 @@ A schema array with two schemas:
 
 To simplify the use of OCIF, a set of built-in schema mappings is defined.
 
-Any [Schema Name](#schema-name) of the form  
-`@ocwg/rel/`_suffix_ maps to a schema [URI](#uri)  
+Any [Schema Name](#schema-name) of the form
+`@ocwg/rel/`_suffix_ maps to a schema [URI](#uri)
 `https://spec.canvasprotocol.org/rel/` _suffix_ `/0.2`
 
 Here `0.2` is the current version of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
@@ -883,7 +883,7 @@ This extension defines geometric circles.
 - Semantics:
   - The `radius` property implies a `size`. I.e. a circle of radius _r_ implies a size of _2r_ x _2r_.
 
-**Example**:  
+**Example** \
 A circle node with a radius of 10 pixels:
 
 ```json
@@ -893,7 +893,7 @@ A circle node with a radius of 10 pixels:
 }
 ```
 
-**Example**  
+**Example** \
 A node, using the circle extension, with a radius of 20 pixels:
 
 ```json
@@ -916,7 +916,7 @@ A node, using the circle extension, with a radius of 20 pixels:
 
 ### Advanced Examples
 
-**Example**  
+**Example** \
 A node using multiple extensions.
 A circle has a port at the geometric "top" position.
 

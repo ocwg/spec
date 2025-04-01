@@ -139,7 +139,7 @@ Taking the requirements "Resources are Web-like", "Offline" and
     -->
 
 ### Content-Formats
-Canvas tools often support some special content formats, e.g., 
+Canvas tools often support some special content formats, e.g.,
 free-hand drawings. We might want to define a content for this, so that
 it can be exchanged.
 
@@ -220,7 +220,7 @@ considered.
     Representation <|-- InlineTextContent
     AssetFile --> AssetContent : holds
     MainFile .> "0..n" AssetFile : refers to
-    
+
     @enduml
     -->
 
@@ -356,9 +356,9 @@ As discussed on 2024-11-03, we want to use the following structure:
 
 Considerations
 
-- We use `https` instead of `http` to ensure secure connections. 
+- We use `https` instead of `http` to ensure secure connections.
 - We drop the `www` subdomain to keep the URIs short and clean.
-- We use `canvasprotocol.org` as the domain to make it clear that this is the official website for the Canvas Protocol. 
+- We use `canvasprotocol.org` as the domain to make it clear that this is the official website for the Canvas Protocol.
 - A path part `ocif` can be dropped, as `canvasprotocol.org` is specific enough.
 - Version info should be present
 
@@ -376,7 +376,7 @@ So the full type names would be `@ocwg/node/ports`, `@ocwg/node/circle`, `@ocwg/
 ### List or Map
 
 A list (`array`) looks like this
-```json 
+```json
 {
   "schemas": [
     {
@@ -391,7 +391,7 @@ A list (`array`) looks like this
 }
 ```
 A map (`object`) has this structure
-```json 
+```json
 {
   "schemas": {
     "@ocwg/node/ports": { "uri": "https://spec.canvasprotocol.com/node/ports" },
@@ -404,11 +404,11 @@ A map (`object`) has this structure
     * Schema names must be unique per OCIF document, a map seems to be a clearer and more compact choice.
 
 * Use a list:
-    * However, real-world tools will use a JSON parser and on top a domain-specific parser. 
+    * However, real-world tools will use a JSON parser and on top a domain-specific parser.
 Consider the case where  two OCIF files are merged manually or otherwise edited.
-Now IDs might be non-unique. 
+Now IDs might be non-unique.
 A plain JSON parser will throw a generic error along the lines of "JSON object malformed".
-If an array was used, the JSON parser would be fine and the domain specific-parser would say "duplicate ID detected, using first occurrence." 
+If an array was used, the JSON parser would be fine and the domain specific-parser would say "duplicate ID detected, using first occurrence."
 This is a more helpful error message and allows opening the OCIF file, although maybe with slightly unintended results.
 
 **Decision**: We use lists.

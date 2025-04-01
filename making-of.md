@@ -20,7 +20,7 @@ via Maikel in https://github.com/orgs/ocwg/discussions/32
 
 ## W3C Tools
 
-- Sample spec (outline) 
+- Sample spec (outline)
     - https://www.w3.org/StyleSheets/TR/2016/README (HTML)
     - https://w3c-ccg.github.io/markdown-to-spec/ (Markdown)
 
@@ -35,9 +35,9 @@ In IntelliJ, the markdown preview produces HTML, which allows this snippet of CS
 ```css
 <!-- hack to render TODO items as issues -->
 <style>
-div > :has(input[type="checkbox"]) { 
-  background-color: #433; 
-  border-left: 8px solid orange; 
+div > :has(input[type="checkbox"]) {
+  background-color: #433;
+  border-left: 8px solid orange;
   padding-left: 3em;
 }
 div > :has(input[type="checkbox"]):before {
