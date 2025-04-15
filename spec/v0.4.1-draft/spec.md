@@ -629,11 +629,16 @@ It implies stronger semantics than a [set relation](#set-relation).
 
 A group is modeled as a relation with a list of its members.
 
-| Property  | JSON Type | OCIF Type   | Required     | Contents                  |
-| --------- | --------- | ----------- | ------------ | ------------------------- |
-| `members` | `array`   | [ID](#id)[] | **required** | IDs of members of the set |
+| Property  | JSON Type | OCIF Type   | Required     | Contents                  | Default |
+| --------- | --------- | ----------- | ------------ | ------------------------- | ------- |
+| `members` | `array`   | [ID](#id)[] | **required** | IDs of members of the set |         |
+| `node`    | `string`  | [ID](#id)   | optional     | ID of a visual node       |         |
 
 - **members**: A list of IDs of nodes (or relations, such as other groups) that are part of the group.
+
+- **node**: The ID of a visual node, that represents the relation visually.
+  - If an node is used to visually represent a group, the node should point back via its `relation` to this group relation.
+  - Semantics: If a group is deleted, which points to a `node`, that node should also be deleted.
 
 **Semantics**
 
