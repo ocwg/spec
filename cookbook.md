@@ -26,7 +26,7 @@ Usage of non-core extensions is technically almost identical to the core extensi
 
 ### Transclusion
 
-**Goal**  
+**Goal** \
 One visual node shows the [resource](spec/v0.4/spec.md#resources) of another visual node.
 This concept is also known as _transclusion_.
 
@@ -35,12 +35,12 @@ We have two roles:
 - An _original_ node -- just any existing visual node, and
 - a _holder_ node -- the node showing the content of the original node.
 
-**Solution**  
+**Solution** \
 We use a [parent-child relation](spec/v0.4/extensions.md#parent-child-relation) to indicate that the holder node is a child of the original node.
 The original node (the parent) is included in the holder node (the child).
 Or in other words: The child inherits the properties (the resource) of the parent.
 
-**Example: A shows content of B**  
+**Example: A shows content of B** \
 Given two nodes A and B, we want node A to show the content (resource) of B, but at another position on the canvas.
 This is a special case of the parent-child relation, where the child inherits the _resource_ property of the parent.
 We use the `inherit` flag to indicate that the child should inherit the properties of the parent.
