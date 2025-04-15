@@ -149,7 +149,7 @@ In OCIF, it looks like this:
 
 ```json5
 {
-  ocif: "https://canvasprotocol.org/ocif/0.4",
+  ocif: "https://canvasprotocol.org/ocif/v0.4",
   nodes: [
     {
       id: "berlin-node",
@@ -260,7 +260,7 @@ A minimal OCIF file, no visible items
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4"
+  "ocif": "https://canvasprotocol.org/ocif/v0.4"
 }
 ```
 
@@ -269,7 +269,7 @@ A small OCIF file, with one node and one resource
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.4",
   "nodes": [
     {
       "id": "n1",
