@@ -69,7 +69,6 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
   - [Arrow](#arrow)
   - [Path](#path)
 - [Relations](#relations)
-  - [Set Relation](#set-relation)
   - [Group Relation](#group-relation)
   - [Edge Relation](#edge-relation)
 - [Assets](#assets)
@@ -578,67 +577,48 @@ In the remainder of this section, the current list of relation extension types (
 In addition to the relation types defined here, anybody can define and use their own relation types.
 If this is your first read of the spec, skip over the details of the relation types and come back to them later.
 
-## Set Relation
-
-- Name: `@ocif/rel/set`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/core/set-rel.json`
-
-A set relation is a relation, which groups nodes together.
-
-A set has the following properties in its `data` object:
-
-| Property  | JSON Type | OCIF Type   | Required     | Contents                  |
-| --------- | --------- | ----------- | ------------ | ------------------------- |
-| `members` | `array`   | [ID](#id)[] | **required** | IDs of members of the set |
-
-- **members**: A list of IDs of nodes or relations that are part of the set.
-  Resources cannot be part of a set.
-
-**Example:** A set relation with three members:
-
-```json
-{
-  "type": "@ocif/set",
-  "members": ["n1", "n2", "n3"]
-}
-```
-
-**Example:** A node using the set relation would look like this:
-
-```json
-{
-  "id": "nodeA",
-  "data": [
-    {
-      "type": "@ocif/set",
-      "members": ["n1", "n2", "n3"]
-    }
-  ]
-}
-```
-
-JSON schema: [set-rel.json](core/set-rel.json)
-
 ## Group Relation
 
 - Name: `@ocif/rel/group`
 - URI: `https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json`
 
-A group relation is a relation, which groups nodes together.
-It implies stronger semantics than a [set relation](#set-relation).
+A group relation is a relation which groups nodes together.
+Groups are known as "Groups" in most canvas apps,
+"Groups" in Godot, and "Tags" in Unity.
 
-A group is modeled as a relation with a list of its members.
+A group has the following properties in its `data` object:
 
-| Property  | JSON Type | OCIF Type   | Required     | Contents                  |
-| --------- | --------- | ----------- | ------------ | ------------------------- |
-| `members` | `array`   | [ID](#id)[] | **required** | IDs of members of the set |
+| Property        | JSON Type | OCIF Type   | Required     | Contents                    |
+| --------------- | --------- | ----------- | ------------ | --------------------------- |
+| `members`       | `array`   | [ID](#id)[] | **required** | IDs of members of the group |
+| `cascadeDelete` | `boolean` | `boolean`   | **optional** | `true` or `false`           |
 
-- **members**: A list of IDs of nodes (or relations, such as other groups) that are part of the group.
+- **members**: A list of IDs of nodes or other groups that are part of the group.
+  Resources cannot be part of a group.
+- **cascadeDelete**: A boolean flag indicating if deleting the group should also delete all members of the group.
+  If `true`, deleting the group will also delete all members of the group.
+  If `false`, deleting the group will not delete its members.
 
-**Semantics**
+**Example:** A group of 3 nodes with letters for names:
+
+```json
+{
+  "id": "letter_named_nodes",
+  "data": [
+    {
+      "type": "@ocif/rel/group",
+      "members": [
+        "A",
+        "B",
+        "C"
+      ]
+    }
+  ]
+}
+```
 
 - Groups can contain groups as members. Thus, all semantics apply recursively.
-- When a group is deleted, all members are deleted as well.
+- When a group is deleted, if `"cascadeDelete"` is `true`, all members are deleted as well.
 - When a group is 'ungrouped,' the group itself is deleted, but its members remain.
 - When a member is deleted, it is removed from the group.
 
@@ -935,8 +915,6 @@ Within the repo, there SHOULD be two files:
 
 As an example, look at the fictive [Circle Extension](#node-extension-circle) in the appendix.
 
-NOTE: Some extensions (e.g., [@ocif/rel/set](#set-relation) and [@ocif/rel/group](#group-relation)) have the exact same structure (both have a set of members) and differ only in semantics. The text describing what the extension does is the only formal difference between them.
-
 ### How To Write an Extension Step-by-Step
 
 - Define the properties of the extension. What data is added to a node or relation?
@@ -1110,9 +1088,6 @@ It is valid to additionally copy it in.
   },
   "@ocif/rel/group": {
     "uri": "https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json"
-  },
-  "@ocif/rel/set": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/set-rel.json"
   }
 }
 ```
