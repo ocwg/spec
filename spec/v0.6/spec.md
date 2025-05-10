@@ -1619,11 +1619,14 @@ It MAY NOT start with a hash-mark (#).
 
 It may not contain control characters like a null byte (00), form feed, carriage return, backspace, and similar characters. In general, OCIF IDs should be [valid HTML IDs](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/id) and if possible even [valid CSS identifiers](https://www.w3.org/TR/CSS2/syndata.html#value-def-identifier): "In CSS, identifiers (including element names, classes, and IDs in selectors) can contain only the characters [a-zA-Z0-9] and ISO 10646 characters U+00A0 and higher, plus the hyphen (-) and the underscore (_); they cannot start with a digit, two hyphens, or a hyphen followed by a digit."
 
-
 It must be unique among all IDs used in an OCIF document.
 The ID space is shared among nodes, relations, and resources.
 
 NOTE: An OCIF file itself can be used as a resource representation. Thus, a node can show a (then nested) other OCIF file. The ID uniqueness applies only within each OCIF file, not across document boundaries.
+
+## Integer
+
+A `number` that represents an integer value, while JSON numbers are normally all floating-point values.
 
 ## MIME Type
 
