@@ -330,7 +330,7 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 - **resource**: A reference to a resource, which can be an image, video, or audio file. See [resources](#resources).
 
   - Resource can be empty, in which case a node is acting as a transform for other nodes.
-    z-ordering: The resource is to be rendered behind the foreground rectangle (or [oval](#oval)).
+  - z-ordering: The resource is to be rendered behind the node. For example, if the node has a rectangular border (or [oval](#oval)), that border would be rendered in front of the resource.
 
 - **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-axis is not modified.
 
