@@ -1231,7 +1231,7 @@ A circle has a port at the geometric "top" position.
 
 ### From v0.3 to v0.4.1
 
-- Changed @ocwg to @ocif
+- Changed from @ocwg (Open Canvas Working Group) to @ocif (Open Canvas Interchange Format) in schema names.
 - Prefaced all version numbers with `v` as in `v0.4.1`
 - Added release instructions
 
