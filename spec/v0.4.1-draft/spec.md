@@ -153,7 +153,7 @@ In OCIF, it looks like this:
 
 ```json5
 {
-  ocif: "https://canvasprotocol.org/ocif/0.4",
+  ocif: "https://canvasprotocol.org/ocif/v0.4.1",
   nodes: [
     {
       id: "berlin-node",
@@ -264,7 +264,7 @@ A minimal OCIF file, no visible items
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4"
+  "ocif": "https://canvasprotocol.org/ocif/v0.4.1"
 }
 ```
 
@@ -273,7 +273,7 @@ A small OCIF file, with one node and one resource
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.4.1",
   "nodes": [
     {
       "id": "n1",
@@ -917,7 +917,7 @@ Within the repo, there SHOULD be two files:
 - schema.json, which contains the JSON schema for the extension.
   - This schema MUST use the same URI as the extension.
   - It SHOULD have a `description` property, describing briefly the purpose of the extension.
-  - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/0.4`.
+  - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/v0.4.1`.
 
 As an example, look at the fictive [Circle Extension](#node-extension-circle) in the appendix.
 
