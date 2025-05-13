@@ -43,11 +43,6 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
   See [OCIF Types](#ocif-types) for a catalog.
 - The terms _OCIF file_ and _OCIF document_ are used interchangeably.
 
-- Issues are temporary TODOs, which should be resolved before the final version. The `@@` makes them easy to search in an editor.
-
-**Issue Example:**
-
-- [ ] @@ This is an issue
 
 ### Table of Contents
 
@@ -108,7 +103,6 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
     - [From v0.2.1 to v0.3](#from-v021-to-v03)
     - [From v0.2.0 to v0.2.1](#from-v020-to-v021)
     - [From v0.1 to v0.2](#from-v01-to-v02)
-  - [Notes to the Editor](#notes-to-the-editor)
 
 # Introduction
 
@@ -1266,36 +1260,3 @@ A circle has a port at the geometric "top" position.
 - Root property `schema_version` renamed to `ocif` -- this is simpler and serves as a kind of "magic" signature, i.e., a JSON document with an "ocif" property near the top is likely an OCIF file.
 - Renamed node `properties` to `data` -- this is simpler and more generic.
 - Relation property `name` renamed to `type`.
-
----
-
-## Notes to the Editor
-
-- All URIs should have the same, consistent structure
-- Property tables should follow these conventions
-  - **required** is always bold, other entries are not
-  - JSON types are set in `monospace`
-  - OCIF types are linked to their definition
-  - All examples start with `**Example:**`
-  - Order of columns is always: Property, JSON Type, OCIF Type, Required, Contents, Default
-    - Empty columns can be omitted
-
-### Release Instructions
-
-When creating a new version of the spec:
-
-1. `cp` the current version's directory (`/spec/vX.X`) to the next version number with `-draft` appended
-2. Merge the new directory to the `main` branch.
-3. Create a new branch named `vX.X-draft`.
-4. Create pull requests against the new `vX.X-draft` folder until satisfied with release. These will have nice, small diffs that just highlight the major changes.
-   - Alternatively, you can leave the new directory on a branch and create pull requests against that branch until it's ready to be merged.
-5. Open a pull request to update all of the "current" version pointers in the `spec` repo:
-   - rename the `vX.X-draft` folder to `vX.X`
-   - update `/public/_redirects` line 2 to point spec.canvasprotocol.org to:
-     ```
-     / https://github.com/ocwg/spec/blob/main/spec/vX.X/spec.md 302
-     ```
-   - Excluding the `/spec` directory, find and replace the previous version with the new version (i.e., replace `v0.4.1` with `v0.4.1.1`).
-     - That will update the Cookbook, Catalog, Examples, and README.md
-6. Update the version numbers on the [website](https://github.com/ocwg/canvasprotocol.org/blob/main/index.html).
-7. Consider notifying people in Discord and sending a Newsletter update.
