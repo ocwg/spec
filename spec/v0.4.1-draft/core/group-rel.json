@@ -11,6 +11,11 @@
         "description": "node ID or relation ID",
         "type": "string"
       }
+    },
+    "cascadeDelete": {
+      "type": "boolean",
+      "description": "If true, deleting the group will delete all members. Default is true.",
+      "default": true
     }
   },
   "required": ["members"]

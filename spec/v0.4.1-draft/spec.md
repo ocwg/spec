@@ -69,7 +69,6 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
   - [Arrow](#arrow)
   - [Path](#path)
 - [Relations](#relations)
-  - [Set Relation](#set-relation)
   - [Group Relation](#group-relation)
   - [Edge Relation](#edge-relation)
 - [Assets](#assets)
@@ -115,11 +114,11 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
 
 This document describes the Open Canvas Interchange Format (OCIF), which allows canvas-applications to exchange their data.
 
-**Other Documents**  
+**Other Documents** \
 For more information about the goals and requirements considered for this spec, see the [Goals](../../design/goals.md), [Requirements](../../design/requirements.md) and [Design Decisions](../../design/design-decisions.md) documents.
 **For practical advice on how to use OCIF, see the [OCIF Cookbook](../../cookbook.md).**
 
-**Canvas**  
+**Canvas** \
 A canvas in this context is a spatial view, on which visual items are placed.
 Often, these items have been placed and sized manually.
 
@@ -213,7 +212,7 @@ In OCIF, it looks like this:
           type: "@ocif/rel/edge",
           start: "berlin-node",
           end: "germany-node",
-          /* WikiData 'is capital of'. 
+          /* WikiData 'is capital of'.
            We could also omit this or just put the string 'is capital of' here. */
           rel: "https://www.wikidata.org/wiki/Property:P1376",
           /* link back to the visual node representing this relation */
@@ -260,7 +259,7 @@ The OCIF file is a JSON object with the following properties:
 
 JSON schema: [schema.json](schema.json)
 
-**Example:** \
+**Example** \
 A minimal OCIF file, no visible items
 
 ```json
@@ -269,7 +268,7 @@ A minimal OCIF file, no visible items
 }
 ```
 
-**Example:** \
+**Example** \
 A small OCIF file, with one node and one resource
 
 ```json
@@ -476,11 +475,11 @@ It should be rendered as a straight line, with optional direction markers at the
   The color of the arrow. Default is white (`#FFFFFF`). Inspired from SVG `stroke`.
 
 - **start**:
-  The start point of the arrow. The array contains the x and y coordinates.  
+  The start point of the arrow. The array contains the x and y coordinates. \
   The z-coordinate, if present, is used only in 3D canvas apps.
 
 - **end**:
-  The end point of the arrow. The array contains the x and y coordinates.
+  The end point of the arrow. The array contains the x and y coordinates. \
   The z-coordinate, if present, is used only in 3D canvas apps.
 
 - **startMarker**:
@@ -588,68 +587,48 @@ In the remainder of this section, the current list of relation extension types (
 In addition to the relation types defined here, anybody can define and use their own relation types.
 If this is your first read of the spec, skip over the details of the relation types and come back to them later.
 
-## Set Relation
-
-- Name: `@ocif/rel/set`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/core/set-rel.json`
-
-A set relation is a relation, which groups nodes together.
-
-A set has the following properties in its `data` object:
-
-| Property  | JSON Type | OCIF Type   | Required     | Contents                  |
-| --------- | --------- | ----------- | ------------ | ------------------------- |
-| `members` | `array`   | [ID](#id)[] | **required** | IDs of members of the set |
-
-- **members**: A list of IDs of nodes or relations that are part of the set.
-  Resources cannot be part of a set.
-
-**Example:** A set relation with three members:
-
-```json
-{
-  "type": "@ocif/set",
-  "members": ["n1", "n2", "n3"]
-}
-```
-
-**Example:** A node using the set relation would look like this:
-
-```json
-{
-  "id": "nodeA",
-  "data": [
-    {
-      "type": "@ocif/set",
-      "members": ["n1", "n2", "n3"]
-    }
-  ]
-}
-```
-
-JSON schema: [set-rel.json](core/set-rel.json)
-
 ## Group Relation
 
 - Name: `@ocif/rel/group`
 - URI: `https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json`
 
-A group relation is a relation, which groups nodes together.
-It implies stronger semantics than a [set relation](#set-relation).
+A group relation is a relation which groups nodes together.
+Groups are known as "Groups" in most canvas apps,
+"Groups" in Godot, and "Tags" in Unity.
 
-A group is modeled as a relation with a list of its members.
+A group has the following properties in its `data` object:
 
-| Property  | JSON Type | OCIF Type   | Required     | Contents                  | Default |
-| --------- | --------- | ----------- | ------------ | ------------------------- | ------- |
-| `members` | `array`   | [ID](#id)[] | **required** | IDs of members of the set |         |
+| Property        | JSON Type | OCIF Type   | Required     | Contents                    |
+| --------------- | --------- | ----------- | ------------ | --------------------------- |
+| `members`       | `array`   | [ID](#id)[] | **required** | IDs of members of the group |
+| `cascadeDelete` | `boolean` | `boolean`   | **optional** | `true` or `false`           |
 
-- **members**: A list of IDs of nodes (or relations, such as other groups) that are part of the group.
+- **members**: A list of IDs of nodes or other groups that are part of the group.
+  Resources cannot be part of a group.
+- **cascadeDelete**: A boolean flag indicating if deleting the group should also delete all members of the group.
+  If `true`, deleting the group will also delete all members of the group.
+  If `false`, deleting the group will not delete its members.
 
+**Example:** A group of 3 nodes with letters for names:
 
-**Semantics**
+```json
+{
+  "id": "letter_named_nodes",
+  "data": [
+    {
+      "type": "@ocif/rel/group",
+      "members": [
+        "A",
+        "B",
+        "C"
+      ]
+    }
+  ]
+}
+```
 
 - Groups can contain groups as members. Thus, all semantics apply recursively.
-- When a group is deleted, all members are deleted as well.
+- When a group is deleted, if `"cascadeDelete"` is `true`, all members are deleted as well.
 - When a group is 'ungrouped,' the group itself is deleted, but its members remain.
 - When a member is deleted, it is removed from the group.
 
@@ -732,7 +711,7 @@ Either `content` or `location` MUST be present. If `content` is used, `location`
   This is the actual data of the resource as a string.
   Can be base64-encoded.
 
-**Summary**  
+**Summary** \
 Valid resource representations are
 
 |                 | `location`                      | `mime-type`                                                | `content`          |
@@ -837,7 +816,7 @@ To summarize, these schema definitions are possible:
 
 By defining a mapping of URIs to names, the OCIF file becomes more readable and easier to maintain.
 
-**Example**  
+**Example** \
 A schema array with two schemas:
 
 ```json
@@ -942,8 +921,6 @@ Within the repo, there SHOULD be two files:
   - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/0.4`.
 
 As an example, look at the fictive [Circle Extension](#node-extension-circle) in the appendix.
-
-NOTE: Some extensions (e.g., [@ocif/rel/set](#set-relation) and [@ocif/rel/group](#group-relation)) have the exact same structure (both have a set of members) and differ only in semantics. The text describing what the extension does is the only formal difference between them.
 
 ### How To Write an Extension Step-by-Step
 
@@ -1118,9 +1095,6 @@ It is valid to additionally copy it in.
   },
   "@ocif/rel/group": {
     "uri": "https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json"
-  },
-  "@ocif/rel/set": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/set-rel.json"
   }
 }
 ```
@@ -1165,7 +1139,7 @@ This fictive example extension defines geometric circles. In reality, a circle i
 - Semantics:
   - The `radius` property implies a `size`. I.e. a circle of radius _r_ implies a size of _2r_ x _2r_.
 
-**Example**:  
+**Example** \
 A circle node with a radius of 10 pixels:
 
 ```json
@@ -1175,7 +1149,7 @@ A circle node with a radius of 10 pixels:
 }
 ```
 
-**Example**  
+**Example** \
 A node, using the circle extension, with a radius of 20 pixels:
 
 ```json
@@ -1198,7 +1172,7 @@ A node, using the circle extension, with a radius of 20 pixels:
 
 ### Advanced Examples
 
-**Example**  
+**Example** \
 A node using multiple extensions.
 A circle has a port at the geometric "top" position.
 

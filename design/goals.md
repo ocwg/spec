@@ -11,12 +11,12 @@ There are several scenarios, which we want to support:
 - Let application A import the data, and have its special data still be there (goal: round-tripping).
 
 ## Visual Resemblance
-Data can be authored in any application, exported in OCIF, imported in another compliant application, and should visually resemble the original data. 
+Data can be authored in any application, exported in OCIF, imported in another compliant application, and should visually resemble the original data.
 
 ## Round-Tripping
-An app A can export to OCIF and embed its native data structures within, so that any app B can work without, re-export, and allow app A to reconstruct its native data structures. 
+An app A can export to OCIF and embed its native data structures within, so that any app B can work without, re-export, and allow app A to reconstruct its native data structures.
 
-- If a node has been deleted in app B, it should also be deleted for app A. 
+- If a node has been deleted in app B, it should also be deleted for app A.
 - If a node has been added in B, no native data for app A can be present. However, app A can import the node and add some defaults.
 
 ## Useful out of the Box
@@ -24,15 +24,15 @@ Balance Extensibility and Usefulness
 On one extreme, we could define an ultra-extensible format for nodes devoid any built-in structure or semantics, delegating all this to extensions.
 On the other hand, we could try to specify the super-set of all structures present in relevant apps. This would be a huge effort and likely to fail.
 
-Therefore, we must carefully balance these two forces and strive for a simple, extensible, but out-of-the-box useful format. 
+Therefore, we must carefully balance these two forces and strive for a simple, extensible, but out-of-the-box useful format.
 
 ## Canvas Apps
 To state our goals, we need to define, what a canvas app is.
-Obviously, an application with the notion of an (infinite?) canvas is a canvas app. 
-So a canvas app is characterized by 
+Obviously, an application with the notion of an (infinite?) canvas is a canvas app.
+So a canvas app is characterized by
 
 - a visual (typically 2D) workspace, where nodes can be placed and connected.
-- Nodes are often rectangles, but can be of other shapes. 
+- Nodes are often rectangles, but can be of other shapes.
 - Nodes can contain text, scribbles, images, or other media.
 - Node can be connected by arrows or other connectors.
 
@@ -42,10 +42,10 @@ However, there are also a lot of slightly more specialized apps, which should al
 - A 3D modeling tool (Hi Aaron! Hi glTF!)
 - A flow-based programming tool (Hi Maikel!)
 - A mind map tool
-- A (semantic) wiki 
+- A (semantic) wiki
 - A graph database / knowledge graph visualizer
 
-Less clearly in focus (although not impossible to export to OCIF) are: 
+Less clearly in focus (although not impossible to export to OCIF) are:
 - A game level editor
 - A CAD tool
 - A UML tool
@@ -72,7 +72,7 @@ To make it even more clear, here is a list of apps known to us, which in our vie
 * yEd
 
 And here is another list of apps inspected by us, to understand the space:
-* Blender Nodes	
+* Blender Nodes
 * ReactFlow
 * Kosmik
 * Stately
@@ -83,6 +83,6 @@ And here is another list of apps inspected by us, to understand the space:
 * Vizio
 * GraphViz DOT
 * Breadcrumbs
- 
 
- More are listed https://infinitecanvas.tools/ 
+
+ More are listed https://infinitecanvas.tools/

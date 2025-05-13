@@ -66,4 +66,3 @@ we need to look at:
 - Minor
   - color spaces?
   - path stroking (rendering a path is not 100% defined)
-

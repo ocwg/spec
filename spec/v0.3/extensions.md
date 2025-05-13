@@ -57,7 +57,7 @@ The _Ports Extension_ has the following properties:
 Each node SHOULD appear only in **one** ports array.
 A port cannot be used by multiple nodes as a port.
 
-**Example:**  
+**Example** \
 A node (n1) with two ports (p1, p2).
 Note that p1 and p2 are normal nodes.
 It's node n1 which uses p1 and p2 as its ports.
@@ -148,7 +148,7 @@ Edge weight is a common requirement, and no extensions are needed for this simpl
 -->
 - **rel**: See [Edge Relation](spec.md#edge-relation)
 
-**Endpoint**  
+**Endpoint** \
 Each endpoint is an object with the following properties:
 
 | Property    | JSON Type | OCIF Type        | Required     | Contents                                 | Default |
@@ -164,7 +164,7 @@ Each endpoint is an object with the following properties:
 Edge weight is a common requirement, and no extensions are needed for this simple property
 -->
 
-**Direction**  
+**Direction** \
 An enum with three values:
 
 - `in` (edge is going **into** the hyper-edge),
@@ -177,7 +177,7 @@ This allows representing cases such as:
 - An edge with no endpoints
 - An edge with only incoming or only outgoing endpoints.
 
-**Example**  
+**Example** \
 An hyperedge relation connecting two nodes as input (n1,n2) with one node as output (n3).
 
 ```json
