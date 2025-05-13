@@ -31,7 +31,7 @@ An interchange file format for canvas-based applications. Visual nodes, structur
 
 ## Status of this Document
 
-This document is an candidate recommendation (CR). The Open Canvas Working Group (OCWG) is inviting implementation feedback.
+This document is a candidate recommendation (CR). The Open Canvas Working Group (OCWG) is inviting implementation feedback.
 
 **Legal**:
 Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
