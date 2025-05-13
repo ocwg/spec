@@ -496,7 +496,7 @@ It should be rendered as a straight line, with optional direction markers at the
   - `arrowhead`: An arrow head at the end. The arrow head points at the end point.
 
 
-The markers allow to represent four kinds of arrow:
+The markers allow representing four kinds of arrow:
 
 | startMarker | endMarker | Visual              |
 |-------------|-----------|---------------------|
