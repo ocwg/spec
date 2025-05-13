@@ -840,7 +840,7 @@ maps to a schema [URI](#uri)
 
 - `https://spec.canvasprotocol.org/v0.4.1/core/` _suffix_ `-rel.json`.
 
-2. A schema URI of the form
+2. A schema name of the form
 
 - `@ocif/node/`_suffix_
 
