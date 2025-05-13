@@ -969,9 +969,9 @@ Here is the catalog of types used throughout the document (in alphabetical order
 
 ## Angle
 
-A `number` that represents an angle in degrees, from -360 to 360.
-The angle is measured in degrees, with positive values indicating a clockwise rotation and negative values indicating a counterclockwise rotation.
-Numbers outside the range of -360 to 360 are allowed, but they are normalized to the range by adding or subtracting 360 until the value is within the range.
+A `number` that represents an angle between -360 and 360.
+The angle is measured in degrees, with positive values (0,360] indicating a clockwise rotation and negative values [-360,0) indicating a counterclockwise rotation.
+Numbers outside the range [-360, 360] are allowed, but they are normalized into the range by adding or subtracting 360 until the value is within the range.
 
 ## Color
 
