@@ -1067,28 +1067,36 @@ The materialized list of schema entries, as explained in [built-in schema mappin
 Note that core extensions have no version number of their own (in the short name).
 They are versioned together with the OCIF spec.
 The following block can be assumed to be present in every OCIF document.
-It is valid to additionally copy it in.
+It is also valid to additionally copy these schema entries in.
 
 ```json
 {
-  "@ocif/node/arrow": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/arrow-node.json"
-  },
-  "@ocif/node/oval": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/oval-node.json"
-  },
-  "@ocif/node/path": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/path-node.json"
-  },
-  "@ocif/node/rect": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/rect-node.json"
-  },
-  "@ocif/rel/edge": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/edge-rel.json"
-  },
-  "@ocif/rel/group": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json"
-  }
+  "schemas": [
+    {
+      "name": "@ocif/node/arrow",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/arrow-node.json"
+    },
+    {
+      "name": "@ocif/node/oval",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/oval-node.json"
+    },
+    {
+      "name": "@ocif/node/path",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/path-node.json"
+    },
+    {
+      "name": "@ocif/node/rect",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/rect-node.json"
+    },
+    {
+      "name": "@ocif/rel/edge",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/edge-rel.json"
+    },
+    {
+      "name": "@ocif/rel/group",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json"
+    }
+  ]
 }
 ```
 
