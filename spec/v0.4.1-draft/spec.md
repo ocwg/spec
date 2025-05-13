@@ -239,7 +239,7 @@ In OCIF, it looks like this:
 The OCIF file is a JSON object with the following properties:
 
 | Property    | JSON Type | OCIF Type                       | Required     | Contents                          |
-| ----------- | --------- | :------------------------------ | ------------ | --------------------------------- |
+|-------------|-----------|:--------------------------------|--------------|-----------------------------------|
 | `ocif`      | `string`  | [URI](#uri)                     | **required** | The URI of the OCIF schema        |
 | `nodes`     | `array`   | [Node](#node)[]                 | optional     | A list of [nodes](#nodes)         |
 | `relations` | `array`   | [Relation](#relation)[]         | optional     | A list of [relations](#relations) |
@@ -417,7 +417,7 @@ A rectangle is a visual node [extension](#extensions), to define the visual appe
 A core node has already a position, size, rotation, scale.
 
 | Property      | JSON Type | OCIF Type       | Required | Contents                 | Default   |
-| ------------- | --------- | --------------- | -------- | ------------------------ | --------- |
+|---------------|-----------|-----------------|----------|--------------------------|-----------|
 | `strokeWidth` | `number`  | number          | optional | The line width.          | `1`       |
 | `strokeColor` | `string`  | [Color](#color) | optional | The color of the stroke. | `#FFFFFF` |
 | `fillColor`   | `string`  | [Color](#color) | optional | The color of the fill.   | (none)    |
@@ -459,7 +459,7 @@ An arrow is a visual node that connects two point coordinates.
 It should be rendered as a straight line, with optional direction markers at the start and end.
 
 | Property      | JSON Type | OCIF Type       | Required     | Contents                | Default   |
-| ------------- | --------- | --------------- | ------------ | ----------------------- | --------- |
+|---------------|-----------|-----------------|--------------|-------------------------|-----------|
 | `strokeWidth` | `number`  | number          | optional     | The line width.         | `1`       |
 | `strokeColor` | `string`  | [Color](#color) | optional     | The color of the arrow. | `#FFFFFF` |
 | `start`       | `array`   | number[]        | **required** | The start point.        | n/a       |
@@ -499,7 +499,7 @@ It should be rendered as a straight line, with optional direction markers at the
 The markers allow to represent four kinds of arrow:
 
 | startMarker | endMarker | Visual              |
-| ----------- | --------- | ------------------- |
+|-------------|-----------|---------------------|
 | none        | none      | start `-------` end |
 | none        | arrowhead | start `------>` end |
 | arrowhead   | none      | start `<------` end |
@@ -518,7 +518,7 @@ A path is a visual node extension, to define the visual appearance of a node as 
 The rendering of resources inside a path is not defined by OCIF, but by the canvas app.
 
 | Property      | JSON Type | OCIF Type | Required     | Contents               | Default   |
-| ------------- | --------- | --------- | ------------ | ---------------------- | --------- |
+|---------------|-----------|-----------|--------------|------------------------|-----------|
 | `strokeWidth` | `number`  | number    | optional     | The line width.        | `1`       |
 | `strokeColor` | `string`  | string    | optional     | The color of the path. | `#FFFFFF` |
 | `fillColor`   | `string`  | string    | optional     | The color of the fill. | `none`    |
@@ -598,7 +598,7 @@ Groups are known as "Groups" in most canvas apps,
 A group has the following properties in its `data` object:
 
 | Property        | JSON Type | OCIF Type   | Required     | Contents                    |
-| --------------- | --------- | ----------- | ------------ | --------------------------- |
+|-----------------|-----------|-------------|--------------|-----------------------------|
 | `members`       | `array`   | [ID](#id)[] | **required** | IDs of members of the group |
 | `cascadeDelete` | `boolean` | `boolean`   | **optional** | `true` or `false`           |
 
@@ -644,7 +644,7 @@ It supports directed and undirected bi-edges.
 It has the following properties (in addition to standard [relation](#relation) properties):
 
 | Property   | JSON Type | OCIF Type | Required     | Contents                  | Default |
-| ---------- | --------- | :-------- | ------------ | ------------------------- | :------ |
+|------------|-----------|:----------|--------------|---------------------------|:--------|
 | `start`    | `string`  | [ID](#id) | **required** | ID of source element.     |         |
 | `end`      | `string`  | [ID](#id) | **required** | ID of target element.     |         |
 | `directed` | `boolean` |           | optional     | Is the edge directed?     | `true`  |
@@ -682,7 +682,7 @@ Typical resources are, e.g., SVG images, text documents, or media files.
 A resource is an `object` with the following properties:
 
 | Property          | JSON Type | OCIF Type                           | Required     | Contents                        |
-| ----------------- | --------- | ----------------------------------- | ------------ | ------------------------------- |
+|-------------------|-----------|-------------------------------------|--------------|---------------------------------|
 | `id`              | `string`  | [ID](#id)                           | **required** | Identifier of the resource      |
 | `representations` | `array`   | [Representation](#representation)[] | **required** | Representations of the resource |
 
@@ -695,7 +695,7 @@ A resource is an `object` with the following properties:
 Each _Representation_ object has the following properties:
 
 | Property    | JSON Type | OCIF Type               | Required  | Contents                               |
-| ----------- | --------- | ----------------------- | --------- | -------------------------------------- |
+|-------------|-----------|-------------------------|-----------|----------------------------------------|
 | `location`  | `string`  | [URI](#uri)             | see below | The storage location for the resource. |
 | `mime-type` | `string`  | [MIME Type](#mime-type) | see below | The IANA MIME Type of the resource.    |
 | `content`   | `string`  |                         | see below | The content of the resource.           |
@@ -714,7 +714,7 @@ Either `content` or `location` MUST be present. If `content` is used, `location`
 Valid resource representations are
 
 |                 | `location`                      | `mime-type`                                                | `content`          |
-| :-------------- | ------------------------------- | ---------------------------------------------------------- | ------------------ |
+|:----------------|---------------------------------|------------------------------------------------------------|--------------------|
 | Inline text     | Ignored, `content` is set       | E..g. `text/plain` or `image/svg+xml`                      | Text/SVG as string |
 | Inline binary   | Ignored, `content` is set       | E.g. `image/png`                                           | Base64             |
 | Remote          | `https://example.com/sunny.png` | Optional; obtained from HTTP response                      | Ignored            |
@@ -777,7 +777,7 @@ Schemas are stored either inline in the `schemas` property of an OCIF document o
 Each entry in the `schemas` array is an object with the following properties:
 
 | Property   | JSON Type | OCIF Type                   | Required     | Contents                                 |
-| ---------- | --------- | :-------------------------- | ------------ | ---------------------------------------- |
+|------------|-----------|:----------------------------|--------------|------------------------------------------|
 | `uri`      | `string`  | absolute [URI](#uri)        | **required** | Identifier (and location) of the schema  |
 | `schema`   | `object`  |                             | optional     | JSON schema inline as a JSON object      |
 | `location` | `string`  | [URI](#uri)                 | optional     | Override storage location for the schema |
@@ -807,7 +807,7 @@ When referencing a schema URI, there are two options:
 To summarize, these schema definitions are possible:
 
 | Schema        | `uri`        | `schema`        | `location`                   | `name`   |
-| ------------- | ------------ | --------------- | ---------------------------- | -------- |
+|---------------|--------------|-----------------|------------------------------|----------|
 | Inline Schema | **required** | the JSON schema | --                           | optional |
 | External      | **required** | --              | relative path                | optional |
 | Remote        | **required** | --              | -- (URI is used)             | optional |
@@ -892,7 +892,7 @@ They allow adding custom data to nodes, relations, and resources.
 - Each extension is an object with a `type` property.
 
 | Property | JSON Type | OCIF Type                                  | Required     | Contents          |
-| -------- | --------- | :----------------------------------------- | ------------ | ----------------- |
+|----------|-----------|:-------------------------------------------|--------------|-------------------|
 | `type`   | `string`  | [Schema Name](#schema-name) or [URI](#uri) | **required** | Type of extension |
 
 - **type**: The type of the extension. This is a URI or a simple name.
@@ -1147,7 +1147,7 @@ This fictive example extension defines geometric circles. In reality, a circle i
 - Properties:
 
 | Property | JSON Type | Required | Contents                    | Default |
-| -------- | --------- | -------- | --------------------------- | ------: |
+|----------|-----------|----------|-----------------------------|--------:|
 | `radius` | number    | optional | The circles radius in pixel |      10 |
 
 - Semantics:
