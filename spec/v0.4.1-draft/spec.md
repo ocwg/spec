@@ -861,7 +861,7 @@ maps to a schema URI
 
 - `https://spec.canvasprotocol.org/v0.4.1/core/` _suffix_ `-node.json`.
 
-Here `0.4` is the current version of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
+Here `v0.4.1` is the current version identifier of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
 
 Built-in Entries, where the syntax `{var}` denotes placeholders:
 
