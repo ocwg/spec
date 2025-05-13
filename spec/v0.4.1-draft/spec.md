@@ -339,7 +339,7 @@ A _Node_ is an `object` with the following properties:
   NOTE: This is particularly useful if the [parent-child](extensions.md#parent-child-relation) relation extension applies to the node and child nodes need a consistent scale transform.
 
 - **relation**:
-  The ID of the relation defining the semantics of the visual node (e.g. an [arrow](#arrow) or [group](#group)). 
+  The ID of the relation defining the semantics of the visual node (e.g. an [arrow](#arrow) or [group](#group)).
   The [relation](#relation) should point back to this visual node using its `node` property.
   - Deletion semantics: If a visual node is deleted, which has a `relation` stated, that underlying relation should also be deleted.
 
@@ -561,7 +561,7 @@ Every relation has the following properties:
 |----------|-----------|--------------------------|--------------|------------------------------------------------------|
 | `id`     | `string`  | [ID](#id)                | **required** | A unique identifier for the relation.                |
 | `data`   | `array`   | [Extension](#extensions) | optional     | Additional data for the relation.                    |
-| `node`   | `string`  | [ID](#id)                | optional     | ID of a visual node, which represents this relation. |        
+| `node`   | `string`  | [ID](#id)                | optional     | ID of a visual node, which represents this relation. |
 
 Similar to nodes, there is a built-in base relation, which can use extensions.
 Contrary to nodes, the base extension has no pre-defined properties except the `id` and `data` properties.
@@ -578,8 +578,8 @@ Thus, relations are very flexible.
   See [extensions](#extensions).
 
 - **node**:
-  The ID of a node, which represents this relation visually. 
-  E.g., often an arrow shape is used to represent an [edge relation](#edge-relation). 
+  The ID of a node, which represents this relation visually.
+  E.g., often an arrow shape is used to represent an [edge relation](#edge-relation).
   - If a visual node is used to represent a relation, the visual node should point back via its `relation` to this relation ID.
   - Semantics: If a relation (e.g. arrow or group) is deleted, which points to a `node`, that node should also be deleted.
 
