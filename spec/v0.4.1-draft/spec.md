@@ -905,7 +905,7 @@ For an example of an extension, see the [appendix](#appendix), [Node Extension: 
 
 If you need to store some extra data at a node for your canvas app, and none of the existing extensions fit, you can define your own extension.
 
-An extensions MUST have a URI (as its ID) and a document describing the extension.
+An extension MUST have a URI (as its ID) and a document describing the extension.
 
 It SHOULD have a version number, as part of its URI.
 It SHOULD have a proposed name, and SHOULD have a JSON schema.
@@ -929,10 +929,10 @@ As an example, look at the fictive [Circle Extension](#node-extension-circle) in
 - Write a text describing the intended semantics.
 - Create a JSON schema that defines the structure of the extension data. Large language models are a great help here.
 
-To publish an extensions, a version number should be included.
+To publish an extension, a version number should be included.
 It is good practice to use a directory structure that reflects the version number of the extension.
 Within the directory, the text is usually stored as a markdown file, which links to the JSON schema.
-The OCIF extensions document currently describes several OCIF extensions in one document, which is also possible.
+The OCIF [extensions document](extensions.md) currently describes several OCIF extensions in one document, which is also possible.
 
 **Example for a file structure**
 
