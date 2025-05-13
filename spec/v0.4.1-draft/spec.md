@@ -790,7 +790,7 @@ Each entry in the `schemas` array is an object with the following properties:
 | `location` | `string`  | [URI](#uri)                 | optional     | Override storage location for the schema |
 | `name`     | `string`  | [Schema Name](#schema-name) | optional     | Optional shortname for a schema. "@..."  |
 
-- **uri**: The URI of the schema. The URI is usually absolute. Only for local testing or development, relative URIs are allowed.
+- **uri**: The URI of the schema. The URI SHOULD be absolute. Only for local testing or development, relative URIs MAY be used.
 
   - The URI SHOULD contain the version number of the schema, either as a version number or as a date.
 
