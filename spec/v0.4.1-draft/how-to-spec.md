@@ -5,7 +5,6 @@
   * [How To Typeset Issues](#how-to-typeset-issues)
 <!-- TOC -->
 
-
 - All URIs should have the same, consistent structure
 - Property tables should follow these conventions
     - **required** is always bold, other entries are not
@@ -41,5 +40,3 @@ When creating a new version of the spec:
 **Issue Example:**
 
 - [ ] @@ This is an issue
-
-
