@@ -332,6 +332,7 @@ A _Node_ is an `object` with the following properties:
 - **resource**: A reference to a resource, which can be an image, video, or audio file. See [resources](#resources).
 
   - Resource can be empty, in which case a node is acting as a transform for other nodes.
+    z-ordering: The resource is to be rendered behind the foreground rectangle (or [oval](#oval)).
 
 - **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-axis is not modified.
 
@@ -406,8 +407,6 @@ There is no special image node in OCIF. An image is just a resource, which can b
 ```
 
 TIP: Additional node extensions can be used. E.g., an [Oval](#oval)) could be used to display the image cropped as a circle.
-
-- [ ] What is the z-ordering of oval/rectangle background vs. image? Relevant for transparency. -> https://github.com/ocwg/spec/issues/10
 
 ## Rectangle
 
