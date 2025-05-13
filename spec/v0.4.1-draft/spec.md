@@ -802,7 +802,7 @@ Each entry in the `schemas` array is an object with the following properties:
   - For a _remote_ schema, the `uri` property is used as a location. This field allows overriding the location with another URL. This is particularly useful for testing or development.
   - An _external_ schema uses a relative URI as a location. This is a relative path to the OCIF file.
 
-- **name**: An optional short name for the schema. This defines an alias to the URI. It is useful for human-readable references to the schema. The name MUST start with a `@` character. Names SHOULD use the convention organisation name `/` schema name. Example name: `@ocif/circle`. Names MUST be unique within an OCIF file.
+- **name**: An optional short name for the schema. This defines an alias to the URI. It is useful for human-readable references to the schema. The name MUST start with a `@` character. Names SHOULD use the convention organisation name `/` type (`node` or `rel`) `/` schema name. Example name: `@example/node/circle` (not needed, use an [oval](#oval) instead). Names MUST be unique within an OCIF file.
   - By convention, schema names do not contain a version number. However, if multiple versions of the same schema are used in a file, the version number MUST be appended to the name, to distinguish between them. E.g. `@example/circle/1.0` and `@example/circle/1.1`.
 
 A JSON schema file may contain more than one type definition (under the `$defs` property).
