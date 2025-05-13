@@ -1027,7 +1027,7 @@ A `string` that represents a Uniform Resource Identifier (URI) as defined in [RF
 # Practical Recommendations
 
 - The proposed MIME-type for OCIF files is `application/ocif+json`.
-<!-- see https://github.com/ocwg/spec/issues/13 -->
+<!-- IANA registration https://github.com/ocwg/spec/issues/13 -->
 
 - The recommended file extension for OCIF files is `.ocif.json`.
   This launches JSON-aware applications by default on most systems.
