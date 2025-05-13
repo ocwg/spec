@@ -299,7 +299,7 @@ Conceptually, a node is a rectangle (bounding box) on the canvas, often displayi
 A _Node_ is an `object` with the following properties:
 
 | Property   | JSON Type | OCIF Type          | Required     | Contents                            | Default     |
-| ---------- | --------- | ------------------ | ------------ | ----------------------------------- | ----------- |
+|------------|-----------|--------------------|--------------|-------------------------------------|-------------|
 | `id`       | `string`  | [ID](#id)          | **required** | A unique identifier for the node.   | n/a         |
 | `position` | `array`   | number[]           | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]       |
 | `size`     | `array`   | number[]           | recommended  | The size of the node per dimension. | `[100,100]` |
@@ -307,6 +307,7 @@ A _Node_ is an `object` with the following properties:
 | `data`     | `array`   | array of Extension | optional     | Extended node data                  |             |
 | `rotation` | `number`  | [Angle](#angle)    | optional     | +/- 360 degrees                     | `0`         |
 | `scale`    | `array`   | number[]           | optional     | Scale factors to resize nodes       | `[1,1,1]`   |
+| `relation` | `string`  | [ID](#id)          | optional     | ID of a [relation](#relation)       | n/a         |
 
 - **id**: A unique identifier for the node. Must be unique within an OCIF file. See [ID](#ocif-types) type for details.
 
@@ -336,6 +337,12 @@ A _Node_ is an `object` with the following properties:
 
 - **scale**: Allows to re-scale a given node.
   NOTE: This is particularly useful if the [parent-child](extensions.md#parent-child-relation) relation extension applies to the node and child nodes need a consistent scale transform.
+
+- **relation**:
+  The ID of the relation defining the semantics of the visual node (e.g. an [arrow](#arrow) or [group](#group)).
+  The [relation](#relation) should point back to this visual node using its `node` property.
+  - Deletion semantics: If a visual node is deleted, which has a `relation` stated, that underlying relation should also be deleted.
+
 
 ## Text Nodes?
 
@@ -460,7 +467,6 @@ It should be rendered as a straight line, with optional direction markers at the
 | `end`         | `array`   | number[]        | **required** | The end point.          | n/a       |
 | `startMarker` | `string`  | string          | optional     | Marker at the start.    | `none`    |
 | `endMarker`   | `string`  | string          | optional     | Marker at the end.      | `none`    |
-| `relation`    | `string`  | ID              | optional     |                         | n/a       |
 
 - **strokeWidth**:
   The line width in logical pixels. Default is `1`. Inspired from SVG `stroke-width`.
@@ -490,9 +496,6 @@ It should be rendered as a straight line, with optional direction markers at the
   - `none`: No special marker at the end. A flat line end at the end.
   - `arrowhead`: An arrow head at the end. The arrow head points at the end point.
 
-- **relation**:
-  The ID of the relation defining the semantics of the arrow. If the ID points to an [edge relation](#edge-relation), which is the most likely usage, then the edge relation should point back to the arrow using its `node` property.
-  - Deletion semantics: If an arrow is deleted, which has a `relation` stated, that underlying relation should also be deleted.
 
 The markers allow to represent four kinds of arrow:
 
@@ -554,10 +557,11 @@ If a relation should be visualized, it should have a corresponding Node.
 
 Every relation has the following properties:
 
-| Property | JSON Type | OCIF Type                | Required     | Contents                              |
-| -------- | --------- | ------------------------ | ------------ | ------------------------------------- |
-| `id`     | `string`  | [ID](#id)                | **required** | A unique identifier for the relation. |
-| `data`   | `array`   | [Extension](#extensions) | optional     | Additional data for the relation.     |
+| Property | JSON Type | OCIF Type                | Required     | Contents                                             |
+|----------|-----------|--------------------------|--------------|------------------------------------------------------|
+| `id`     | `string`  | [ID](#id)                | **required** | A unique identifier for the relation.                |
+| `data`   | `array`   | [Extension](#extensions) | optional     | Additional data for the relation.                    |
+| `node`   | `string`  | [ID](#id)                | optional     | ID of a visual node, which represents this relation. |
 
 Similar to nodes, there is a built-in base relation, which can use extensions.
 Contrary to nodes, the base extension has no pre-defined properties except the `id` and `data` properties.
@@ -572,6 +576,12 @@ Thus, relations are very flexible.
   Additional data for the relation.
   Each array entry is an _extension object_, which is the same for nodes and relations.
   See [extensions](#extensions).
+
+- **node**:
+  The ID of a node, which represents this relation visually.
+  E.g., often an arrow shape is used to represent an [edge relation](#edge-relation).
+  - If a visual node is used to represent a relation, the visual node should point back via its `relation` to this relation ID.
+  - Semantics: If a relation (e.g. arrow or group) is deleted, which points to a `node`, that node should also be deleted.
 
 In the remainder of this section, the current list of relation extension types (also just called _relation types_) is explained.
 In addition to the relation types defined here, anybody can define and use their own relation types.
@@ -632,7 +642,7 @@ JSON schema: [group-rel.json](core/group-rel.json)
 An edge relates two elements (nodes and/or relation, mixing types is allowed).
 It supports directed and undirected bi-edges.
 
-It has the following properties:
+It has the following properties (in addition to standard [relation](#relation) properties):
 
 | Property   | JSON Type | OCIF Type | Required     | Contents                  | Default |
 | ---------- | --------- | :-------- | ------------ | ------------------------- | :------ |
@@ -646,9 +656,6 @@ It has the following properties:
 - **to**: The ID of the target element.
 - **directed**: A boolean flag indicating if the edge is directed. If `true`, the edge is directed from the source to the target. If `false`, the edge is undirected. Default is `true`.
 - **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject,predicate,object) as (from,rel,to).
-- **node**: The ID of a visual node, that represents the relation visually.
-  - If an arrow is used to represent an edge, the arrow should point back via its `relation` to this edge relation.
-  - Semantics: If an edge is deleted, which points to a `node`, that node should also be deleted.
 
 JSON schema: [edge-rel.json](core/edge-rel.json)
 
