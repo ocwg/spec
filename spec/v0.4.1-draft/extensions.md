@@ -19,18 +19,17 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
 ### Table of Contents
 
 <!-- TOC -->
-
-- [OCIF Extensions](#ocif-extensions)
-  - [Abstract](#abstract)
-  - [Status of this Document](#status-of-this-document)
-    - [Table of Contents](#table-of-contents)
-- [Node Extensions](#node-extensions)
-  - [Ports Node](#ports-node)
-  - [Relative Node](#relative-node)
-- [Relation Extensions](#relation-extensions)
-  - [Hyperedge Relation](#hyperedge-relation)
-  - [Parent-Child Relation](#parent-child-relation)
-- [Changes](#changes)
+* [OCIF Extensions](#ocif-extensions)
+  * [Abstract](#abstract)
+  * [Status of this Document](#status-of-this-document)
+    * [Table of Contents](#table-of-contents)
+* [Node Extensions](#node-extensions)
+  * [Ports Node](#ports-node)
+  * [Relative Node](#relative-node)
+* [Relation Extensions](#relation-extensions)
+  * [Hyperedge Relation](#hyperedge-relation)
+  * [Parent-Child Relation](#parent-child-relation)
+* [Changes](#changes)
 <!-- TOC -->
 
 # Node Extensions
@@ -49,7 +48,7 @@ Any node can act as a port. The 'container' node uses the _Ports Extension_ to d
 The _Ports Extension_ has the following properties:
 
 | Property | JSON Type | OCIF Type        | Required     | Contents                      | Default |
-| -------- | --------- | ---------------- | ------------ | ----------------------------- | ------- |
+|----------|-----------|------------------|--------------|-------------------------------|---------|
 | `ports`  | `array`   | [ID](spec.md#id) | **required** | IDs of nodes acting as ports. |         |
 
 Each node SHOULD appear only in **one** ports array.
@@ -104,7 +103,7 @@ The node on which this extension is placed is the _target node_.
 It defines a _source_ node, which is used as a reference for the relative positioning.
 
 | Property   | JSON Type | OCIF Type              | Required     | Contents                         | Default |
-| ---------- | --------- | ---------------------- | ------------ | -------------------------------- | ------- |
+|------------|-----------|------------------------|--------------|----------------------------------|---------|
 | `source`   | `string`  | [ID](spec.md#id)       | **required** | ID of the source node.           |         |
 | `position` | `array`   | number[]               | optional     | Relative position of the target. | `[0,0]` |
 | `rotation` | `number`  | [Angle](spec.md#angle) | optional     | Relative angle of the target.    | `0`     |
@@ -134,7 +133,7 @@ Such a model allows representing all kinds of hyper-edges, even rather obscure o
 A hyper-edge in OCIF has the following properties:
 
 | Property    | JSON Type | OCIF Type | Required     | Contents                             | Default |
-| ----------- | --------- | --------- | ------------ | ------------------------------------ | ------: |
+|-------------|-----------|-----------|--------------|--------------------------------------|--------:|
 | `endpoints` | `array`   | Endpoint  | **required** | List of endpoints of the hyper-edge. |         |
 | `weight`    | `number`  |           | optional     | Weight of the edge                   |   `1.0` |
 | `rel`       | `string`  |           | optional     | Represented relation type            |         |
@@ -150,7 +149,7 @@ Edge weight is a common requirement, and no extensions are needed for this simpl
 Each endpoint is an object with the following properties:
 
 | Property    | JSON Type | OCIF Type        | Required     | Contents                                 | Default |
-| ----------- | --------- | ---------------- | ------------ | ---------------------------------------- | ------- |
+|-------------|-----------|------------------|--------------|------------------------------------------|---------|
 | `id`        | `string`  | [ID](spec.md#id) | **required** | ID of attached entity (node or relation) |         |
 | `direction` | `string`  | Direction        | optional     | Direction of the connection.             | `undir` |
 | `weight`    | `number`  |                  | optional     | Weight of the edge                       | `1.0`   |
@@ -200,7 +199,7 @@ A parent-child relation models a hierarchical relationship between nodes or rela
 It can be used to model inheritance, containment, or other hierarchical relationships.
 
 | Property        | JSON Type | OCIF Type        | Required     | Contents                                | Default |
-| --------------- | --------- | ---------------- | ------------ | --------------------------------------- | :------ |
+|-----------------|-----------|------------------|--------------|-----------------------------------------|:--------|
 | `parent`        | `string`  | [ID](spec.md#id) | **required** | ID of the parent.                       |         |
 | `child`         | `string`  | [ID](spec.md#id) | **required** | ID of the child.                        |         |
 | `inherit`       | `boolean` |                  | optional     | Inherit properties.                     | `false` |

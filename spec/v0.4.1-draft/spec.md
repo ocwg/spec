@@ -31,7 +31,7 @@ An interchange file format for canvas-based applications. Visual nodes, structur
 
 ## Status of this Document
 
-This document is an editor's draft and has no official standing. It is a work in progress and may be updated, replaced, or obsoleted by other documents at any time.
+This document is a candidate recommendation (CR). The Open Canvas Working Group (OCWG) is inviting implementation feedback.
 
 **Legal**:
 Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
@@ -43,11 +43,6 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
   See [OCIF Types](#ocif-types) for a catalog.
 - The terms _OCIF file_ and _OCIF document_ are used interchangeably.
 
-- Issues are temporary TODOs, which should be resolved before the final version. The `@@` makes them easy to search in an editor.
-
-**Issue Example:**
-
-- [ ] @@ This is an issue
 
 ### Table of Contents
 
@@ -104,11 +99,10 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
     - [Advanced Examples](#advanced-examples)
   - [OCWG URL Structure (Planned)](#ocwg-url-structure-planned)
   - [Changes](#changes)
-    - [From v0.3 to v0.4.1](#from-v03-to-v04)
+    - [From v0.3 to v0.4.1](#from-v03-to-v041)
     - [From v0.2.1 to v0.3](#from-v021-to-v03)
     - [From v0.2.0 to v0.2.1](#from-v020-to-v021)
     - [From v0.1 to v0.2](#from-v01-to-v02)
-  - [Notes to the Editor](#notes-to-the-editor)
 
 # Introduction
 
@@ -153,7 +147,7 @@ In OCIF, it looks like this:
 
 ```json5
 {
-  ocif: "https://canvasprotocol.org/ocif/0.4",
+  ocif: "https://canvasprotocol.org/ocif/v0.4.1",
   nodes: [
     {
       id: "berlin-node",
@@ -239,7 +233,7 @@ In OCIF, it looks like this:
 The OCIF file is a JSON object with the following properties:
 
 | Property    | JSON Type | OCIF Type                       | Required     | Contents                          |
-| ----------- | --------- | :------------------------------ | ------------ | --------------------------------- |
+|-------------|-----------|:--------------------------------|--------------|-----------------------------------|
 | `ocif`      | `string`  | [URI](#uri)                     | **required** | The URI of the OCIF schema        |
 | `nodes`     | `array`   | [Node](#node)[]                 | optional     | A list of [nodes](#nodes)         |
 | `relations` | `array`   | [Relation](#relation)[]         | optional     | A list of [relations](#relations) |
@@ -264,7 +258,7 @@ A minimal OCIF file, no visible items
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4"
+  "ocif": "https://canvasprotocol.org/ocif/v0.4.1"
 }
 ```
 
@@ -273,7 +267,7 @@ A small OCIF file, with one node and one resource
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.4.1",
   "nodes": [
     {
       "id": "n1",
@@ -298,16 +292,18 @@ Nodes represent visual items on the canvas.
 Conceptually, a node is a rectangle (bounding box) on the canvas, often displaying some content (resource).
 A _Node_ is an `object` with the following properties:
 
-| Property   | JSON Type | OCIF Type          | Required     | Contents                            | Default     |
-|------------|-----------|--------------------|--------------|-------------------------------------|-------------|
-| `id`       | `string`  | [ID](#id)          | **required** | A unique identifier for the node.   | n/a         |
-| `position` | `array`   | number[]           | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]       |
-| `size`     | `array`   | number[]           | recommended  | The size of the node per dimension. | `[100,100]` |
-| `resource` | `string`  | [ID](#id)          | optional     | The resource to display             |             |
-| `data`     | `array`   | array of Extension | optional     | Extended node data                  |             |
-| `rotation` | `number`  | [Angle](#angle)    | optional     | +/- 360 degrees                     | `0`         |
-| `scale`    | `array`   | number[]           | optional     | Scale factors to resize nodes       | `[1,1,1]`   |
-| `relation` | `string`  | [ID](#id)          | optional     | ID of a [relation](#relation)       | n/a         |
+| Property   | JSON Type | OCIF Type                         | Required     | Contents                            | Default     |
+|------------|-----------|-----------------------------------|--------------|-------------------------------------|-------------|
+| `id`       | `string`  | [ID](#id)                         | **required** | A unique identifier for the node.   | n/a         |
+| `position` | `array`   | number[]                          | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]       |
+| `size`     | `array`   | number[]                          | recommended  | The size of the node per dimension. | `[100,100]` |
+| `resource` | `string`  | [ID](#id)                         | optional     | The resource to display             |             |
+| `data`     | `array`   | array of [Extension](#extensions) | optional     | Extended node data                  |             |
+| `rotation` | `number`  | [Angle](#angle)                   | optional     | +/- 360 degrees                     | `0`         |
+| `scale`    | `array`   | number[]                          | optional     | Scale factors to resize nodes       | `[1,1,1]`   |
+| `relation` | `string`  | [ID](#id)                         | optional     | ID of a [relation](#relation)       | n/a         |
+
+NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
 - **id**: A unique identifier for the node. Must be unique within an OCIF file. See [ID](#ocif-types) type for details.
 
@@ -317,6 +313,7 @@ A _Node_ is an `object` with the following properties:
   - The _coordinate system_ has the x-axis pointing to the right, the y-axis pointing down, and the z-axis pointing away from the screen. This is the same as in CSS, SVG, and most 2D and 3D graphics libraries. The origin is the top-left corner of the canvas.
   - The unit is logical pixels (as used in CSS for `px`).
   - The positioned point (to which the `position` refers) is the top-left corner of the node.
+  - The position is global. (The computation for this position can _additionally_ be stated using the [relative node](extensions.md#relative-node) extension).
   - The default for z-axis is 0, when importing 2D as 3D.
   - When importing 3D as 2D, the z-axis is ignored (but can be left as-is). When a position is changed, the z-axis CAN be set to 0. Yes, this implies that full round-tripping is not always possible.
   - Values on all three axes can be negative.
@@ -332,6 +329,7 @@ A _Node_ is an `object` with the following properties:
 - **resource**: A reference to a resource, which can be an image, video, or audio file. See [resources](#resources).
 
   - Resource can be empty, in which case a node is acting as a transform for other nodes.
+    z-ordering: The resource is to be rendered behind the foreground rectangle (or [oval](#oval)).
 
 - **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-axis is not modified.
 
@@ -339,7 +337,7 @@ A _Node_ is an `object` with the following properties:
   NOTE: This is particularly useful if the [parent-child](extensions.md#parent-child-relation) relation extension applies to the node and child nodes need a consistent scale transform.
 
 - **relation**:
-  The ID of the relation defining the semantics of the visual node (e.g. an [arrow](#arrow) or [group](#group)).
+  The ID of the relation defining the semantics of the visual node (e.g., an [arrow](#arrow)).
   The [relation](#relation) should point back to this visual node using its `node` property.
   - Deletion semantics: If a visual node is deleted, which has a `relation` stated, that underlying relation should also be deleted.
 
@@ -407,8 +405,6 @@ There is no special image node in OCIF. An image is just a resource, which can b
 
 TIP: Additional node extensions can be used. E.g., an [Oval](#oval)) could be used to display the image cropped as a circle.
 
-- [ ] What is the z-ordering of oval/rectangle background vs. image? Relevant for transparency. -> https://github.com/ocwg/spec/issues/10
-
 ## Rectangle
 
 - Name: `@ocif/node/rect`
@@ -418,7 +414,7 @@ A rectangle is a visual node [extension](#extensions), to define the visual appe
 A core node has already a position, size, rotation, scale.
 
 | Property      | JSON Type | OCIF Type       | Required | Contents                 | Default   |
-| ------------- | --------- | --------------- | -------- | ------------------------ | --------- |
+|---------------|-----------|-----------------|----------|--------------------------|-----------|
 | `strokeWidth` | `number`  | number          | optional | The line width.          | `1`       |
 | `strokeColor` | `string`  | [Color](#color) | optional | The color of the stroke. | `#FFFFFF` |
 | `fillColor`   | `string`  | [Color](#color) | optional | The color of the fill.   | (none)    |
@@ -460,7 +456,7 @@ An arrow is a visual node that connects two point coordinates.
 It should be rendered as a straight line, with optional direction markers at the start and end.
 
 | Property      | JSON Type | OCIF Type       | Required     | Contents                | Default   |
-| ------------- | --------- | --------------- | ------------ | ----------------------- | --------- |
+|---------------|-----------|-----------------|--------------|-------------------------|-----------|
 | `strokeWidth` | `number`  | number          | optional     | The line width.         | `1`       |
 | `strokeColor` | `string`  | [Color](#color) | optional     | The color of the arrow. | `#FFFFFF` |
 | `start`       | `array`   | number[]        | **required** | The start point.        | n/a       |
@@ -496,11 +492,15 @@ It should be rendered as a straight line, with optional direction markers at the
   - `none`: No special marker at the end. A flat line end at the end.
   - `arrowhead`: An arrow head at the end. The arrow head points at the end point.
 
+NOTE on **position** and **size**:
+An arrow should only include a position, if a [resource](#resource) is stated to represent this arrow.
+The geometric properties (start and end) often suffice.
 
-The markers allow to represent four kinds of arrow:
+
+The markers allow representing four kinds of arrow:
 
 | startMarker | endMarker | Visual              |
-| ----------- | --------- | ------------------- |
+|-------------|-----------|---------------------|
 | none        | none      | start `-------` end |
 | none        | arrowhead | start `------>` end |
 | arrowhead   | none      | start `<------` end |
@@ -518,12 +518,12 @@ JSON schema: [arrow-node.json](core/arrow-node.json)
 A path is a visual node extension, to define the visual appearance of a node as a path.
 The rendering of resources inside a path is not defined by OCIF, but by the canvas app.
 
-| Property      | JSON Type | OCIF Type | Required     | Contents               | Default   |
-| ------------- | --------- | --------- | ------------ | ---------------------- | --------- |
-| `strokeWidth` | `number`  | number    | optional     | The line width.        | `1`       |
-| `strokeColor` | `string`  | string    | optional     | The color of the path. | `#FFFFFF` |
-| `fillColor`   | `string`  | string    | optional     | The color of the fill. | `none`    |
-| `path`        | `string`  | string    | **required** | The path data.         | n/a       |
+| Property      | JSON Type | OCIF Type       | Required     | Contents               | Default   |
+|---------------|-----------|-----------------|--------------|------------------------|-----------|
+| `strokeWidth` | `number`  | number          | optional     | The line width.        | `1`       |
+| `strokeColor` | `string`  | [Color](#color) | optional     | The color of the path. | `#FFFFFF` |
+| `fillColor`   | `string`  | [Color](#color) | optional     | The color of the fill. | `none`    |
+| `path`        | `string`  | string          | **required** | The path data.         | n/a       |
 
 - **strokeWidth**:
   The line width in logical pixels. Default is `1`. Inspired from SVG `stroke-width`.
@@ -599,7 +599,7 @@ Groups are known as "Groups" in most canvas apps,
 A group has the following properties in its `data` object:
 
 | Property        | JSON Type | OCIF Type   | Required     | Contents                    |
-| --------------- | --------- | ----------- | ------------ | --------------------------- |
+|-----------------|-----------|-------------|--------------|-----------------------------|
 | `members`       | `array`   | [ID](#id)[] | **required** | IDs of members of the group |
 | `cascadeDelete` | `boolean` | `boolean`   | **optional** | `true` or `false`           |
 
@@ -645,17 +645,17 @@ It supports directed and undirected bi-edges.
 It has the following properties (in addition to standard [relation](#relation) properties):
 
 | Property   | JSON Type | OCIF Type | Required     | Contents                  | Default |
-| ---------- | --------- | :-------- | ------------ | ------------------------- | :------ |
+|------------|-----------|:----------|--------------|---------------------------|:--------|
 | `start`    | `string`  | [ID](#id) | **required** | ID of source element.     |         |
 | `end`      | `string`  | [ID](#id) | **required** | ID of target element.     |         |
 | `directed` | `boolean` |           | optional     | Is the edge directed?     | `true`  |
 | `rel`      | `string`  |           | optional     | Represented relation type |         |
 | `node`     | `string`  | [ID](#id) | optional     | ID of a visual node       |         |
 
-- **from**: The ID of the source element.
-- **to**: The ID of the target element.
+- **start**: The ID of the source element.
+- **end**: The ID of the target element.
 - **directed**: A boolean flag indicating if the edge is directed. If `true`, the edge is directed from the source to the target. If `false`, the edge is undirected. Default is `true`.
-- **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject,predicate,object) as (from,rel,to).
+- **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject,predicate,object) as (start,rel,end).
 
 JSON schema: [edge-rel.json](core/edge-rel.json)
 
@@ -683,7 +683,7 @@ Typical resources are, e.g., SVG images, text documents, or media files.
 A resource is an `object` with the following properties:
 
 | Property          | JSON Type | OCIF Type                           | Required     | Contents                        |
-| ----------------- | --------- | ----------------------------------- | ------------ | ------------------------------- |
+|-------------------|-----------|-------------------------------------|--------------|---------------------------------|
 | `id`              | `string`  | [ID](#id)                           | **required** | Identifier of the resource      |
 | `representations` | `array`   | [Representation](#representation)[] | **required** | Representations of the resource |
 
@@ -696,7 +696,7 @@ A resource is an `object` with the following properties:
 Each _Representation_ object has the following properties:
 
 | Property    | JSON Type | OCIF Type               | Required  | Contents                               |
-| ----------- | --------- | ----------------------- | --------- | -------------------------------------- |
+|-------------|-----------|-------------------------|-----------|----------------------------------------|
 | `location`  | `string`  | [URI](#uri)             | see below | The storage location for the resource. |
 | `mime-type` | `string`  | [MIME Type](#mime-type) | see below | The IANA MIME Type of the resource.    |
 | `content`   | `string`  |                         | see below | The content of the resource.           |
@@ -715,7 +715,7 @@ Either `content` or `location` MUST be present. If `content` is used, `location`
 Valid resource representations are
 
 |                 | `location`                      | `mime-type`                                                | `content`          |
-| :-------------- | ------------------------------- | ---------------------------------------------------------- | ------------------ |
+|:----------------|---------------------------------|------------------------------------------------------------|--------------------|
 | Inline text     | Ignored, `content` is set       | E..g. `text/plain` or `image/svg+xml`                      | Text/SVG as string |
 | Inline binary   | Ignored, `content` is set       | E.g. `image/png`                                           | Base64             |
 | Remote          | `https://example.com/sunny.png` | Optional; obtained from HTTP response                      | Ignored            |
@@ -778,13 +778,13 @@ Schemas are stored either inline in the `schemas` property of an OCIF document o
 Each entry in the `schemas` array is an object with the following properties:
 
 | Property   | JSON Type | OCIF Type                   | Required     | Contents                                 |
-| ---------- | --------- | :-------------------------- | ------------ | ---------------------------------------- |
+|------------|-----------|:----------------------------|--------------|------------------------------------------|
 | `uri`      | `string`  | absolute [URI](#uri)        | **required** | Identifier (and location) of the schema  |
 | `schema`   | `object`  |                             | optional     | JSON schema inline as a JSON object      |
 | `location` | `string`  | [URI](#uri)                 | optional     | Override storage location for the schema |
 | `name`     | `string`  | [Schema Name](#schema-name) | optional     | Optional shortname for a schema. "@..."  |
 
-- **uri**: The URI of the schema. The URI is usually absolute. Only for local testing or development, relative URIs are allowed.
+- **uri**: The URI of the schema. The URI SHOULD be absolute. Only for local testing or development, relative URIs MAY be used.
 
   - The URI SHOULD contain the version number of the schema, either as a version number or as a date.
 
@@ -796,7 +796,7 @@ Each entry in the `schemas` array is an object with the following properties:
   - For a _remote_ schema, the `uri` property is used as a location. This field allows overriding the location with another URL. This is particularly useful for testing or development.
   - An _external_ schema uses a relative URI as a location. This is a relative path to the OCIF file.
 
-- **name**: An optional short name for the schema. This defines an alias to the URI. It is useful for human-readable references to the schema. The name MUST start with a `@` character. Names SHOULD use the convention organisation name `/` schema name. Example name: `@ocif/circle`. Names MUST be unique within an OCIF file.
+- **name**: An optional short name for the schema. This defines an alias to the URI. It is useful for human-readable references to the schema. The name MUST start with a `@` character. Names SHOULD use the convention organisation name `/` type (`node` or `rel`) `/` schema name. Example name: `@example/node/circle` (not needed, use an [oval](#oval) instead). Names MUST be unique within an OCIF file.
   - By convention, schema names do not contain a version number. However, if multiple versions of the same schema are used in a file, the version number MUST be appended to the name, to distinguish between them. E.g. `@example/circle/1.0` and `@example/circle/1.1`.
 
 A JSON schema file may contain more than one type definition (under the `$defs` property).
@@ -808,7 +808,7 @@ When referencing a schema URI, there are two options:
 To summarize, these schema definitions are possible:
 
 | Schema        | `uri`        | `schema`        | `location`                   | `name`   |
-| ------------- | ------------ | --------------- | ---------------------------- | -------- |
+|---------------|--------------|-----------------|------------------------------|----------|
 | Inline Schema | **required** | the JSON schema | --                           | optional |
 | External      | **required** | --              | relative path                | optional |
 | Remote        | **required** | --              | -- (URI is used)             | optional |
@@ -847,7 +847,7 @@ maps to a schema [URI](#uri)
 
 - `https://spec.canvasprotocol.org/v0.4.1/core/` _suffix_ `-rel.json`.
 
-2. A schema URI of the form
+2. A schema name of the form
 
 - `@ocif/node/`_suffix_
 
@@ -855,7 +855,7 @@ maps to a schema URI
 
 - `https://spec.canvasprotocol.org/v0.4.1/core/` _suffix_ `-node.json`.
 
-Here `0.4` is the current version of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
+Here `v0.4.1` is the current version identifier of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
 
 Built-in Entries, where the syntax `{var}` denotes placeholders:
 
@@ -893,7 +893,7 @@ They allow adding custom data to nodes, relations, and resources.
 - Each extension is an object with a `type` property.
 
 | Property | JSON Type | OCIF Type                                  | Required     | Contents          |
-| -------- | --------- | :----------------------------------------- | ------------ | ----------------- |
+|----------|-----------|:-------------------------------------------|--------------|-------------------|
 | `type`   | `string`  | [Schema Name](#schema-name) or [URI](#uri) | **required** | Type of extension |
 
 - **type**: The type of the extension. This is a URI or a simple name.
@@ -905,7 +905,7 @@ For an example of an extension, see the [appendix](#appendix), [Node Extension: 
 
 If you need to store some extra data at a node for your canvas app, and none of the existing extensions fit, you can define your own extension.
 
-An extensions MUST have a URI (as its ID) and a document describing the extension.
+An extension MUST have a URI (as its ID) and a document describing the extension.
 
 It SHOULD have a version number, as part of its URI.
 It SHOULD have a proposed name, and SHOULD have a JSON schema.
@@ -918,7 +918,7 @@ Within the repo, there SHOULD be two files:
 - schema.json, which contains the JSON schema for the extension.
   - This schema MUST use the same URI as the extension.
   - It SHOULD have a `description` property, describing briefly the purpose of the extension.
-  - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/0.4`.
+  - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/v0.4.1`.
 
 As an example, look at the fictive [Circle Extension](#node-extension-circle) in the appendix.
 
@@ -929,10 +929,10 @@ As an example, look at the fictive [Circle Extension](#node-extension-circle) in
 - Write a text describing the intended semantics.
 - Create a JSON schema that defines the structure of the extension data. Large language models are a great help here.
 
-To publish an extensions, a version number should be included.
+To publish an extension, a version number should be included.
 It is good practice to use a directory structure that reflects the version number of the extension.
 Within the directory, the text is usually stored as a markdown file, which links to the JSON schema.
-The OCIF extensions document currently describes several OCIF extensions in one document, which is also possible.
+The OCIF [extensions document](extensions.md) currently describes several OCIF extensions in one document, which is also possible.
 
 **Example for a file structure**
 
@@ -969,9 +969,9 @@ Here is the catalog of types used throughout the document (in alphabetical order
 
 ## Angle
 
-A `number` that represents an angle in degrees, from -360 to 360.
-The angle is measured in degrees, with positive values indicating a clockwise rotation and negative values indicating a counterclockwise rotation.
-Numbers outside the range of -360 to 360 are allowed, but they are normalized to the range by adding or subtracting 360 until the value is within the range.
+A `number` that represents an angle between -360 and 360.
+The angle is measured in degrees, with positive values (0,360] indicating a clockwise rotation and negative values [-360,0) indicating a counterclockwise rotation.
+Numbers outside the range [-360, 360] are allowed, but they are normalized into the range by adding or subtracting 360 until the value is within the range.
 
 ## Color
 
@@ -1028,7 +1028,7 @@ A `string` that represents a Uniform Resource Identifier (URI) as defined in [RF
 # Practical Recommendations
 
 - The proposed MIME-type for OCIF files is `application/ocif+json`.
-<!-- see https://github.com/ocwg/spec/issues/13 -->
+<!-- IANA registration https://github.com/ocwg/spec/issues/13 -->
 
 - The recommended file extension for OCIF files is `.ocif.json`.
   This launches JSON-aware applications by default on most systems.
@@ -1074,28 +1074,36 @@ The materialized list of schema entries, as explained in [built-in schema mappin
 Note that core extensions have no version number of their own (in the short name).
 They are versioned together with the OCIF spec.
 The following block can be assumed to be present in every OCIF document.
-It is valid to additionally copy it in.
+It is also valid to additionally copy these schema entries in.
 
 ```json
 {
-  "@ocif/node/arrow": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/arrow-node.json"
-  },
-  "@ocif/node/oval": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/oval-node.json"
-  },
-  "@ocif/node/path": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/path-node.json"
-  },
-  "@ocif/node/rect": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/rect-node.json"
-  },
-  "@ocif/rel/edge": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/edge-rel.json"
-  },
-  "@ocif/rel/group": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json"
-  }
+  "schemas": [
+    {
+      "name": "@ocif/node/arrow",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/arrow-node.json"
+    },
+    {
+      "name": "@ocif/node/oval",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/oval-node.json"
+    },
+    {
+      "name": "@ocif/node/path",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/path-node.json"
+    },
+    {
+      "name": "@ocif/node/rect",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/rect-node.json"
+    },
+    {
+      "name": "@ocif/rel/edge",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/edge-rel.json"
+    },
+    {
+      "name": "@ocif/rel/group",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json"
+    }
+  ]
 }
 ```
 
@@ -1105,20 +1113,27 @@ The following block _cannot_ be assumed to be present in every OCIF document.
 All used extensions must be linked in the schema section.
 For an updated list of known extensions, see the [catalog.md](../../catalog.md).
 
+
 ```json
 {
-  "@ocif/rel/hyperedge/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/hyperedge-rel.json"
-  },
-  "@ocif/rel/parent-child/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/parent-child-rel.json"
-  },
-  "@ocif/node/ports/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/ports-node.json"
-  },
-  "@ocif/node/relative/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/relative-node.json"
-  }
+  "schemas": [
+    {
+      "name": "@ocif/rel/hyperedge/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/hyperedge-rel.json"
+    },
+    {
+      "name": "@ocif/rel/parent-child/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/parent-child-rel.json"
+    },
+    {
+      "name": "@ocif/node/ports/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/ports-node.json"
+    },
+    {
+      "name": "@ocif/node/relative/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/relative-node.json"
+    }
+  ]
 }
 ```
 
@@ -1133,7 +1148,7 @@ This fictive example extension defines geometric circles. In reality, a circle i
 - Properties:
 
 | Property | JSON Type | Required | Contents                    | Default |
-| -------- | --------- | -------- | --------------------------- | ------: |
+|----------|-----------|----------|-----------------------------|--------:|
 | `radius` | number    | optional | The circles radius in pixel |      10 |
 
 - Semantics:
@@ -1217,7 +1232,7 @@ A circle has a port at the geometric "top" position.
 
 ### From v0.3 to v0.4.1
 
-- Changed @ocwg to @ocif
+- Changed from @ocwg (Open Canvas Working Group) to @ocif (Open Canvas Interchange Format) in schema names.
 - Prefaced all version numbers with `v` as in `v0.4.1`
 - Added release instructions
 
@@ -1245,36 +1260,3 @@ A circle has a port at the geometric "top" position.
 - Root property `schema_version` renamed to `ocif` -- this is simpler and serves as a kind of "magic" signature, i.e., a JSON document with an "ocif" property near the top is likely an OCIF file.
 - Renamed node `properties` to `data` -- this is simpler and more generic.
 - Relation property `name` renamed to `type`.
-
----
-
-## Notes to the Editor
-
-- All URIs should have the same, consistent structure
-- Property tables should follow these conventions
-  - **required** is always bold, other entries are not
-  - JSON types are set in `monospace`
-  - OCIF types are linked to their definition
-  - All examples start with `**Example:**`
-  - Order of columns is always: Property, JSON Type, OCIF Type, Required, Contents, Default
-    - Empty columns can be omitted
-
-### Release Instructions
-
-When creating a new version of the spec:
-
-1. `cp` the current version's directory (`/spec/vX.X`) to the next version number with `-draft` appended
-2. Merge the new directory to the `main` branch.
-3. Create a new branch named `vX.X-draft`.
-4. Create pull requests against the new `vX.X-draft` folder until satisfied with release. These will have nice, small diffs that just highlight the major changes.
-   - Alternatively, you can leave the new directory on a branch and create pull requests against that branch until it's ready to be merged.
-5. Open a pull request to update all of the "current" version pointers in the `spec` repo:
-   - rename the `vX.X-draft` folder to `vX.X`
-   - update `/public/_redirects` line 2 to point spec.canvasprotocol.org to:
-     ```
-     / https://github.com/ocwg/spec/blob/main/spec/vX.X/spec.md 302
-     ```
-   - Excluding the `/spec` directory, find and replace the previous version with the new version (i.e., replace `v0.4.1` with `v0.4.1.1`).
-     - That will update the Cookbook, Catalog, Examples, and README.md
-6. Update the version numbers on the [website](https://github.com/ocwg/canvasprotocol.org/blob/main/index.html).
-7. Consider notifying people in Discord and sending a Newsletter update.
