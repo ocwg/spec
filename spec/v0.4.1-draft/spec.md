@@ -104,7 +104,7 @@ Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Grou
     - [Advanced Examples](#advanced-examples)
   - [OCWG URL Structure (Planned)](#ocwg-url-structure-planned)
   - [Changes](#changes)
-    - [From v0.3 to v0.4.1](#from-v03-to-v04)
+    - [From v0.3 to v0.4.1](#from-v03-to-v041)
     - [From v0.2.1 to v0.3](#from-v021-to-v03)
     - [From v0.2.0 to v0.2.1](#from-v020-to-v021)
     - [From v0.1 to v0.2](#from-v01-to-v02)
@@ -340,7 +340,7 @@ A _Node_ is an `object` with the following properties:
   NOTE: This is particularly useful if the [parent-child](extensions.md#parent-child-relation) relation extension applies to the node and child nodes need a consistent scale transform.
 
 - **relation**:
-  The ID of the relation defining the semantics of the visual node (e.g. an [arrow](#arrow) or [group](#group)).
+  The ID of the relation defining the semantics of the visual node (e.g., an [arrow](#arrow)).
   The [relation](#relation) should point back to this visual node using its `node` property.
   - Deletion semantics: If a visual node is deleted, which has a `relation` stated, that underlying relation should also be deleted.
 
