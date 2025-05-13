@@ -495,6 +495,10 @@ It should be rendered as a straight line, with optional direction markers at the
   - `none`: No special marker at the end. A flat line end at the end.
   - `arrowhead`: An arrow head at the end. The arrow head points at the end point.
 
+NOTE on **position** and **size**:
+An arrow should only include a position, if a [resource](#resource) is stated to represent this arrow.
+The geometric properties (start and end) often suffice.
+
 
 The markers allow representing four kinds of arrow:
 
@@ -517,12 +521,12 @@ JSON schema: [arrow-node.json](core/arrow-node.json)
 A path is a visual node extension, to define the visual appearance of a node as a path.
 The rendering of resources inside a path is not defined by OCIF, but by the canvas app.
 
-| Property      | JSON Type | OCIF Type | Required     | Contents               | Default   |
-|---------------|-----------|-----------|--------------|------------------------|-----------|
-| `strokeWidth` | `number`  | number    | optional     | The line width.        | `1`       |
-| `strokeColor` | `string`  | string    | optional     | The color of the path. | `#FFFFFF` |
-| `fillColor`   | `string`  | string    | optional     | The color of the fill. | `none`    |
-| `path`        | `string`  | string    | **required** | The path data.         | n/a       |
+| Property      | JSON Type | OCIF Type       | Required     | Contents               | Default   |
+|---------------|-----------|-----------------|--------------|------------------------|-----------|
+| `strokeWidth` | `number`  | number          | optional     | The line width.        | `1`       |
+| `strokeColor` | `string`  | [Color](#color) | optional     | The color of the path. | `#FFFFFF` |
+| `fillColor`   | `string`  | [Color](#color) | optional     | The color of the fill. | `none`    |
+| `path`        | `string`  | string          | **required** | The path data.         | n/a       |
 
 - **strokeWidth**:
   The line width in logical pixels. Default is `1`. Inspired from SVG `stroke-width`.
