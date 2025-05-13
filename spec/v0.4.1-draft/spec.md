@@ -309,6 +309,8 @@ A _Node_ is an `object` with the following properties:
 | `scale`    | `array`   | number[]           | optional     | Scale factors to resize nodes       | `[1,1,1]`   |
 | `relation` | `string`  | [ID](#id)          | optional     | ID of a [relation](#relation)       | n/a         |
 
+NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
+
 - **id**: A unique identifier for the node. Must be unique within an OCIF file. See [ID](#ocif-types) type for details.
 
 - **position**: The position of the node on the canvas.
