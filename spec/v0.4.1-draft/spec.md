@@ -642,10 +642,10 @@ It has the following properties:
 | `rel`      | `string`  |           | optional     | Represented relation type |         |
 | `node`     | `string`  | [ID](#id) | optional     | ID of a visual node       |         |
 
-- **from**: The ID of the source element.
-- **to**: The ID of the target element.
+- **start**: The ID of the source element.
+- **end**: The ID of the target element.
 - **directed**: A boolean flag indicating if the edge is directed. If `true`, the edge is directed from the source to the target. If `false`, the edge is undirected. Default is `true`.
-- **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject,predicate,object) as (from,rel,to).
+- **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject,predicate,object) as (start,rel,end).
 - **node**: The ID of a visual node, that represents the relation visually.
   - If an arrow is used to represent an edge, the arrow should point back via its `relation` to this edge relation.
   - Semantics: If an edge is deleted, which points to a `node`, that node should also be deleted.
