@@ -1112,20 +1112,27 @@ The following block _cannot_ be assumed to be present in every OCIF document.
 All used extensions must be linked in the schema section.
 For an updated list of known extensions, see the [catalog.md](../../catalog.md).
 
+
 ```json
 {
-  "@ocif/rel/hyperedge/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/hyperedge-rel.json"
-  },
-  "@ocif/rel/parent-child/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/parent-child-rel.json"
-  },
-  "@ocif/node/ports/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/ports-node.json"
-  },
-  "@ocif/node/relative/0.4": {
-    "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/relative-node.json"
-  }
+  "schemas": [
+    {
+      "name": "@ocif/rel/hyperedge/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/hyperedge-rel.json"
+    },
+    {
+      "name": "@ocif/rel/parent-child/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/parent-child-rel.json"
+    },
+    {
+      "name": "@ocif/node/ports/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/ports-node.json"
+    },
+    {
+      "name": "@ocif/node/relative/0.4.1",
+      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/relative-node.json"
+    }
+  ]
 }
 ```
 
