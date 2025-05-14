@@ -8,6 +8,20 @@
       "type": "string",
       "description": "The URI of the OCIF schema"
     },
+    "buffers": {
+      "type": "array",
+      "description": "A list of buffers",
+      "items": {
+        "$ref": "#/$defs/buffer"
+      }
+    },
+    "bufferViews": {
+      "type": "array",
+      "description": "A list of buffer views",
+      "items": {
+        "$ref": "#/$defs/bufferView"
+      }
+    },
     "nodes": {
       "type": "array",
       "description": "A list of nodes",
@@ -38,6 +52,52 @@
     }
   },
   "$defs": {
+    "buffer": {
+      "type": "object",
+      "description": "A buffer in the OCIF document",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the buffer."
+        },
+        "byteLength": {
+          "type": "integer",
+          "description": "The length of the buffer in bytes. The actual size of the buffer MAY be a few bytes larger than this value if needed for alignment.",
+          "minimum": 0
+        },
+        "location": {
+          "type": "string",
+          "description": "The storage location for the resource. This can be a relative URI for an external resource, an absolute URI for a remote resource, or a data: URI with base64-encoded data. For OCIF Binary files with data chunks providing the buffer data, the `location` property MUST be set to `chunk:N` where N is the index of the chunk (0 is reserved for the OCIF JSON itself, so N may only be 1 or higher)."
+        }
+      },
+      "required": ["id", "byteLength"]
+    },
+    "bufferView": {
+      "type": "object",
+      "description": "A buffer view in the OCIF document",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the buffer view."
+        },
+        "buffer": {
+          "type": "string",
+          "description": "The ID of the buffer this view is based on."
+        },
+        "byteLength": {
+          "type": "integer",
+          "description": "The length of the buffer view in bytes. The declared byte offset plus the declared byte length MUST NOT exceed the buffer's byte length. This property is required.",
+          "minimum": 0
+        },
+        "byteOffset": {
+          "type": "integer",
+          "description": "The start offset of the buffer view in bytes. This is relative to the start of the buffer. For example, if the byte offset is 100, then byte 0 of the buffer view is byte 100 of the buffer. The declared byte offset plus the declared byte length MUST NOT exceed the buffer's byte length. This property is optional and defaults to 0.",
+          "minimum": 0,
+          "default": 0
+        }
+      },
+      "required": ["id", "buffer", "byteLength"]
+    },
     "node": {
       "type": "object",
       "description": "A node in the OCIF document",

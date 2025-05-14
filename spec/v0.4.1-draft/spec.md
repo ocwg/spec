@@ -877,6 +877,104 @@ Built-in Entries, where the syntax `{var}` denotes placeholders:
 
 These mappings SHOULD be materialized into the OCIF JSON schema.
 
+# Binary Blob Data
+
+As a general-purpose canvas format, OCIF often needs to store various types of binary blob data which cannot be represented in a human readable way. For example, the bytes of an image are not readable when displayed as text. Such data can be stored in several ways:
+
+- As an external file in its original format, which is referenced by a relative URI.
+- As base64-encoded data in the OCIF file, such as in a `data:` URI or the `"content"` property of a resource representation.
+- As data in a general-purpose buffer stored in a separate file, which is referenced by a relative URI.
+- As data in a general-purpose buffer stored at the end of a binary OCIF file.
+
+The first option is recommended for most cases, as it allows for keeping the data accessible outside of OCIF, and decreases friction for implementations to read the data. For example, a PNG image can be stored in a `.png` file. However, this means the OCIF file is not self-contained, so you cannot simply copy the OCIF file by itself and have it keep the image data with it, so it is not suitable for all use cases. Also, not all data necessarily has a corresponding file format. For example, an animation animating positions of nodes may wish to store a binary blob array of floats, which does not have a file format.
+
+The second option makes the OCIF file self-contained, at the cost of making the data within harder to access. However, this is a less efficient encoding of the data, since base64 encoding requires 4 bytes of text to store 3 bytes of binary data. This also poses a problem for text editors trying to display the OCIF file, as megabytes of base64-encoded data will be millions of columns wide and can cause text editors to crash, slow down, lose functionality (such as refusing to syntax highlight such a large file), or otherwise misbehave.
+
+As an alternative, you can store binary data in a general-purpose buffer, which is then sliced into smaller pieces. This allows for storing, for example, dozens of images all in one `.bin` file, instead of having dozens of separate files. In some cases, it is easier to move two files around than dozens of files. This also makes it clear which data belongs to which OCIF file if multiple OCIF files are present in the same folder, for example, `myfile.ocif.json` and `myfile.bin` clearly go together since they both start with the same name, but `someimage.png` is not immediately clear if it belongs to `myfile.ocif.json` or `otherfile.ocif.json`. If it is desired to have a single self-contained file encoded efficiently, the OCIF binary file format is available for that case.
+
+## Buffers and Buffer Views
+
+If any buffers are present in the OCIF file, they are stored in the `buffers` array of the OCIF JSON. Each buffer is an object with the following properties:
+
+| Property     | JSON Type | OCIF Type          | Required     | Contents                            | Default     |
+| ------------ | --------- | ------------------ | ------------ | ----------------------------------- | ----------- |
+| `id`         | `string`  | [ID](#id)          | **required** | A unique identifier for the buffer. | n/a         |
+| `location`   | `string`  | [URI](#uri)        | optional     | The location of the buffer.         | n/a         |
+| `byteLength` | `number`  | number             | **required** | The size of the buffer in bytes.    | n/a         |
+
+Buffers are usually used by buffer views, which provide a sliced view of the buffer. For example, if a buffer contains 10 PNG images, there may be ten buffer views, each one pointing to a different slice of the buffer for that image. Each buffer view is an object with the following properties:
+
+| Property     | JSON Type | OCIF Type          | Required     | Contents                                          | Default     |
+| ------------ | --------- | ------------------ | ------------ | ------------------------------------------------- | ----------- |
+| `id`         | `string`  | [ID](#id)          | **required** | A unique identifier for the buffer view.          | n/a         |
+| `buffer`     | `string`  | [ID](#id)          | **required** | The ID of the buffer used by this view.           | n/a         |
+| `byteLength` | `number`  | number             | **required** | The size of the view in bytes.                    | n/a         |
+| `byteOffset` | `number`  | number             | optional     | The offset from the start of the buffer in bytes. | `0`         |
+
+Buffer views may then be used by resource representations, which reference the buffer view with the `location` property set to `"bufferView:id"`, where `id` is the ID of the buffer view.
+
+## OCIF Binary File Format
+
+OCIF files are usually stored in a JSON-based text format (`.ocif.json`), or may be stored in a binary format (`.ocb`, "OCIF Binary"). With the text format, binary blobs of data may either be base64-encoded within the JSON, or referenced as external files. The binary format is a more compact representation of the same data within a self-contained file, which appends binary blobs of data after the end of the JSON.
+
+The binary format begins with a 16-byte file header, which contains the following fields:
+
+- A 4-byte magic number, which MUST be equal to the byte sequence `0x4F 0x43 0x49 0x46`, or ASCII string "OCIF".
+  - When interpreted as a little-endian unsigned 32-bit integer, this is `0x4649434F`.
+- A 4-byte version number, which MUST be equal to the byte sequence `0x01 0x04 0x00 0x00`.
+  - When interpreted as a little-endian unsigned 32-bit integer, this is `0x00000401` (2 bytes major, 1 byte minor, 1 byte patch).
+  - This value is only for the v0.4.1 draft version of the specification. The final version will have a different value.
+- A 8-byte size number, which MUST be equal to the total size in bytes of the entire file, including the file header, all chunks, all JSON data, and all binary blobs of data.
+  - This value is a little-endian unsigned 64-bit integer, meaning the maximum file size of a binary OCIF file is 2^64 - 1 bytes.
+
+After the file header, the file consists of a series of one or more chunks. Each chunk begins with its own 16-byte chunk header, with a similar format to the file header:
+
+- A 4-byte chunk type. In the base specification, this MUST be one of the following:
+  - The byte sequence `0x4A 0x53 0x4F 0x4E`, the ASCII string "JSON". This indicates the chunk contains JSON data.
+    - When interpreted as a little-endian unsigned 32-bit integer, this is `0x4E4F534A`.
+    - JSON chunks MUST be UTF-8 encoded without a BOM, MUST NOT contain control characters `0x7F` or `0x00` through `0x1F` except for optionally tab `0x09` and line feed `0x0A`, and MUST be a valid JSON object. These requirements also apply to the text format.
+  - The byte sequence `0x42 0x4C 0x4F 0x42`, the ASCII string "BLOB". This indicates the chunk contains binary blob data, usually the data of a buffer.
+    - When interpreted as a little-endian unsigned 32-bit integer, this is `0x424F4C42`.
+    - "BLOB" chunks may be used for any data, since it does not prescribe a specific format, just "it is a blob of data".
+  - Implementations MAY define additional chunk types. The byte sequence selected SHOULD be a somewhat-human-readable magic sequence of printable ASCII characters, but may be any value. Note: This does not need to match the magic number used by the data format itself, if any.
+- A 4-byte chunk compression format indicator. In the base specification, this MUST be one of the following:
+  - The byte sequence `0x00 0x00 0x00 0x00`, or zero. This indicates the chunk is not compressed.
+  - The byte sequence `0x5A 0x73 0x74 0x64`, the ASCII string "Zstd". This indicates the chunk is compressed using the Zstandard compression format.
+    - When interpreted as a little-endian unsigned 32-bit integer, this is `0x6474735A`.
+    - The chunk data MUST also include Zstd's own magic number `0x28 0xB5 0x2F 0xFD` at the start of the data, it cannot be omitted.
+  - Implementations MUST support the uncompressed format. Implementations MAY choose to implement none of the other compression formats, refusing to load such files.
+  - Implementations MAY define additional compression formats. The byte sequence selected SHOULD be a somewhat-human-readable magic sequence of printable ASCII characters, but may be any value. Note: This does not need to match the magic number used by the compression format itself.
+- A 8-byte chunk data size number, which MUST be equal to the size in bytes of the chunk data, excluding the chunk header, and excluding any padding after the chunk data.
+  - This value is a little-endian unsigned 64-bit integer. The maximum chunk data size is 2^64 - 33 bytes (an additional 32 bytes are subtracted for the file and chunk headers).
+  - If the chunk is compressed, this value is the size of the compressed data, not the uncompressed data. However, the `"byteLength"` field in the JSON data refers to the uncompressed size of the data.
+- The data in each chunk immediately follows the chunk header, and is of the size in bytes indicated by the chunk data size number.
+
+Every chunk header MUST be aligned to a 16-byte boundary. This means that whenever a chunk has another chunk after it, the chunk on the left MUST have padding placed after the data (not included in the chunk data size) to the next 16-byte boundary (if already at the boundary, there is no padding). The final chunk in the file does not need padding after it. Padding is usually null `0x00` bytes for binary blobs or compressed chunks, but space `0x20` characters SHOULD be used for padding uncompressed JSON data. The 8-byte chunk data size number MUST NOT include this padding, it only includes the used bytes of the chunk data.
+
+The first chunk in the file MUST be a JSON chunk containing the OCIF JSON data that conforms to the main OCIF schema `schema.json`. If the file has binary blob chunks containing OCIF buffers, they MUST be the following chunks in the file. Each buffer in the OCIF JSON data's buffers array refer to these chunks in the form of `"location": "chunk:N"` where N is the index of the chunk. 0 is reserved for the OCIF JSON itself, so N may only be 1 or higher. The OCIF JSON buffer's `"byteLength"` always refers to the uncompressed size of the data, but the chunk's data size refers to the compressed size of the data if the chunk is compressed. The behavior of additional chunks not used by buffers is undefined, and may be used for any purpose.
+
+Binary OCIF files smaller than 32 bytes are invalid, because that is the minimum size of the file header and the first chunk header.
+
+Following all of the above rules, the data layout of a OCIF binary file can be summarized as follows:
+
+| Offset in bytes | Size in bytes | Description                                       | Valid values                                     |
+| --------------- | ------------- | ------------------------------------------------- | ------------------------------------------------ |
+| 0               | 4             | The OCIF file header's magic number.              | Constant `OCIF` or `0x4F 0x43 0x49 0x46`         |
+| 4               | 4             | The OCIF file header's version number.            | Constant based on the spec version               |
+| 8               | 8             | The OCIF file header's size in bytes.             | Between 32 and 2^64 - 1                          |
+| 16              | 4             | The first chunk's chunk type.                     | Constant `JSON` or `0x4A 0x53 0x4F 0x4E`         |
+| 20              | 4             | The first chunk's compression format.             | Constant `0x00000000` for uncompressed           |
+| 24              | 8             | The first chunk's size in bytes.                  | Between 0 and 2^64 - 33                          |
+| 32              | N             | The first chunk's data, the OCIF JSON data.       | UTF-8 encoded JSON excluding control characters  |
+| 32 + N          | P1            | (optional) Padding if a second chunk exists.      | 0 to 15 null bytes or spaces to 16-byte boundary |
+| 32 + N + P1     | 4             | (optional) The second chunk's type.               | Constant `BLOB` or `0x42 0x4C 0x4F 0x42`         |
+| 36 + N + P1     | 4             | (optional) The second chunk's compression format. | Constant `0x00000000` for uncompressed           |
+| 40 + N + P1     | 8             | (optional) The second chunk's size in bytes.      | Between 0 and 2^64 - (48 + N + P1)               |
+| 48 + N + P1     | M             | (optional) The second chunk's data.               | Binary blob data                                 |
+| 48 + N + M + P1 | P2            | (optional) Padding if a third chunk exists.       | 0 to 15 null bytes or spaces to 16-byte boundary |
+
+More chunks may follow the second chunk, including additional BLOB chunks for buffers, or any other chunk type.
+
 # Extensions
 
 No two canvas applications are alike:
