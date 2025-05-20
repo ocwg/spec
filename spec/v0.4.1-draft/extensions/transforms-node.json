@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/node/transforms",
+  "description": "Geometric transforms for nodes",
+  "type": "object",
+  "properties": {
+    "scale": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Scale factor for the node. The array contains the scale factor for each dimension."
+    },
+    "offset": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Relative position of the child node relative to the parent node. The numbers given in the array are vector-added to the position of the source node."
+    },
+    "rotation": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Relative angle per dimension. The rotation is added to the rotation of parent coordinate system."
+    }
+  },
+  "required": ["source"]
+}
