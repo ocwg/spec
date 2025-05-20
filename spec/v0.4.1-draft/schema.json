@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OCIF core 0.4",
-  "description": "The schema for the Open Component Interconnect Format (OCIF) Core document structure.",
+  "description": "The schema for the Open Canvas Interchange Format (OCIF) Core document structure.",
   "type": "object",
   "properties": {
     "ocif": {
