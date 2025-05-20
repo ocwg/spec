@@ -182,8 +182,31 @@ The offsets are interpreted in the global parents (#TODO or global?) coordinate 
 JSON schema: [anchored-node.json](extensions/parent-child-rel.json)
 
 
+## Text Style Node
+
+- Name: `@ocif/node/textstyle`
+- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/textstyle-node.json`
+
+The text style extension allows setting common properties for rendering plain text and structured text (such as Markdown or AsciiDoc).
 
 
+| Property     | JSON Type | OCIF Type       | Required | Contents    | Default      |
+|--------------|-----------|-----------------|----------|-------------|--------------|
+| `fontSizePx` | `number`  |                 | optional | Font size   | `12px`       |
+| `fontFamily` | `string`  |                 | optional | Font family | `sans-serif` |
+| `color`      | `string`  | Color           | optional | Text color  | `#000000`    |
+| `align`      | `string`  | enum, see below | optional | Alignment   | `left`       |
+| `bold`       | `boolean` |                 | optional | Bold text   | `false`      |
+| `italic`     | `boolean` |                 | optional | Italic text | `false`      |
+
+* **fontSize**: The font size in `px`, as used in CSS.
+* **fontFamily**: The font family, as used in CSS.
+* **color**: The text color. See [Color](spec.md#color).
+* **align**: The text alignment. Possible values are `left`, `right`, `center`, `justify`.
+* **bold**: A boolean flag indicating if the text should be bold.
+* **italic**: A boolean flag indicating if the text should be italic.
+
+JSON schema: [textstyle-node.json](extensions/parent-child-rel.json)
 
 
 # Relation Extensions
