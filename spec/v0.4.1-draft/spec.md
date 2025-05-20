@@ -299,6 +299,7 @@ A _Node_ is an `object` with the following properties:
 | `rotation` | `number`  | [Angle](#angle)                   | optional     | +/- 360 degrees                     | `0`         |
 | `scale`    | `array`   | number[]                          | optional     | Scale factors to resize nodes       | `[1,1,1]`   |
 | `relation` | `string`  | [ID](#id)                         | optional     | ID of a [relation](#relation)       | n/a         |
+| `resource-fit` | `string`  | enum, see below                   | optional     | Fitting resource in item            | `contain`   |
 
 NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
@@ -317,7 +318,8 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
 - **size**: The size of the node in dimensions. I.e. this is **x-axis** ("width" at position `0`), **y-axis** ("height" at position `1`), and **z-axis** ("depth" at position `2`).
 
-  - Size might be omitted if a linked resource defines the size. E.g., raster images such as PNG an JPEG define their size in pixels. SVG can have a `viewbox` defined, but may also omit it. Text can be wrapped at any width, so a size property is clearly required. In general, a size property is really useful as a fall-back to display at least a kind of rectangle, if the resource cannot be displayed as intended. Size can only be omitted if _all_ resource representations define a size.
+  - Size might be omitted if a linked resource defines the size. E.g., raster images such as PNG an JPEG define their size in pixels. SVG can have a `viewbox` defined, but may also omit it. Text can be wrapped at any width, so a size property is clearly required. In general, a size property is really useful as a fall-back to display at least a kind of rectangle, if the resource cannot be displayed as intended. Size can only be omitted if _all_ resource representations define a size.\
+  - See also [Size and Resource](#size-and-resource)
 
 - **data**: Additional properties of the node.
   A node may have any number of extensions. Each extension is a JSON object with a `type` property.
@@ -328,15 +330,38 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
   - Resource can be empty, in which case a node is acting as a transform for other nodes.
   - z-ordering: The resource is to be rendered behind the node. For example, if the node has a rectangular border (or [oval](#oval)), that border would be rendered in front of the resource.
 
-- **rotation**: The 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-axis is not modified.
+- **resource-fit**: Given a node with dimensions 100 (height) x 200 (width) and a bitmap image (e.g. a .png) with a  size of 1000 x 1000.
+  How should this image be displayed? We re-use some options from CSS ([object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) property):
 
-- **scale**: Allows to re-scale a given node.
-  NOTE: This is particularly useful if the [parent-child](extensions.md#parent-child-relation) relation extension applies to the node and child nodes need a consistent scale transform.
+  - `none`: All pixels are displayed in the available space unscaled. The example would be cropped down to the 100 x 200 area top-left. No auto-centering.
+  - `keep-width`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.5`, so that it is 200 px wide and 200 px heigh. The top half of the image is visible.
+  - `keep-height`: Scaled by keeping the aspect ratio, so that the image height matches the item height. This results in the image being displayed at a scale of `0.1`, so that it is 100 px high and 100 px wide. The image is now fully visible, but there are boxes of empty space left and right of the image.
+  - `contain`: Scaled by keeping the aspect ratio of the image, so that the image fits into the item for both height and width.
+    The image is auto-centered vertically and horizontally.
+    Empty space left and right or top and bottom might appear.
+    NOTE: This is identical to auto-selecting one of the two previous options.
+  - `cover`: Scaled by keeping the aspect ratio of the image, so that the image fits into the item for one of height and width while the other dimension overlaps. The overlap is cropped away and not visible. The entire view area is filled.
+  - `fill`: Aspect ratio is ignored and the image is simply stretched to match the width and height of the view box.
+
+- **rotation**: The absolute, global 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-axis is not modified.
 
 - **relation**:
   The ID of the relation defining the semantics of the visual node (e.g., an [arrow](#arrow)).
   The [relation](#relation) should point back to this visual node using its `node` property.
   - Deletion semantics: If a visual node is deleted, which has a `relation` stated, that underlying relation should also be deleted.
+
+
+## Size and Resource
+Conceptually, a node has a position (top-left) and a size.
+The node position is interpreted as the root of a local coordinate system.
+The size of the node is interpreted in the global coordinate system.
+This yields a rectangle (bounding box) acting as a clipping mask on the contents of the node.
+
+A node may display a resource.
+This resource may have an intrinsic size (bitmap image) or at least a given aspect-ratio (vector graphics without an explicit size) or have not stated its size (text or formatted text).
+For text resources, the text settings (e.g., font size and line height) define how text is wrapped and displayed in the available space.
+
+The `scale` factor can also be manually overwritten using the [node transforms](extensions.md#node-transforms).
 
 
 ## Text Nodes?
