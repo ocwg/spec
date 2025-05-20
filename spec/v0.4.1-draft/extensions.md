@@ -35,7 +35,7 @@ Open Canvas Interchange Format (OCIF) v0.5 © 2025 by Open Canvas Working Group 
 
 # Node Extensions
 
-These are [extension](spec.md#extensions) that can be added to nodes in an OCIF document.
+These are [extensions](spec.md#extensions) that can be added to nodes in an OCIF document.
 To be placed inside the `data` `array`.
 
 ## Ports Node
@@ -43,7 +43,7 @@ To be placed inside the `data` `array`.
 - Name: `@ocif/node/ports`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/ports-node.json`
 
-It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g., arrows are attached to a shape.
+It provides the familiar concept of _ports_ to a node. A port is a point that allows geometrically controlling where, e.g., arrows are attached to a shape.
 
 Any node can act as a port. The 'container' node uses the _Ports Extension_ to define which nodes it uses as ports.
 The _Ports Extension_ has the following properties:
@@ -57,8 +57,8 @@ A port cannot be used by multiple nodes as a port.
 
 **Example** \
 A node (n1) with two ports (p1, p2).
-Note that p1 and p2 are normal nodes.
-It's node n1 which uses p1 and p2 as its ports.
+Note that _p1_ and _p2_ are normal nodes.
+It is the node _n1_ which uses _p1_ and _p2_ as its ports.
 An arrow can now start at node p1 (which is a port of n1) and end at node n2 (which is not a port in this example).
 
 ```json
@@ -104,13 +104,13 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 - Name: `@ocif/node/transform`
 - URI: `https://spec.canvasprotocol.org/v0.4.1/ext/transform-node.json`
 
-The node transform extension allows to customize the local coordinate system of a node relative to the parent coordinate system.
+The node transform extension allows customizing the local coordinate system of a node relative to the parent coordinate system.
 This is a concept commonly found in game engines and infinitely zoomable canvases.
 
-**This extensions MUST be used together with the [parent-child-relation](#parent-child-relation)** to define the child node to which to apply the transforms.
-The default parent coordinate system is the global canvas-wide coordinate system.
+This extension is usually used together with the [parent-child-relation](#parent-child-relation) to define the parent node, from which the reference coordinate system is used.
+The default parent coordinate system is the global, canvas-wide coordinate system.
 
-The transformns affect the local coordinate systemt, which is used to display resources (see [spec](spec.md#size-and-resource)) and child nodes. The child nodes have global coordinates and the node transform extension can provide the "recipe" how to calculate the global positions of a node when, e.g., the parent has been moved, rotated, or scaled.
+The transforms affect the local coordinate system, which is used to display resources (see [spec](spec.md#size-and-resource)) and child nodes. The child nodes have global coordinates, and the node transform extension can provide the "recipe" how to calculate the global positions of a node when, e.g., the parent has been moved, rotated, or scaled.
 
 Transforms are chainable. For example, a node A may transform its coordinate system relative to the canvas. Node B may transform relative to the coordinate system of its parent A. Then node C transforms again relative to its parent B. The resulting scale, rotation, and offset computation requires computing first A, then B, then C.
 
@@ -126,7 +126,7 @@ Transforms are chainable. For example, a node A may transform its coordinate sys
       Scale factors provide additional state which influences interaction behaviour, e.g., an item drag-dropped into an item with a scale factor of less than 1 causes the item to shrink, when released.
 
 - **rotation**: A number-vector (floating-point) to override (set) the rotation of the node.
-- This (relative, locasl) rotation is added to the rotation of the parent.
+- This (relative, local) rotation is added to the rotation of the parent.
 
 - **offset**: A number-vector (floating-point) to override (set) the offset of the node, relative to its parent position.
 
@@ -151,7 +151,7 @@ Furthermore, when zooming very large maps, position and size should be computed 
   ]
 }
 ```
-JSON schema: [transform-node.json](ext/scale-node.json)
+JSON schema: [transform-node.json](extensions/transforms-node.json)
 
 
 
@@ -177,7 +177,7 @@ These percentage-coordinates are now used to position the item.
 
 The offsets are interpreted in the global parents (#TODO or global?) coordinate system.
 
-@@ What is the interpretation if top-left is given and bottom-right is not?
+@@ What is the interpretation if the top-left is given and bottom-right is not?
 
 JSON schema: [anchored-node.json](extensions/parent-child-rel.json)
 
@@ -193,10 +193,10 @@ JSON schema: [anchored-node.json](extensions/parent-child-rel.json)
 - Name: `@ocif/rel/hyperedge`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/hyperedge-rel.json`
 
-A hyperedge is a relation, which connects any number of nodes.
+A hyperedge is a relation that connects any number of nodes.
 Hyperedges can also be used to model simple bi-edges.
 
-Conceptually, a hyper-edge is an entity, which has a number of _endpoints_.
+Conceptually, a hyper-edge is an entity that has a number of _endpoints_.
 For each endpoint, we allow defining the directionality of the connection.
 The endpoints are explicitly defined as an ordered list, i.e., endpoints can be addressed by their position in the list.
 Such a model allows representing all kinds of hyper-edges, even rather obscure one.
