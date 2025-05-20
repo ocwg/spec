@@ -114,11 +114,12 @@ The transforms affect the local coordinate system, which is used to display reso
 
 Transforms are chainable. For example, a node A may transform its coordinate system relative to the canvas. Node B may transform relative to the coordinate system of its parent A. Then node C transforms again relative to its parent B. The resulting scale, rotation, and offset computation requires computing first A, then B, then C.
 
-| Property   | JSON Type                          | OCIF Type | Required     | Contents            | Default |
-|------------|------------------------------------|-----------|--------------|---------------------|---------|
-| `scale`    | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Scale factor        | `1`     |
-| `rotation` | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Rotation in degrees | `0`     |
-| `offset`   | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Offset              | `0`     |
+| Property        | JSON Type                          | OCIF Type | Required     | Contents            | Default   |
+|-----------------|------------------------------------|-----------|--------------|---------------------|-----------|
+| `scale`         | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Scale factor        | `1`       |
+| `rotation`      | `number`                           | Angle     | **optional** | Rotation in degrees | `0`       |
+| `rotation-axis` | `number[3]`                        |           | **optional** | Rotation axis       | `[0,0,1]` |
+| `offset`        | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Offset              | `0`       |
 
 - **scale**: A number-vector (floating-point) to override (set) the automatic scale factor of the node. This defines the scale of the local coordinate system. A larger scale SHOULD also affect font sizes. The scale factors are multiplied component-wise to the parent coordinate system.
 
@@ -126,7 +127,10 @@ Transforms are chainable. For example, a node A may transform its coordinate sys
       Scale factors provide additional state which influences interaction behaviour, e.g., an item drag-dropped into an item with a scale factor of less than 1 causes the item to shrink, when released.
 
 - **rotation**: A number-vector (floating-point) to override (set) the rotation of the node.
-- This (relative, local) rotation is added to the rotation of the parent.
+  - This (relative, local) rotation is added to the rotation of the parent.
+  - It a single number around the axis defined in `rotation-axis`, in degrees in counter-clockwise direction.
+
+- **rotation-axis**: The default is `(0,0,1)`. This is the axis-angle notation.
 
 - **offset**: A number-vector (floating-point) to override (set) the offset of the node, relative to its parent position.
 
