@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/node/path",
+  "description": "Path node extension",
+  "type": "object",
+  "properties": {
+    "strokeWidth": {
+      "type": "number",
+      "description": "The line width."
+    },
+    "strokeColor": {
+      "type": "string",
+      "description": "The color of the stroke."
+    },
+    "fillColor": {
+      "type": "string",
+      "description": "The color of the fill."
+    },
+    "path": {
+      "type": "string",
+      "description": "The path data in SVG 'd' attribute syntax."
+    }
+  },
+  "required": ["path"]
+}

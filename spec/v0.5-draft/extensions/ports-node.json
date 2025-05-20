@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/node/ports",
+  "description": "Node ports extension",
+  "type": "object",
+  "properties": {
+    "ports": {
+      "type": "array",
+      "items": {
+        "$comment": "Each item is an ID of a node",
+        "type": "string"
+      }
+    }
+  }
+}

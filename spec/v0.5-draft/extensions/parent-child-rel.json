@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/rel/parent-child",
+  "description": "Parent-child relationship extension. A parent-child relation models a hierarchical relationship between nodes. It can be used to model inheritance, containment, or other hierarchical relationships.",
+  "type": "object",
+  "properties": {
+    "parent": {
+      "type": "string",
+      "description": "ID of the parent node. There SHOULD be only one parent per child."
+    },
+    "child": {
+      "type": "string",
+      "description": "ID of the child node. A parent can have multiple children (expressed my multiple parent-child relations)."
+    },
+    "inherit": {
+      "type": "boolean",
+      "description": "Inherit properties. A boolean flag indicating if the child should inherit properties from the parent. Default is false. The exact semantics of inheritance are defined by the application. In general, when looking for JSON properties of a node and finding them undefined, an app should look for the same value in the parent node. This chain of parents should be followed until root is reached or a cycle is detected."
+    }
+  }
+}
