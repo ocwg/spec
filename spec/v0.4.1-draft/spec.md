@@ -322,20 +322,26 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 - **resource**: A reference to a resource, which can be an image, video, or audio file. See [resources](#resources).
 
   - Resource can be empty, in which case a node is acting as a transform for other nodes.
-  - z-ordering: The resource is to be rendered behind the node. For example, if the node has a rectangular border (or [oval](#oval)), that border would be rendered in front of the resource.
+  - Resource content is cropped/limited by the nodes boundaries. This is commonly called _clip children_. Only in this respect the resource content is a kind of child. In CSS, this is called `overflow: hidden`.
+
+  - Resources can define ornamental borders, e.g. a rectangle has a rectangular border, or an [oval](#oval) defines an oval border. The border itself is z-ordered in front of the resource content.
 
 - **resource-fit**: Given a node with dimensions 100 (height) x 200 (width) and a bitmap image (e.g., a .png) with a size of 1000 x 1000.
   How should this image be displayed? We re-use some options from CSS ([object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) property):
 
   - `none`: All pixels are displayed in the available space unscaled. The example would be cropped down to the 100 x 200 area top-left. No auto-centering.
-  - `keep-width`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.5`, so that it is 200 px wide and 200 px heigh. The top half of the image is visible.
-  - `keep-height`: Scaled by keeping the aspect ratio, so that the image height matches the item height. This results in the image being displayed at a scale of `0.1`, so that it is 100 px high and 100 px wide. The image is now fully visible, but there are boxes of empty space left and right of the image.
+  - `contain-x`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.5`, so that it is 200 px wide and 200 px heigh.
+   This is called `keep-width` in Godot.
+  - `contain-y`: Scaled by keeping the aspect ratio, so that the image height matches the item height. This results in the image being displayed at a scale of `0.1`, so that it is 100 px high and 100 px wide. The image is now fully visible, but there are boxes of empty space left and right of the image.
+   This is called `keep-height` in Godot.
   - `contain`: Scaled by keeping the aspect ratio of the image, so that the image fits into the item for both height and width.
     The image is auto-centered vertically and horizontally.
     Empty space left and right or top and bottom might appear.
     NOTE: This is identical to auto-selecting one of the two previous options.
+    This is called 'keep aspect centered' in Godot.
   - `cover`: Scaled by keeping the aspect ratio of the image, so that the image fits into the item for one of height and width while the other dimension overlaps. The overlap is cropped away and not visible. The entire view area is filled.
   - `fill`: Aspect ratio is ignored and the image is simply stretched to match the width and height of the view box.
+  - `tile`: If the image is larger than the viewport, it just gets cropped. If it is smaller, it gets repeated in both dimensions. CSS calls this `background-repeat: repeat`.
 
 - **rotation**: The absolute, global 2D rotation of the node in degrees. The rotation center is the positioned point, i.e., top-left. The z-axis is not modified.
 
