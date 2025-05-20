@@ -112,7 +112,7 @@ The default parent coordinate system is the global canvas-wide coordinate system
 
 The transformns affect the local coordinate systemt, which is used to display resources (see [spec](spec.md#size-and-resource)) and child nodes. The child nodes have global coordinates and the node transform extension can provide the "recipe" how to calculate the global positions of a node when, e.g., the parent has been moved, rotated, or scaled.
 
-Transforms are chainable. E.g. a node A may transform its coordinate systemt relatrive to the canvas. Node B may transform again the coordinate system of A. Then node C transforms again with a parent of B. The resulting scale, rotation and offest computation requires computing first A, then B, then C.
+Transforms are chainable. For example, a node A may transform its coordinate system relative to the canvas. Node B may transform relative to the coordinate system of its parent A. Then node C transforms again relative to its parent B. The resulting scale, rotation, and offset computation requires computing first A, then B, then C.
 
 | Property   | JSON Type                          | OCIF Type | Required     | Contents            | Default |
 |------------|------------------------------------|-----------|--------------|---------------------|---------|
