@@ -168,12 +168,12 @@ Now nodes can be positioned relative to the parent using relative positions.
 The coordinates in [0,1]x[0,1] (or [0,1]x[0,1]x[0,1] in 3D) cover any position within the parent item.
 These percentage-coordinates are now used to position the item.
 
-| Property                | JSON Type                  | OCIF Type             | Required     | Contents            | Default         |
-|-------------------------|----------------------------|-----------------------|--------------|---------------------|-----------------|
-| `top-left-position`     | `number[2]` or `number[3]` | Percentage Coordinate | **optional** | Top left anchor     | [0,0] / [0,0,0] |
-| `bottom-right-position` | `number[2]` or `number[3]` | Percentage Coordinate | **optional** | Bottom-right anchor | [1,1] / [1,1,1] |
-| `top-left-offset`       | `number[2]` or `number[3]` | Absolute offset       | **optional** | Top left offset     | [0,0] / [0,0,0] |
-| `bottom-right-offset`   | `number[2]` or `number[3]` | Absolute offset       | **optional** | Bottom-right offset | [0,0] / [0,0,0] |
+| Property              | JSON Type                  | OCIF Type             | Required     | Contents            | Default         |
+|-----------------------|----------------------------|-----------------------|--------------|---------------------|-----------------|
+| `topLeftPosition`     | `number[2]` or `number[3]` | Percentage Coordinate | **optional** | Top left anchor     | [0,0] / [0,0,0] |
+| `bottomRightPosition` | `number[2]` or `number[3]` | Percentage Coordinate | **optional** | Bottom-right anchor | [1,1] / [1,1,1] |
+| `topLeftOffset`       | `number[2]` or `number[3]` | Absolute offset       | **optional** | Top left offset     | [0,0] / [0,0,0] |
+| `bottomRightOffset`   | `number[2]` or `number[3]` | Absolute offset       | **optional** | Bottom-right offset | [0,0] / [0,0,0] |
 
 The offsets are interpreted in the global parents (#TODO or global?) coordinate system.
 
