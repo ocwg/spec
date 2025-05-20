@@ -26,6 +26,7 @@ Open Canvas Interchange Format (OCIF) v0.5 © 2025 by Open Canvas Working Group 
 * [Node Extensions](#node-extensions)
   * [Ports Node](#ports-node)
   * [Node Transforms](#node-transforms)
+  * [Anchored Node](#anchored-node)
 * [Relation Extensions](#relation-extensions)
   * [Hyperedge Relation](#hyperedge-relation)
   * [Parent-Child Relation](#parent-child-relation)
@@ -152,6 +153,39 @@ Furthermore, when zooming very large maps, position and size should be computed 
 ```
 JSON schema: [transform-node.json](ext/scale-node.json)
 
+
+
+## Anchored Node
+
+- Name: `@ocif/node/anchored`
+- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/anchored-node.json`
+
+Relative positioning requires anchoring to a parent item.
+The parent position is interpreted as the root of a local coordinate system.
+The parent size is added to the position and yields the coordindat of the _one_.
+This is (1,1) in 2D and (1,1,1) in 3D.
+Now nodes can be positioned relative to the parent using relative positions.
+The coordinates in [0,1]x[0,1] (or [0,1]x[0,1]x[0,1] in 3D) cover any position within the parent item.
+These percentage-coordinates are now used to position the item.
+
+| Property                | JSON Type                  | OCIF Type             | Required     | Contents            | Default         |
+|-------------------------|----------------------------|-----------------------|--------------|---------------------|-----------------|
+| `top-left-position`     | `number[2]` or `number[3]` | Percentage Coordinate | **optional** | Top left anchor     | [0,0] / [0,0,0] |
+| `bottom-right-position` | `number[2]` or `number[3]` | Percentage Coordinate | **optional** | Bottom-right anchor | [1,1] / [1,1,1] |
+| `top-left-offset`       | `number[2]` or `number[3]` | Absolute offset       | **optional** | Top left offset     | [0,0] / [0,0,0] |
+| `bottom-right-offset`   | `number[2]` or `number[3]` | Absolute offset       | **optional** | Bottom-right offset | [0,0] / [0,0,0] |
+
+The offsets are interpreted in the global parents (#TODO or global?) coordinate system.
+
+@@ What is the interpretation if top-left is given and bottom-right is not?
+
+JSON schema: [anchored-node.json](extensions/parent-child-rel.json)
+
+
+
+
+
+
 # Relation Extensions
 
 ## Hyperedge Relation
@@ -264,6 +298,7 @@ JSON schema: [parent-child-rel.json](extensions/parent-child-rel.json)
 # Changes
 
 - "Relative Node" has been replaced by "Node Transforms"
+- "Anchored Node" has been added
 - Simplified language from "Ports Extension" to "Ports Node", from "Relative Constraints Extension" to "Relative Node."
 - Moved "freehand-node" to issues https://github.com/ocwg/spec/issues/14
 - 2025-01-21: Initial version of the document.
