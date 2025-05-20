@@ -1045,6 +1045,16 @@ It can be _used_ as `type` of relation, `type` of relation extension, or `type` 
 
 A `string` that represents a Uniform Resource Identifier (URI) as defined in [RFC 3986](https://tools.ietf.org/html/rfc3986).
 
+## Vector
+The whole canvas is interpreted either as 2D or 3D.
+
+- A 3D vector is represented using an `array` with three `number` in them, with `v[0]` as _x_, `v[1]` as _y_, and `v[2]` as _z_.
+- A 2D vector is represented using an `array` with two `number` in them, with `v[0]` as _x_ and `v[1]` as _y_. In 2D, the z-axis coordinate SHOULD be used for relative z-index ordering of 2D shapes. An application MAY also ignore the z-axis. A 2D vector interpreted as 3D is auto-extend with z-axis set to `0`.
+
+- Syntax shortcut: A vector given as a single number, e.g. `3` is auto-extended to apply uniformly to all dimensions, e.g., `[3,3,3]`. This is most useful for a `scale` factor.
+
+
+
 # Practical Recommendations
 
 - The proposed MIME-type for OCIF files is `application/ocif+json`.
