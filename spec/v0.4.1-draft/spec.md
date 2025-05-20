@@ -289,17 +289,16 @@ Nodes represent visual items on the canvas.
 Conceptually, a node is a rectangle (bounding box) on the canvas, often displaying some content (resource).
 A _Node_ is an `object` with the following properties:
 
-| Property   | JSON Type | OCIF Type                         | Required     | Contents                            | Default     |
-|------------|-----------|-----------------------------------|--------------|-------------------------------------|-------------|
-| `id`       | `string`  | [ID](#id)                         | **required** | A unique identifier for the node.   | n/a         |
-| `position` | `array`   | number[]                          | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]       |
-| `size`     | `array`   | number[]                          | recommended  | The size of the node per dimension. | `[100,100]` |
-| `resource` | `string`  | [ID](#id)                         | optional     | The resource to display             |             |
-| `data`     | `array`   | array of [Extension](#extensions) | optional     | Extended node data                  |             |
-| `rotation` | `number`  | [Angle](#angle)                   | optional     | +/- 360 degrees                     | `0`         |
-| `scale`    | `array`   | number[]                          | optional     | Scale factors to resize nodes       | `[1,1,1]`   |
-| `relation` | `string`  | [ID](#id)                         | optional     | ID of a [relation](#relation)       | n/a         |
+| Property       | JSON Type | OCIF Type                         | Required     | Contents                            | Default     |
+|----------------|-----------|-----------------------------------|--------------|-------------------------------------|-------------|
+| `id`           | `string`  | [ID](#id)                         | **required** | A unique identifier for the node.   | n/a         |
+| `position`     | `array`   | number[]                          | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]       |
+| `size`         | `array`   | number[]                          | recommended  | The size of the node per dimension. | `[100,100]` |
+| `resource`     | `string`  | [ID](#id)                         | optional     | The resource to display             |             |
 | `resource-fit` | `string`  | enum, see below                   | optional     | Fitting resource in item            | `contain`   |
+| `data`         | `array`   | array of [Extension](#extensions) | optional     | Extended node data                  |             |
+| `rotation`     | `number`  | [Angle](#angle)                   | optional     | +/- 360 degrees                     | `0`         |
+| `relation`     | `string`  | [ID](#id)                         | optional     | ID of a [relation](#relation)       | n/a         |
 
 NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
@@ -1262,6 +1261,9 @@ A circle has a port at the geometric "top" position.
 
 ### From v0.3 to v0.4
 
+- Moved node `scale` property to [node transforms](extensions.md#node-transforms) extension.
+- Changed from @ocwg (Open Canvas Working Group) to @ocif (Open Canvas Interchange Format) in schema names.
+- Prefaced all version numbers with `v` as in `v0.4.1`
 - Changed @ocwg to @ocif
 - Prefaced all version numbers with `v` as in `v0.5`
 - Added release instructions

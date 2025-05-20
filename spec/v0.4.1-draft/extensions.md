@@ -25,7 +25,7 @@ Open Canvas Interchange Format (OCIF) v0.5 © 2025 by Open Canvas Working Group 
     * [Table of Contents](#table-of-contents)
 * [Node Extensions](#node-extensions)
   * [Ports Node](#ports-node)
-  * [Relative Node](#relative-node)
+  * [Node Transforms](#node-transforms)
 * [Relation Extensions](#relation-extensions)
   * [Hyperedge Relation](#hyperedge-relation)
   * [Parent-Child Relation](#parent-child-relation)
@@ -92,28 +92,65 @@ An arrow can now start at node p1 (which is a port of n1) and end at node n2 (wh
 
 JSON schema: [ports-node.json](extensions/ports-node.json)
 
-## Relative Node
 
-- Name: `@ocif/node/relative`
-- URI: `https://spec.canvasprotocol.org/v0.5/extensions/relative-node.json`
 
-Relative constraints are used to define, e.g., the relative positioning of nodes.
 
-The node on which this extension is placed is the _target node_.
-It defines a _source_ node, which is used as a reference for the relative positioning.
 
-| Property   | JSON Type | OCIF Type              | Required     | Contents                         | Default |
-|------------|-----------|------------------------|--------------|----------------------------------|---------|
-| `source`   | `string`  | [ID](spec.md#id)       | **required** | ID of the source node.           |         |
-| `position` | `array`   | number[]               | optional     | Relative position of the target. | `[0,0]` |
-| `rotation` | `number`  | [Angle](spec.md#angle) | optional     | Relative angle of the target.    | `0`     |
 
-- **source**: The ID of the source node, which is used as a reference for the relative positioning.
-- **position**: The relative position of the target node to the source node.
-  The numbers given in the array are vector-added to the position of the source node.
-- **rotation**: The relative rotation of the target node to the source node. The rotation is added to the rotation of the source node.
 
-JSON schema: [relative-node.json](extensions/relative-node.json)
+## Node Transforms
+
+- Name: `@ocif/node/transform
+- URI: `https://spec.canvasprotocol.org/v0.4.1/ext/transform-node.json`
+
+The node transform extension allows to customize the local coordinate system of a node relative to the parent coordinate system.
+This is a concept commonly found in game engines and infinitely zoomable canvases.
+
+**This extensions MUST be used together with the [parent-child-relation](#parent-child-relation)** to define the child node to which to apply the transforms.
+The default parent coordinate system is the global canvas-wide coordinate system.
+
+The transformns affect the local coordinate systemt, which is used to display resources (see [spec](spec.md#size-and-resource)) and child nodes. The child nodes have global coordinates and the node transform extension can provide the "recipe" how to calculate the global positions of a node when, e.g., the parent has been moved, rotated, or scaled.
+
+Transforms are chainable. E.g. a node A may transform its coordinate systemt relatrive to the canvas. Node B may transform again the coordinate system of A. Then node C transforms again with a parent of B. The resulting scale, rotation and offest computation requires computing first A, then B, then C.
+
+| Property   | JSON Type                          | OCIF Type | Required     | Contents            | Default |
+|------------|------------------------------------|-----------|--------------|---------------------|---------|
+| `scale`    | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Scale factor        | `1`     |
+| `rotation` | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Rotation in degrees | `0`     |
+| `offset`   | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Offset              | `0`     |
+
+- **scale**: A number-vector (floating-point) to override (set) the automatic scale factor of the node. This defines the scale of the local coordinate system. A larger scale SHOULD also affect font sizes. The scale factors are multiplied component-wise to the parent coordinate system.
+
+    - NOTE: The scale factors cannot be computed from global positions alone.
+      Scale factors provide additional state which influences interaction behaviour, e.g., an item drag-dropped into an item with a scale factor of less than 1 causes the item to shrink, when released.
+
+- **rotation**: A number-vector (floating-point) to override (set) the rotation of the node.
+- This (relative, locasl) rotation is added to the rotation of the parent.
+
+- **offset**: A number-vector (floating-point) to override (set) the offset of the node, relative to its parent position.
+
+**Practical Advice**\
+On import, the global positions can be used as-is.
+For text rendering, the scale factors SHOULD be taken into account.
+For interactive apps, the transforms allow to adapt on parent changes.
+Furthermore, when zooming very large maps, position and size should be computed on the fly using node transforms, as global positions would become unstable due to numeric precision.
+
+
+**Example:** A node with a scale factor:
+
+```json
+{
+  "id": "node-with-image",
+  "position": [100, 100],
+  "size": [100, 200],
+  "resource": "frog",
+  "data": [
+    { "type": "@ocif/node/transform",
+      "scale": 0.5 }
+  ]
+}
+```
+JSON schema: [transform-node.json](ext/scale-node.json)
 
 # Relation Extensions
 
@@ -195,17 +232,18 @@ JSON schema: [hyperedge-rel.json](extensions/hyperedge-rel.json)
 - Name: `@ocif/rel/parent-child`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/parent-child-rel.json`
 
-A parent-child relation models a hierarchical relationship between nodes or relations.
+A parent-child relation models a strict hierarchical relationship between nodes or relations.
 It can be used to model inheritance, containment, or other hierarchical relationships.
 
 | Property        | JSON Type | OCIF Type        | Required     | Contents                                | Default |
 |-----------------|-----------|------------------|--------------|-----------------------------------------|:--------|
-| `parent`        | `string`  | [ID](spec.md#id) | **required** | ID of the parent.                       |         |
+| `parent`        | `string`  | [ID](spec.md#id) | optional     | ID of the parent.                       | empty   |
 | `child`         | `string`  | [ID](spec.md#id) | **required** | ID of the child.                        |         |
 | `inherit`       | `boolean` |                  | optional     | Inherit properties.                     | `false` |
 | `cascadeDelete` | `boolean` |                  | optional     | Delete children when parent is deleted. | `true`  |
 
 - **parent**: The ID of the parent node or relation. There MUST be only one parent per child.
+  - If empty, the canvas itself acts as the parent node. This is relevant for [node transforms](#node-transforms).
 
 - **child**: The ID of the child node or relation. A parent can have multiple children (expressed my multiple parent-child relations).
 
@@ -225,6 +263,7 @@ JSON schema: [parent-child-rel.json](extensions/parent-child-rel.json)
 
 # Changes
 
+- "Relative Node" has been replaced by "Node Transforms"
 - Simplified language from "Ports Extension" to "Ports Node", from "Relative Constraints Extension" to "Relative Node."
 - Moved "freehand-node" to issues https://github.com/ocwg/spec/issues/14
 - 2025-01-21: Initial version of the document.
