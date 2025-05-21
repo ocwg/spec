@@ -14,7 +14,7 @@ See the [OCIF Core Specification](./spec) for the core features of OCIF.
 This document is an editor's draft and has no official standing. It is a work in progress and may be updated, replaced, or obsoleted by other documents at any time.
 
 **Legal**:
-Open Canvas Interchange Format (OCIF) v0.4.1 © 2025 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
+Open Canvas Interchange Format (OCIF) v0.5 © 2025 by Open Canvas Working Group is licensed under CC BY-SA 4.0. To view a copy of this licence, visit https://creativecommons.org/licenses/by-sa/4.0/
 
 ### Table of Contents
 
@@ -41,7 +41,7 @@ To be placed inside the `data` `array`.
 ## Ports Node
 
 - Name: `@ocif/node/ports`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/ports-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/ports-node.json`
 
 It provides the familiar concept of _ports_ to a node. A port is a point, which allows geometrically controlling where, e.g., arrows are attached to a shape.
 
@@ -96,7 +96,7 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 ## Relative Node
 
 - Name: `@ocif/node/relative`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/relative-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/relative-node.json`
 
 Relative constraints are used to define, e.g., the relative positioning of nodes.
 
@@ -121,7 +121,7 @@ JSON schema: [relative-node.json](extensions/relative-node.json)
 ## Hyperedge Relation
 
 - Name: `@ocif/rel/hyperedge`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/hyperedge-rel.json`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/hyperedge-rel.json`
 
 A hyperedge is a relation, which connects any number of nodes.
 Hyperedges can also be used to model simple bi-edges.
@@ -194,7 +194,7 @@ JSON schema: [hyperedge-rel.json](extensions/hyperedge-rel.json)
 ## Parent-Child Relation
 
 - Name: `@ocif/rel/parent-child`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/parent-child-rel.json`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/parent-child-rel.json`
 
 A parent-child relation models a hierarchical relationship between nodes.
 It can be used to model inheritance, containment, or other hierarchical relationships.
