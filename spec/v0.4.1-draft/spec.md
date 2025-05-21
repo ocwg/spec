@@ -1250,6 +1250,8 @@ A circle has a port at the geometric "top" position.
 
 ### From v0.3 to v0.4
 
+- Changed @ocwg to @ocif
+- Prefaced all version numbers with `v` as in `v0.5`
 - Moved node `scale` property to [node transforms](extensions.md#node-transforms) extension.
 - Changed from @ocwg (Open Canvas Working Group) to @ocif (Open Canvas Interchange Format) in schema names.
 - Prefaced all version numbers with `v` as in `v0.4.1`
