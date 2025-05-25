@@ -141,7 +141,7 @@ In OCIF, it looks like this:
 
 ```json5
 {
-  ocif: "https://canvasprotocol.org/ocif/v0.4.1",
+  ocif: "https://canvasprotocol.org/ocif/v0.5",
   nodes: [
     {
       id: "berlin-node",
@@ -252,7 +252,7 @@ A minimal OCIF file, no visible items
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/v0.4.1"
+  "ocif": "https://canvasprotocol.org/ocif/v0.5"
 }
 ```
 
@@ -261,7 +261,7 @@ A small OCIF file, with one node and one resource
 
 ```json
 {
-  "ocif": "https://canvasprotocol.org/ocif/v0.4.1",
+  "ocif": "https://canvasprotocol.org/ocif/v0.5",
   "nodes": [
     {
       "id": "n1",
@@ -859,11 +859,11 @@ A schema array with two schemas:
 The syntax `{var}` denotes placeholders.
 To simplify the use of OCIF, a set of built-in schema mappings is defined:
 
-1. Any [Schema Name](#schema-name) of the form `@ocif/rel/{suffix}` maps to a schema [URI](#uri) `https://spec.canvasprotocol.org/v0.4.1/core/{suffix}-rel.json`.
+1. Any [Schema Name](#schema-name) of the form `@ocif/rel/{suffix}` maps to a schema [URI](#uri) `https://spec.canvasprotocol.org/v0.5/core/{suffix}-rel.json`.
 
-2. A schema name of the form `@ocif/node/{suffix}` maps to a schema URI `https://spec.canvasprotocol.org/v0.4.1/core/{suffix}-node.json`.
+2. A schema name of the form `@ocif/node/{suffix}` maps to a schema URI `https://spec.canvasprotocol.org/v0.5/core/{suffix}-node.json`.
 
-Here `v0.4.1` is the current version identifier of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
+Here `v0.5` is the current version identifier of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
 
 Built-in Entries:
 
@@ -926,7 +926,7 @@ Within the repo, there SHOULD be two files:
 - schema.json, which contains the JSON schema for the extension.
   - This schema MUST use the same URI as the extension.
   - It SHOULD have a `description` property, describing briefly the purpose of the extension.
-  - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/v0.4.1`.
+  - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/v0.5`.
 
 As an example, look at the fictive [Circle Extension](#node-extension-circle) in the appendix.
 
@@ -1099,27 +1099,27 @@ It is also valid to additionally copy these schema entries in.
   "schemas": [
     {
       "name": "@ocif/node/arrow",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/arrow-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/core/arrow-node.json"
     },
     {
       "name": "@ocif/node/oval",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/oval-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/core/oval-node.json"
     },
     {
       "name": "@ocif/node/path",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/path-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/core/path-node.json"
     },
     {
       "name": "@ocif/node/rect",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/rect-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/core/rect-node.json"
     },
     {
       "name": "@ocif/rel/edge",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/edge-rel.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/core/edge-rel.json"
     },
     {
       "name": "@ocif/rel/group",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/core/group-rel.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/core/group-rel.json"
     }
   ]
 }
@@ -1137,19 +1137,19 @@ For an updated list of known extensions, see the [catalog.md](../../catalog.md).
   "schemas": [
     {
       "name": "@ocif/rel/hyperedge/0.4.1",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/hyperedge-rel.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/extensions/hyperedge-rel.json"
     },
     {
       "name": "@ocif/rel/parent-child/0.4.1",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/parent-child-rel.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/extensions/parent-child-rel.json"
     },
     {
       "name": "@ocif/node/ports/0.4.1",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/ports-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/extensions/ports-node.json"
     },
     {
       "name": "@ocif/node/relative/0.4.1",
-      "uri": "https://spec.canvasprotocol.org/v0.4.1/extensions/relative-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5/extensions/relative-node.json"
     }
   ]
 }
@@ -1254,8 +1254,6 @@ A circle has a port at the geometric "top" position.
 - Prefaced all version numbers with `v` as in `v0.5`
 - Moved node `scale` property to [node transforms](extensions.md#node-transforms) extension.
 - Changed from @ocwg (Open Canvas Working Group) to @ocif (Open Canvas Interchange Format) in schema names.
-- Prefaced all version numbers with `v` as in `v0.4.1`
-- Changed @ocwg to @ocif
 - Prefaced all version numbers with `v` as in `v0.5`
 - Added release instructions
 

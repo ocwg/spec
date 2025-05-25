@@ -102,7 +102,7 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 ## Node Transforms
 
 - Name: `@ocif/node/transform`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/ext/transform-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.5/ext/transform-node.json`
 
 The node transform extension allows customizing the local coordinate system of a node relative to the parent coordinate system.
 This is a concept commonly found in game engines and infinitely zoomable canvases.
@@ -162,7 +162,7 @@ JSON schema: [transform-node.json](extensions/transforms-node.json)
 ## Anchored Node
 
 - Name: `@ocif/node/anchored`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/anchored-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/anchored-node.json`
 
 Relative positioning requires anchoring to a parent item.
 The parent position is interpreted as the root of a local coordinate system.
@@ -189,7 +189,7 @@ JSON schema: [anchored-node.json](extensions/parent-child-rel.json)
 ## Text Style Node
 
 - Name: `@ocif/node/textstyle`
-- URI: `https://spec.canvasprotocol.org/v0.4.1/extensions/textstyle-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/textstyle-node.json`
 
 The text style extension allows setting common properties for rendering plain text and structured text (such as Markdown or AsciiDoc).
 
