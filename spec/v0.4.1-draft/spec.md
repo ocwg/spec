@@ -290,7 +290,7 @@ A _Node_ is an `object` with the following properties:
 | `position`     | `array`   | number[]                          | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]       |
 | `size`         | `array`   | number[]                          | recommended  | The size of the node per dimension. | `[100,100]` |
 | `resource`     | `string`  | [ID](#id)                         | optional     | The resource to display             |             |
-| `resource-fit` | `string`  | enum, see below                   | optional     | Fitting resource in item            | `contain`   |
+| `resourceFit` | `string`  | enum, see below                   | optional     | Fitting resource in item            | `contain`   |
 | `data`         | `array`   | array of [Extension](#extensions) | optional     | Extended node data                  |             |
 | `rotation`     | `number`  | [Angle](#angle)                   | optional     | +/- 360 degrees                     | `0`         |
 | `relation`     | `string`  | [ID](#id)                         | optional     | ID of a [relation](#relation)       | n/a         |
