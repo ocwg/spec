@@ -2,7 +2,7 @@
 
 Copyright © 2025 the Contributors to the Open Canvas Working Group (OCWG).
 
-Versioning Policy: Currently, all extensions in this document are at version **0.4**.
+Versioning Policy: Currently, all extensions in this document are at version **0.5**.
 
 ## Abstract
 
