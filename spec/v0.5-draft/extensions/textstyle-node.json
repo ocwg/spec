@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.canvasprotocol.org/v0.5/extensions/textstyle-node.json",
+  "title": "@ocif/node/textstyle",
+  "description": "Text style extension for rendering plain text and structured text",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/textstyle"
+    },
+    "fontSizePx": {
+      "description": "Font size in px, as used in CSS",
+      "type": "number",
+      "default": 12
+    },
+    "fontFamily": {
+      "description": "Font family, as used in CSS",
+      "type": "string",
+      "default": "sans-serif"
+    },
+    "color": {
+      "description": "Text color",
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$",
+      "default": "#000000"
+    },
+    "align": {
+      "description": "Text alignment",
+      "type": "string",
+      "enum": ["left", "right", "center", "justify"],
+      "default": "left"
+    },
+    "bold": {
+      "description": "Bold text",
+      "type": "boolean",
+      "default": false
+    },
+    "italic": {
+      "description": "Italic text",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["type"]
+}
