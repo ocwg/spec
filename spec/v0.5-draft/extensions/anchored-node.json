@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://spec.canvasprotocol.org/v0.5/extensions/anchored-node.json",
   "title": "@ocif/node/anchored",
   "description": "Anchored node extension for relative positioning anchored to a parent item",
