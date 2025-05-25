@@ -4,6 +4,10 @@
   "description": "Hyperedge relation extension",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/rel/hyperedge"
+    },
     "endpoints": {
       "type": "array",
       "items": {
@@ -35,5 +39,5 @@
       "description": "Represented relation type"
     }
   },
-  "required": ["members"]
+  "required": ["type", "endpoints"]
 }
