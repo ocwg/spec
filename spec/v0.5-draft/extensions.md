@@ -185,9 +185,9 @@ These percentage-coordinates are now used to position the item.
 | `topLeftOffset`       | `number[2]` or `number[3]` | Absolute offset       | **optional** | Top left offset     | [0,0] / [0,0,0] |
 | `bottomRightOffset`   | `number[2]` or `number[3]` | Absolute offset       | **optional** | Bottom-right offset | [0,0] / [0,0,0] |
 
-The offsets are interpreted in the global parents (#TODO or global?) coordinate system.
+The offsets are interpreted in the parent's coordinate system.
 
-@@ What is the interpretation if the top-left is given and bottom-right is not?
+If only the top-left position is given, the bottom-right position defaults to [1,1] (or [1,1,1] in 3D) as specified in the default values. This means the node would be anchored at the specified top-left position, and would extend to the bottom-right of the parent.
 
 JSON schema: [anchored-node.json](extensions/anchored-node.json)
 
