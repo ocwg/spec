@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "OCIF core 0.4",
+  "title": "OCIF core 0.5",
   "description": "The schema for the Open Canvas Interchange Format (OCIF) Core document structure.",
   "type": "object",
   "properties": {
@@ -64,6 +64,11 @@
           "type": "string",
           "description": "The resource to display"
         },
+        "resourceFit": {
+          "type": "string",
+          "description": "Fitting resource in item",
+          "enum": ["none", "containX", "containY", "contain", "cover", "fill", "tile"]
+        },
         "data": {
           "type": "array",
           "description": "Extended node data"
@@ -72,12 +77,9 @@
           "type": "number",
           "description": "+/- 360 degrees"
         },
-        "scale": {
-          "type": "array",
-          "description": "Scale factors to resize nodes",
-          "items": {
-            "type": "number"
-          }
+        "relation": {
+          "type": "string",
+          "description": "ID of a relation"
         }
       },
       "required": ["id"]
@@ -93,6 +95,10 @@
         "data": {
           "type": "array",
           "description": "Additional data for the relation."
+        },
+        "node": {
+          "type": "string",
+          "description": "ID of a visual node, which represents this relation."
         }
       },
       "required": ["id"]
