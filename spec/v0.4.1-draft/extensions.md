@@ -186,7 +186,7 @@ The offsets are interpreted in the global parents (#TODO or global?) coordinate 
 
 @@ What is the interpretation if the top-left is given and bottom-right is not?
 
-JSON schema: [anchored-node.json](extensions/parent-child-rel.json)
+JSON schema: [anchored-node.json](extensions/anchored-node.json)
 
 
 ## Text Style Node
@@ -213,7 +213,7 @@ The text style extension allows setting common properties for rendering plain te
 * **bold**: A boolean flag indicating if the text should be bold.
 * **italic**: A boolean flag indicating if the text should be italic.
 
-JSON schema: [textstyle-node.json](extensions/parent-child-rel.json)
+JSON schema: [textstyle-node.json](extensions/textstyle-node.json)
 
 
 # Relation Extensions
