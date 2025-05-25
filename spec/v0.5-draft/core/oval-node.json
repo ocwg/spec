@@ -4,6 +4,10 @@
   "description": "Oval node extension",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/oval"
+    },
     "strokeWidth": {
       "type": "number",
       "description": "The line width."
@@ -16,5 +20,6 @@
       "type": "string",
       "description": "The color of the fill."
     }
-  }
+  },
+  "required": ["type"]
 }
