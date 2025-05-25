@@ -107,19 +107,20 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 The node transform extension allows customizing the local coordinate system of a node relative to the parent coordinate system.
 This is a concept commonly found in game engines and infinitely zoomable canvases.
 
-This extension is usually used together with the [parent-child-relation](#parent-child-relation) to define the parent node, from which the reference coordinate system is used.
 The default parent coordinate system is the global, canvas-wide coordinate system.
+If the [parent-child-relation](#parent-child-relation) is used, the defined parent node MUST be used as the one,
+from which the reference coordinate system is used.
 
 The transforms affect the local coordinate system, which is used to display resources (see [spec](spec.md#size-and-resource)) and child nodes. The child nodes have global coordinates, and the node transform extension can provide the "recipe" how to calculate the global positions of a node when, e.g., the parent has been moved, rotated, or scaled.
 
 Transforms are chainable. For example, a node A may transform its coordinate system relative to the canvas. Node B may transform relative to the coordinate system of its parent A. Then node C transforms again relative to its parent B. The resulting scale, rotation, and offset computation requires computing first A, then B, then C.
 
-| Property        | JSON Type                          | OCIF Type | Required     | Contents            | Default   |
-|-----------------|------------------------------------|-----------|--------------|---------------------|-----------|
-| `scale`         | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Scale factor        | `1`       |
-| `rotation`      | `number`                           | Angle     | **optional** | Rotation in degrees | `0`       |
-| `rotation-axis` | `number[3]`                        |           | **optional** | Rotation axis       | `[0,0,1]` |
-| `offset`        | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Offset              | `0`       |
+| Property       | JSON Type                          | OCIF Type | Required     | Contents            | Default   |
+|----------------|------------------------------------|-----------|--------------|---------------------|-----------|
+| `scale`        | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Scale factor        | `1`       |
+| `rotation`     | `number`                           | Angle     | **optional** | Rotation in degrees | `0`       |
+| `rotationAxis` | `number[3]`                        |           | **optional** | Rotation axis       | `[0,0,1]` |
+| `offset`       | `number`, `number[2]`, `number[3]` | Vector    | **optional** | Offset              | `0`       |
 
 - **scale**: A number-vector (floating-point) to override (set) the automatic scale factor of the node. This defines the scale of the local coordinate system. A larger scale SHOULD also affect font sizes. The scale factors are multiplied component-wise to the parent coordinate system.
 
@@ -128,11 +129,13 @@ Transforms are chainable. For example, a node A may transform its coordinate sys
 
 - **rotation**: A number-vector (floating-point) to override (set) the rotation of the node.
   - This (relative, local) rotation is added to the rotation of the parent.
-  - It a single number around the axis defined in `rotation-axis`, in degrees in counter-clockwise direction.
+  - A single number around the axis defined in `rotationAxis`, in degrees in counter-clockwise direction.
 
-- **rotation-axis**: The default is `(0,0,1)`. This is the axis-angle notation.
+- **rotationAxis**: The default is `(0,0,1)`. This is the [axis-angle notation](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation). The default is to use the z-axis, which results in 'normal' 2D rotation in the x-y-plane.
 
-- **offset**: A number-vector (floating-point) to override (set) the offset of the node, relative to its parent position.
+- **offset**: A number-vector (floating-point). This vector is added to the parent position to result in the childs position. This is the 'recipe' how the global child positions have been computed.
+
+  - Semantics: When the parent is moved in an app, the app SHOULD update the children's position accordingly. The offset remains unchanged, unless the child itself is moved. In that case, the offset and the position of the child should be adapted.
 
 **Practical Advice**\
 On import, the global positions can be used as-is.
@@ -322,10 +325,14 @@ Semantics:
 
 JSON schema: [parent-child-rel.json](extensions/parent-child-rel.json)
 
-# Changes
 
+## Changes
+
+### From v0.4 to v0.5
 - "Relative Node" has been replaced by "Node Transforms"
 - "Anchored Node" has been added
+
+### Up to v0.4
 - Simplified language from "Ports Extension" to "Ports Node", from "Relative Constraints Extension" to "Relative Node."
 - Moved "freehand-node" to issues https://github.com/ocwg/spec/issues/14
 - 2025-01-21: Initial version of the document.

@@ -121,9 +121,9 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The storage location for the resource. This can be a relative URI for an external resource or an absolute URI for a remote resource. If a data: URI is used, the content and mime-type properties are implicitly defined already. Values in content and mime-type are ignored."
+          "description": "The storage location for the resource. This can be a relative URI for an external resource or an absolute URI for a remote resource. If a data: URI is used, the content and MIME-type properties are implicitly defined already. Values in content and mime-type are ignored."
         },
-        "mime-type": {
+        "mimeType": {
           "type": "string",
           "description": "The IANA MIME Type of the resource."
         },

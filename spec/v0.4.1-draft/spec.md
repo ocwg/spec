@@ -212,11 +212,11 @@ In OCIF, it looks like this:
   resources: [
     {
       id: "berlin-res",
-      representations: [{ "mime-type": "text/plain", content: "Berlin" }],
+      representations: [{ "mimeType": "text/plain", content: "Berlin" }],
     },
     {
       id: "germany-res",
-      representations: [{ "mime-type": "text/plain", content: "Germany 🇩🇪" }],
+      representations: [{ "mimeType": "text/plain", content: "Germany 🇩🇪" }],
     },
   ],
 }
@@ -272,7 +272,7 @@ A small OCIF file, with one node and one resource
   "resources": [
     {
       "id": "r1",
-      "representations": [{ "mime-type": "text/plain", "content": "Hello, World!" }]
+      "representations": [{ "mimeType": "text/plain", "content": "Hello, World!" }]
     }
   ]
 }
@@ -330,9 +330,9 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
   How should this image be displayed? We re-use some options from CSS ([object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) property):
 
   - `none`: All pixels are displayed in the available space unscaled. The example would be cropped down to the 100 x 200 area top-left. No auto-centering.
-  - `contain-x`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.5`, so that it is 200 px wide and 200 px heigh.
+  - `containX`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.5`, so that it is 200 px wide and 200 px heigh.
    This is called `keep-width` in Godot.
-  - `contain-y`: Scaled by keeping the aspect ratio, so that the image height matches the item height. This results in the image being displayed at a scale of `0.1`, so that it is 100 px high and 100 px wide. The image is now fully visible, but there are boxes of empty space left and right of the image.
+  - `containY`: Scaled by keeping the aspect ratio, so that the image height matches the item height. This results in the image being displayed at a scale of `0.1`, so that it is 100 px high and 100 px wide. The image is now fully visible, but there are boxes of empty space left and right of the image.
    This is called `keep-height` in Godot.
   - `contain`: Scaled by keeping the aspect ratio of the image, so that the image fits into the item for both height and width.
     The image is auto-centered vertically and horizontally.
@@ -385,7 +385,7 @@ See [Resources](#resources) for details on text resources.
       "id": "r1",
       "representations": [
         {
-          "mime-type": "text/plain",
+          "mimeType": "text/plain",
           "content": "Hello, World!"
         }
       ]
@@ -416,7 +416,7 @@ There is no special image node in OCIF. An image is just a resource, which can b
       "id": "r1",
       "representations": [
         {
-          "mime-type": "image/png",
+          "mimeType": "image/png",
           "location": "https://example.com/image.png"
         }
       ]
@@ -717,18 +717,18 @@ A resource is an `object` with the following properties:
 
 Each _Representation_ object has the following properties:
 
-| Property    | JSON Type | OCIF Type               | Required  | Contents                               |
-|-------------|-----------|-------------------------|-----------|----------------------------------------|
-| `location`  | `string`  | [URI](#uri)             | see below | The storage location for the resource. |
-| `mime-type` | `string`  | [MIME Type](#mime-type) | see below | The IANA MIME Type of the resource.    |
-| `content`   | `string`  |                         | see below | The content of the resource.           |
+| Property   | JSON Type | OCIF Type               | Required  | Contents                               |
+|------------|-----------|-------------------------|-----------|----------------------------------------|
+| `location` | `string`  | [URI](#uri)             | see below | The storage location for the resource. |
+| `mimeType` | `string`  | [MIME Type](#mime-type) | see below | The IANA MIME Type of the resource.    |
+| `content`  | `string`  |                         | see below | The content of the resource.           |
 
 Either `content` or `location` MUST be present. If `content` is used, `location` must be left out and vice versa.
 
 - **location**: The storage location for the resource.
   This can be a relative URI for an external resource or an absolute URI for a remote resource.
-  - If a `data:` URI is used, the `content` and `mime-type` properties are implicitly defined already. Values in `content` and `mime-type` are ignored.
-- **mime-type**: The IANA MIME Type of the resource. See [MIME Type](#mime-type) for details.
+  - If a `data:` URI is used, the `content` and `mimeType` properties are implicitly defined already. Values in `content` and `mimeType` are ignored.
+- **mimeType**: The IANA MIME Type of the resource. See [MIME Type](#mime-type) for details.
 - **content**: The content of the resource.
   This is the actual data of the resource as a string.
   It can be base64-encoded.
@@ -736,7 +736,7 @@ Either `content` or `location` MUST be present. If `content` is used, `location`
 **Summary** \
 Valid resource representations are
 
-|                 | `location`                      | `mime-type`                                                | `content`          |
+|                 | `location`                      | `mimeType`                                                 | `content`          |
 |:----------------|---------------------------------|------------------------------------------------------------|--------------------|
 | Inline text     | Ignored, `content` is set       | E..g. `text/plain` or `image/svg+xml`                      | Text/SVG as string |
 | Inline binary   | Ignored, `content` is set       | E.g. `image/png`                                           | Base64             |
@@ -751,7 +751,7 @@ Valid resource representations are
   "resources": [
     {
       "id": "r1",
-      "representations": [{ "mime-type": "image/svg+xml", "content": "<svg>...</svg>" }]
+      "representations": [{ "mimeType": "image/svg+xml", "content": "<svg>...</svg>" }]
     }
   ]
 }
@@ -771,12 +771,12 @@ Valid resource representations are
     {
       "id": "r1",
       "representations": [
-        { "mime-type": "image/svg+xml", "content": "<svg>...</svg>" },
+        { "mimeType": "image/svg+xml", "content": "<svg>...</svg>" },
         {
-          "mime-type": "image/png",
+          "mimeType": "image/png",
           "location": "https://example.com/image.png"
         },
-        { "mime-type": "text/plain", "content": "Plan of the maze" }
+        { "mimeType": "text/plain", "content": "Plan of the maze" }
       ]
     }
   ]
@@ -1245,6 +1245,9 @@ A circle has a port at the geometric "top" position.
   - `https://spec.canvasprotocol.org/v0.5/core/rect-node.json` - URI for the rectangle node extension
   - `https://spec.canvasprotocol.org/v0.5/core/edge-rel.json` - URI for the rectangle relation extension (core)
   - `https://spec.canvasprotocol.org/v0.5/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.4; this is also its [URI](#uri)
+
+## Syntax Conventions
+- All JSON property names are camelCased. This makes it the easiest to name variables in a programming language.
 
 ## Changes
 
