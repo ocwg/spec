@@ -326,7 +326,7 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
   - Resources can define ornamental borders, e.g. a rectangle has a rectangular border, or an [oval](#oval) defines an oval border. The border itself is z-ordered in front of the resource content.
 
-- **resource-fit**: Given a node with dimensions 100 (height) x 200 (width) and a bitmap image (e.g., a .png) with a size of 1000 x 1000.
+- **resourceFit**: Given a node with dimensions 100 (height) x 200 (width) and a bitmap image (e.g., a .png) with a size of 1000 x 1000.
   How should this image be displayed? We re-use some options from CSS ([object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) property):
 
   - `none`: All pixels are displayed in the available space unscaled. The example would be cropped down to the 100 x 200 area top-left. No auto-centering.
