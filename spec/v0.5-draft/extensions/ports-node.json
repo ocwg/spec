@@ -4,6 +4,10 @@
   "description": "Node ports extension",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/ports"
+    },
     "ports": {
       "type": "array",
       "items": {
@@ -11,5 +15,6 @@
         "type": "string"
       }
     }
-  }
+  },
+  "required": ["type", "ports"]
 }
