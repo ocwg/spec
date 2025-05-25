@@ -27,10 +27,13 @@ Open Canvas Interchange Format (OCIF) v0.5 © 2025 by Open Canvas Working Group 
   * [Ports Node](#ports-node)
   * [Node Transforms](#node-transforms)
   * [Anchored Node](#anchored-node)
+  * [Text Style Node](#text-style-node)
 * [Relation Extensions](#relation-extensions)
   * [Hyperedge Relation](#hyperedge-relation)
   * [Parent-Child Relation](#parent-child-relation)
-* [Changes](#changes)
+  * [Changes](#changes)
+    * [From v0.4 to v0.5](#from-v04-to-v05)
+    * [Up to v0.4](#up-to-v04)
 <!-- TOC -->
 
 # Node Extensions
