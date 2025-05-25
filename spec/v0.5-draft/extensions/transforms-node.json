@@ -4,6 +4,10 @@
   "description": "Geometric transforms for nodes",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/transforms"
+    },
     "scale": {
       "type": "array",
       "items": {
@@ -19,12 +23,19 @@
       "description": "Relative position of the child node relative to the parent node. The numbers given in the array are vector-added to the position of the source node."
     },
     "rotation": {
+      "type": "number",
+      "description": "Relative angle in degrees. The rotation is added to the rotation of parent coordinate system."
+    },
+    "rotationAxis": {
       "type": "array",
       "items": {
         "type": "number"
       },
-      "description": "Relative angle per dimension. The rotation is added to the rotation of parent coordinate system."
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Rotation axis for 3D rotation. Default is [0,0,1] (z-axis).",
+      "default": [0, 0, 1]
     }
   },
-  "required": ["source"]
+  "required": ["type"]
 }
