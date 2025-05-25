@@ -4,6 +4,10 @@
   "description": "Parent-child relationship extension. A parent-child relation models a hierarchical relationship between nodes. It can be used to model inheritance, containment, or other hierarchical relationships.",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/rel/parent-child"
+    },
     "parent": {
       "type": "string",
       "description": "ID of the parent node. There SHOULD be only one parent per child."
@@ -14,7 +18,14 @@
     },
     "inherit": {
       "type": "boolean",
-      "description": "Inherit properties. A boolean flag indicating if the child should inherit properties from the parent. Default is false. The exact semantics of inheritance are defined by the application. In general, when looking for JSON properties of a node and finding them undefined, an app should look for the same value in the parent node. This chain of parents should be followed until root is reached or a cycle is detected."
+      "description": "Inherit properties. A boolean flag indicating if the child should inherit properties from the parent. Default is false. The exact semantics of inheritance are defined by the application. In general, when looking for JSON properties of a node and finding them undefined, an app should look for the same value in the parent node. This chain of parents should be followed until root is reached or a cycle is detected.",
+      "default": false
+    },
+    "cascadeDelete": {
+      "type": "boolean",
+      "description": "A boolean flag indicating if the children should be deleted when the parent is deleted.",
+      "default": true
     }
-  }
+  },
+  "required": ["type", "child"]
 }
