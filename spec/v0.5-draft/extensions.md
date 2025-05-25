@@ -104,8 +104,8 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 
 ## Node Transforms
 
-- Name: `@ocif/node/transform`
-- URI: `https://spec.canvasprotocol.org/v0.5/ext/transform-node.json`
+- Name: `@ocif/node/transforms`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/transforms-node.json`
 
 The node transform extension allows customizing the local coordinate system of a node relative to the parent coordinate system.
 This is a concept commonly found in game engines and infinitely zoomable canvases.
