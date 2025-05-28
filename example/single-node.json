@@ -1,5 +1,5 @@
 {
-  "ocif": "https://canvasprotocol.org/ocif/v0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.5",
   "nodes": [
     {
       "id": "shape:054132af-4d2f-48ed-b239-f5129dd35288",
@@ -7,5 +7,5 @@
     }
   ],
   "relations": [],
-  "schemas": {}
+  "schemas": []
 }

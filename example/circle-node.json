@@ -1,5 +1,5 @@
 {
-  "ocif": "https://canvasprotocol.org/ocif/v0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.5",
   "nodes": [
     {
       "id": "n1",
@@ -8,8 +8,7 @@
       "resource": "r1",
       "data": [
         {
-          "type": "@ocif/circle",
-          "radius": 50
+          "type": "@ocif/node/oval"
         }
       ]
     }
@@ -26,16 +25,5 @@
     }
   ],
   "relations": [],
-  "schemas": [
-    {
-      "uri": "https://spec.canvasprotocol.org/node/circle/0.2",
-      "name": "@ocif/circle",
-      "schema": {
-        "properties": {
-          "radius": { "type": "integer" }
-        },
-        "required": ["radius"]
-      }
-    }
-  ]
+  "schemas": []
 }
