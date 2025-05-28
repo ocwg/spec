@@ -1251,6 +1251,24 @@ A circle has a port at the geometric "top" position.
 
 ## Changes
 
+### From v0.4 to v0.5
+
+**Core Specification Changes:**
+- Removed `node.scale` property - moved to `@ocif/node/transforms` extension
+- Added `node.resource-fit` property for controlling resource display within nodes
+- Added OCIF type `Vector` with support for 2D/3D vectors and scalar shortcuts
+- Made `type` property required for all core node and relation extensions
+- Made specific properties required in core extensions (e.g., `start`/`end` for arrows, `ports` for ports extension)
+
+**Extension Changes:**
+- Removed `@ocif/rel/set` relation - merged functionality into `@ocif/rel/group`
+- Added `cascadeDelete` property to group relations
+- Removed deprecated `@ocif/node/relative` extension - functionality moved to `@ocif/node/transforms`
+- Added `@ocif/node/anchored` - percentage-based positioning relative to parent bounds
+- Added `@ocif/node/textstyle` - font styling properties for text rendering
+- Added `@ocif/node/transforms` - geometric transforms including scale, offset, and rotation
+- Updated extension versioning to use explicit version numbers (e.g., `@ocif/node/ports/0.4.1`)
+
 ### From v0.3 to v0.4
 
 - Changed @ocwg to @ocif
