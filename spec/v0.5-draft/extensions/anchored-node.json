@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.canvasprotocol.org/v0.5/extensions/anchored-node.json",
+  "title": "@ocif/node/anchored",
+  "description": "Anchored node extension for relative positioning anchored to a parent item",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/anchored"
+    },
+    "topLeftPosition": {
+      "description": "Top left anchor as percentage coordinates",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ],
+      "default": [0, 0]
+    },
+    "bottomRightPosition": {
+      "description": "Bottom-right anchor as percentage coordinates",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ],
+      "default": [1, 1]
+    },
+    "topLeftOffset": {
+      "description": "Top left offset as absolute coordinates",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ],
+      "default": [0, 0]
+    },
+    "bottomRightOffset": {
+      "description": "Bottom-right offset as absolute coordinates",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ],
+      "default": [0, 0]
+    }
+  },
+  "required": ["type"]
+}

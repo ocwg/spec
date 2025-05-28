@@ -1,6 +1,6 @@
 # OCIF Extensions List
 
-This document lists known OCIF extensions ([see OCIF spec v0.4](spec/v0.4/spec.md)).
+This document lists known OCIF extensions ([see OCIF spec v0.5](spec/v0.5-draft/spec.md)).
 Listing in this file is not required for an extension to be used in an OCIF document.
 Note the extensions can even be defined within an OCIF document, without an external schema file.
 All this is described in the OCIF spec.
@@ -32,11 +32,12 @@ The List:
   - [Path Node](#path-node)
   - [Rectangle Node](#rectangle-node)
   - [Ports Node](#ports-node)
+  - [Anchored Node](#anchored-node)
+  - [Text Style Node](#text-style-node)
+  - [Transforms Node](#transforms-node)
 - [Relation Extensions](#relation-extensions)
   - [Edge Relation](#edge-relation)
   - [Group Relation](#group-relation)
-  - [Set Relation](#set-relation)
-  - [Relative Nodes Relation](#relative-nodes-relation)
   - [Hyperedge Relation](#hyperedge-relation)
   - [Parent-Child Relation](#parent-child-relation)
 - [Deprecated Extensions](#deprecated-extensions)
@@ -47,41 +48,65 @@ The List:
 ## Arrow Node
 
 - Name: `@ocif/node/arrow`
-- URI: `https://spec.canvasprotocol.org/v0.4/core/arrow-node.json`
-- Doc: [spec/v0.4/spec.md#arrow](spec/v0.4/spec.md#arrow)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/core/arrow-node.json`
+- Doc: [spec/v0.5-draft/spec.md#arrow](spec/v0.5-draft/spec.md#arrow)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 ## Oval Node
 
 - Name: `@ocif/node/oval`
-- URI: `https://spec.canvasprotocol.org/v0.4/core/oval-node.json`
-- Doc: [spec/v0.4/spec.md#oval](spec/v0.4/spec.md#oval)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/core/oval-node.json`
+- Doc: [spec/v0.5-draft/spec.md#oval](spec/v0.5-draft/spec.md#oval)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 ## Path Node
 
 - Name: `@ocif/node/path`
-- URI: `https://spec.canvasprotocol.org/v0.4/core/path-node.json`
-- Doc: [spec/v0.4/spec.md#path](spec/v0.4/spec.md#path)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/core/path-node.json`
+- Doc: [spec/v0.5-draft/spec.md#path](spec/v0.5-draft/spec.md#path)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 ## Rectangle Node
 
 - Name: `@ocif/node/rect`
-- URI: `https://spec.canvasprotocol.org/v0.4/core/rect-node.json`
-- Doc: [spec/v0.4/spec.md#rectanlge](spec/v0.4/spec.md#rectangle)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/core/rect-node.json`
+- Doc: [spec/v0.5-draft/spec.md#rectangle](spec/v0.5-draft/spec.md#rectangle)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 ## Ports Node
 
 - Name: `@ocif/node/ports`
-- URI: `https://spec.canvasprotocol.org/v0.4/extensions/ports-node.json`
-- Doc: [spec/v0.4/extensions.md#ports-node](spec/v0.4/extensions.md#ports-node)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/ports-node.json`
+- Doc: [spec/v0.5-draft/extensions.md#ports-node](spec/v0.5-draft/extensions.md#ports-node)
+- Version: v0.5
+- Author: Open Canvas Working Group
+
+## Anchored Node
+
+- Name: `@ocif/node/anchored`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/anchored-node.json`
+- Doc: [spec/v0.5-draft/extensions.md#anchored-node](spec/v0.5-draft/extensions.md#anchored-node)
+- Version: v0.5
+- Author: Open Canvas Working Group
+
+## Text Style Node
+
+- Name: `@ocif/node/textstyle`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/textstyle-node.json`
+- Doc: [spec/v0.5-draft/extensions.md#text-style-node](spec/v0.5-draft/extensions.md#text-style-node)
+- Version: v0.5
+- Author: Open Canvas Working Group
+
+## Transforms Node
+
+- Name: `@ocif/node/transforms`
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/transforms-node.json`
+- Doc: [spec/v0.5-draft/extensions.md#transforms-node](spec/v0.5-draft/extensions.md#transforms-node)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 # Relation Extensions
@@ -89,49 +114,33 @@ The List:
 ## Edge Relation
 
 - Name: `@ocif/rel/edge`
-- URI: `https://spec.canvasprotocol.org/v0.4/core/edge-rel.json`
-- Doc: [spec/v0.4/spec.md#edge-relation](spec/v0.4/spec.md#edge-relation)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/core/edge-rel.json`
+- Doc: [spec/v0.5-draft/spec.md#edge-relation](spec/v0.5-draft/spec.md#edge-relation)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 ## Group Relation
 
 - Name: `@ocif/rel/group`
-- URI: `https://spec.canvasprotocol.org/v0.4/core/group-rel.json`
-- Doc: [spec/v0.4/spec.md#group-relation](spec/v0.4/spec.md#group-relation)
-- Version: v0.4
-- Author: Open Canvas Working Group
-
-## Set Relation
-
-- Name: `@ocif/rel/set`
-- URI: `https://spec.canvasprotocol.org/v0.4/core/set-rel.json`
-- Doc: [spec/v0.4/spec.md#set-relation](spec/v0.4/spec.md#set-relation)
-- Version: v0.4
-- Author: Open Canvas Working Group
-
-## Relative Nodes Relation
-
-- Name: `@ocif/node/relative`
-- URI: `https://spec.canvasprotocol.org/v0.4/extensions/relative-node.json`
-- Doc: [spec/v0.4/extensions.md#relative-node](spec/v0.4/extensions.md#relative-node)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/core/group-rel.json`
+- Doc: [spec/v0.5-draft/spec.md#group-relation](spec/v0.5-draft/spec.md#group-relation)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 ## Hyperedge Relation
 
 - Name: `@ocif/rel/hyperedge`
-- URI: `https://spec.canvasprotocol.org/v0.4/extensions/hyperedge-rel.json`
-- Doc: [spec/v0.4/extensions.md#hyperedge-relation](spec/v0.4/extensions.md#hyperedge-relation)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/hyperedge-rel.json`
+- Doc: [spec/v0.5-draft/extensions.md#hyperedge-relation](spec/v0.5-draft/extensions.md#hyperedge-relation)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 ## Parent-Child Relation
 
 - Name: `@ocif/rel/parent-child`
-- URI: `https://spec.canvasprotocol.org/v0.4/extensions/parent-child-rel.json`
-- Doc: [spec/v0.4/extensions.md#parent-child-relation](spec/v0.4/extensions.md#parent-child-relation)
-- Version: v0.4
+- URI: `https://spec.canvasprotocol.org/v0.5/extensions/parent-child-rel.json`
+- Doc: [spec/v0.5-draft/extensions.md#parent-child-relation](spec/v0.5-draft/extensions.md#parent-child-relation)
+- Version: v0.5
 - Author: Open Canvas Working Group
 
 # Deprecated Extensions
@@ -142,3 +151,5 @@ The authors of these extensions have deprecated them. Often this means that the 
 - `https://spec.canvasprotocol.org/rel/hyperedge/0.2`
 - `https://spec.canvasprotocol.org/rel/parent-child/0.2`
 - `https://spec.canvasprotocol.org/rel/relative/0.2`
+- `@ocif/rel/set` - functionality merged into `@ocif/rel/group` in v0.5
+- `@ocif/node/relative` - functionality moved to `@ocif/node/transforms` in v0.5

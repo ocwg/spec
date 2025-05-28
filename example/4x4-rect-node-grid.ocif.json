@@ -1,5 +1,5 @@
 {
-  "ocif": "https://canvasprotocol.org/ocif/v0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.5",
   "nodes": [
     {
       "id": "n1",
@@ -291,5 +291,7 @@
       "id": "r16",
       "representations": [{ "mime-type": "text/plain", "content": "Star" }]
     }
-  ]
+  ],
+  "relations": [],
+  "schemas": []
 }

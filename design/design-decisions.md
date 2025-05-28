@@ -25,6 +25,10 @@ several design decisions. They result in self-imposed requirements.
     * [Relations vs Visual Nodes](#relations-vs-visual-nodes)
     * [URL and Name Space](#url-and-name-space)
     * [Schemas as List or Map](#schemas-as-list-or-map)
+    * [Coordinate Systems and Relative Positioning (v0.5)](#coordinate-systems-and-relative-positioning-v05)
+    * [Resource Display and Fitting (v0.5)](#resource-display-and-fitting-v05)
+    * [Extension Consolidation and Schema Versioning (v0.5)](#extension-consolidation-and-schema-versioning-v05)
+    * [Vector Type and Multi-dimensional Support (v0.5)](#vector-type-and-multi-dimensional-support-v05)
   * [References](#references)
 <!-- TOC -->
 
@@ -428,6 +432,29 @@ Each extension is represented in JSON as an object of the form
 So the `type` property is the single reserved property name in the spec. Should we use a less frequently name? Such as `exttype`?
 
 **Decision**: We keep `type`, as it is so short and clearly expresses the intent.
+
+## Coordinate Systems and Relative Positioning (v0.5)
+We separate global coordinates (core spec) from relative positioning (extensions). Apps have different capabilities - some support only global coordinates while others need relative positioning.
+
+We keep global node properties (position, size, rotation) in core spec and create dedicated extensions:
+- `@ocif/node/anchored` for percentage-based positioning relative to parent bounds  
+- `@ocif/node/transforms` for relative transforms (position offset, rotation, scale)
+- Remove global `node.scale` property from core spec
+
+Discussed in [GitHub #52](https://github.com/orgs/ocwg/discussions/52) and Meeting 025.
+
+## Resource Display and Fitting (v0.5)
+We add `node.resource-fit` property with CSS-like object-fit semantics to control how resources (images, content) are displayed within node boundaries. This provides a standardized way to handle resource scaling and positioning across different applications.
+
+## Extension Consolidation and Schema Versioning (v0.5)
+We merge similar extensions and require explicit versioning to reduce spec complexity and eliminate redundancy:
+- Merge `@ocif/rel/set` functionality into `@ocif/rel/group` with added `cascadeDelete` property
+- Deprecate `@ocif/node/relative` in favor of `@ocif/node/transforms` extension  
+- Make `type` property required for all core extensions
+- Use explicit version numbers for extensions (e.g., `@ocif/node/ports/v0.5`)
+
+## Vector Type and Multi-dimensional Support (v0.5)
+We introduce Vector OCIF type supporting 2D `[x,y]` and 3D `[x,y,z]` arrays with scalar shortcuts where single numbers auto-expand (e.g., `3` becomes `[3,3,3]`). 2D vectors auto-extend to 3D with `z=0` when needed. This provides future-proofing for 3D applications while maintaining simplicity for 2D cases.
 
 
 # References

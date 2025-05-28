@@ -4,6 +4,10 @@
   "description": "Arrow node extension",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/arrow"
+    },
     "strokeWidth": {
       "type": "number",
       "description": "The line width."
@@ -48,5 +52,6 @@
       "type": "string",
       "description": "The ID of the relation defining the semantics of the arrow."
     }
-  }
+  },
+  "required": ["type", "start", "end"]
 }

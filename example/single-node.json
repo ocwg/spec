@@ -1,13 +1,11 @@
 {
-  "ocif": "https://canvasprotocol.org/ocif/v0.4",
+  "ocif": "https://canvasprotocol.org/ocif/v0.5",
   "nodes": [
     {
       "id": "shape:054132af-4d2f-48ed-b239-f5129dd35288",
-      "schema": "@ocif/node",
-      "schema_version": "0.1",
       "position": [122.34441018202554, -276.51955082999257]
     }
   ],
   "relations": [],
-  "schemas": {}
+  "schemas": []
 }
