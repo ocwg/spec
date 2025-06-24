@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/rel/group",
+  "description": "Group relation extension",
+  "type": "object",
+  "properties": {
+    "members": {
+      "type": "array",
+      "description": "IDs of members of the group",
+      "items": {
+        "description": "node ID or relation ID",
+        "type": "string"
+      }
+    },
+    "cascadeDelete": {
+      "type": "boolean",
+      "description": "If true, deleting the group will delete all members. Default is true.",
+      "default": true
+    }
+  },
+  "required": ["members"]
+}
