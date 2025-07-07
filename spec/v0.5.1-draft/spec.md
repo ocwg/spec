@@ -583,6 +583,22 @@ All text styles are already defined as default values of optional properties in 
 The root node 'contains' all nodes that are not explicitly contained by another node.
 "Contain" in this context refers to the [parent-child](extensions.md#parent-child-relation) relation.
 
+The `size` property of the root node effectively defines a canvas size, much like the [viewbox](https://www.w3.org/TR/SVGTiny12/coords.html#ViewBoxAttribute of an SVG file).
+The coordinate system of a node always starts at the top-left corner at (0,0). So the `position` attribute of the root node has no effect.
+
+
+### Nesting Canvases
+A [node](#node) 'A' in a canvas (now called 'host canvas') may use a [resource](#resource) of type `application/ocif+json` (the [recommended IANA MIME type](#practical-recommendations) for OCIF files). That resource defines another canvas (now called 'sub-canvas'). Per definition, the sub-canvas has an explicit or implicit [root node](#root-node).
+From the perspective of the host canvas, node 'A' and the sub-canvas root node **are the same node**.
+
+The properties of the **host** canvas node 'A' extend and overwrite the properties of the imported **child** canvas root node. This allows to re-use existing canvases in different ways.
+That is, the host node 'A' is interpreted as a JSON Merge Patch ([RFC 7396](https://www.rfc-editor.org/info/rfc7396)) document against the sub-canvas root node.
+There is one exception: `data`-extension arrays are always _merged_:
+Both arrays are appended, first the sub-canvas root nodes extensions, then the host nodes 'A' extensions.
+Later entries overwrite earlier entries for the same `type` of extension.
+
+#### Partial Export
+NOTE: When exporting a node from a canvas (and all its child nodes per parent-child relation), that node should become the root node of the exported sub-canvas. For consistency, all effective values, which may be inherited, need to be copied onto the exported root node.
 
 
 # Relations
