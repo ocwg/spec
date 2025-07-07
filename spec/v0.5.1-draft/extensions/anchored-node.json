@@ -9,7 +9,7 @@
       "type": "string",
       "const": "@ocif/node/anchored"
     },
-    "topLeftPosition": {
+    "topLeftAnchor": {
       "description": "Top left anchor as percentage coordinates",
       "oneOf": [
         {
@@ -31,7 +31,7 @@
       ],
       "default": [0, 0]
     },
-    "bottomRightPosition": {
+    "bottomRightAnchor": {
       "description": "Bottom-right anchor as percentage coordinates",
       "oneOf": [
         {
