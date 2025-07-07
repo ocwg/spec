@@ -219,6 +219,52 @@ The text style extension allows setting common properties for rendering plain te
 JSON schema: [textstyle-node.json](extensions/textstyle-node.json)
 
 
+## Theme Node
+
+- Name: `@ocif/node/theme`
+- URI: `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/theme-node.json`
+
+The theme node extension allows defining and selecting themes.
+Defining themes works in a recursive way, by setting properties in a named theme.
+
+Example for Using a Theme on the [Root Node](spec.md#root-node):
+```json
+{
+  "data": [{ "type": "@ocif/node/theme",
+    "dark": {
+      "data": [{ "type": "@ocif/node/textstyle",
+        "color": "#FFFFFF"
+      }]
+    },
+    "light": {
+      "data": [{ "type": "@ocif/node/textstyle",
+        "color": "#000000"
+      }]
+    }
+  }]
+}
+
+```
+So the theme branches a node content into several possible worlds and defines any values, including those in extensions.
+
+### Theme Selection
+Theme selection could happen at the canvas level or at any node in a parent-child inheritance tree. Theme selection inherits downwards. So any node (including the root node) is a good place to select a theme.
+We model this with a `select-theme` property in the same extension.
+The default is selecting no theme, which ignores all theme definitions.
+This default theme can also be selected explicitly further down the parent-child tree by stating `"select-theme": null`.
+
+Example for Selecting a Theme on a Node:
+```json
+{
+  "data": [
+    {
+      "type": "@ocif/node/theme",
+      "select-theme": "dark"
+    }
+  ]
+}
+```
+
 # Relation Extensions
 
 ## Hyperedge Relation
