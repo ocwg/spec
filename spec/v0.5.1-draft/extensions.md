@@ -310,7 +310,7 @@ It can be used to model inheritance, containment, or other hierarchical relation
 | `cascadeDelete` | `boolean` |                  | optional     | Delete children when parent is deleted. | `true`  |
 
 - **parent**: The ID of the parent node or relation. There MUST be only one parent per child.
-  - If empty, the canvas itself acts as the parent node. This is relevant for [node transforms](#node-transforms).
+  - If empty, the [root node of the canvas](spec.md#root-node) is the parent node. This is relevant for [node transforms](#node-transforms).
 
 - **child**: The ID of the child node or relation. A parent can have multiple children (expressed my multiple parent-child relations).
 

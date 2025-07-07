@@ -229,6 +229,7 @@ The OCIF file is a JSON object with the following properties:
 | Property    | JSON Type | OCIF Type                       | Required     | Contents                          |
 |-------------|-----------|:--------------------------------|--------------|-----------------------------------|
 | `ocif`      | `string`  | [URI](#uri)                     | **required** | The URI of the OCIF schema        |
+| `rootNode`  | `string`  | [ID](#id)                       | optional     | A canvas root [node](#nodes)      |
 | `nodes`     | `array`   | [Node](#node)[]                 | optional     | A list of [nodes](#nodes)         |
 | `relations` | `array`   | [Relation](#relation)[]         | optional     | A list of [relations](#relations) |
 | `resources` | `array`   | [Resource](#resource)[]         | optional     | A list of [resources](#resources) |
@@ -240,6 +241,7 @@ The OCIF file is a JSON object with the following properties:
     - `https://spec.canvasprotocol.org/v0.1` Retrospectively assigned URI for the first draft at https://github.com/ocwg/spec/blob/initial-draft/README.md
     - `https://spec.canvasprotocol.org/v0.2` This is a preliminary version, as described in this draft, for experiments
     - `https://spec.canvasprotocol.org/v0.3` This is the first stable version.
+- **rootNode**: An optional [root node](#root-node) id. It MUST point to a node defined within the `nodes` array.
 - **nodes**: A list of nodes on the canvas. See [Nodes](#nodes) for details.
 - **relations**: A list of relations between nodes (and relations). See [Relations](#relations) for details.
 - **resources**: A list of resources used by nodes. See [Resources](#resources) for details.
@@ -569,6 +571,19 @@ The rendering of resources inside a path is not defined by OCIF, but by the canv
 NOTE: Canvas apps can simplify rendering of curves (cubic/quadratic bezier, arc) to straight lines.
 
 JSON schema: [path-node.json](core/path-node.json)
+
+
+## Root Node
+Every canvas has a defined or implied _root node_.
+The root node itself SHOULD not be rendered, only its interior.
+If no root node is defined, an implied root with ID `rootNode` is used.
+
+All text styles are already defined as default values of optional properties in the [text style](extensions.md#text-style-node) extension. A root node can define these values to set custom standard values for a whole canvas.
+
+The root node 'contains' all nodes that are not explicitly contained by another node.
+"Contain" in this context refers to the [parent-child](extensions.md#parent-child-relation) relation.
+
+
 
 # Relations
 
