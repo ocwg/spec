@@ -4,6 +4,10 @@
   "description": "Path node extension",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/path"
+    },
     "strokeWidth": {
       "type": "number",
       "description": "The line width."
