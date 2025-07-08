@@ -582,9 +582,12 @@ All text styles are already defined as default values of optional properties in 
 
 The root node 'contains' all nodes that are not explicitly contained by another node.
 "Contain" in this context refers to the [parent-child](extensions.md#parent-child-relation) relation.
+The root node cannot be used as a child of another node within the same file, but instances may be child nodes in another file.
+If a non-root node is not a child of another node, it is implicitly a child of the root node.
 
-The `size` property of the root node effectively defines a canvas size, much like the [viewbox](https://www.w3.org/TR/SVGTiny12/coords.html#ViewBoxAttribute of an SVG file).
-The coordinate system of a node always starts at the top-left corner at (0,0). So the `position` attribute of the root node has no effect.
+The `size` property of the root node effectively defines a canvas size, much like the [viewbox](https://www.w3.org/TR/SVGTiny12/coords.html#ViewBoxAttribute) of an SVG file. However, while a viewbox in SVG allows setting the root position, the coordinate system of an OCIF file always starts at the top-left corner at (0,0).
+
+The root node represents the entire OCIF file, and it does not make sense for a node to have a transform relative to itself. Therefore, the `position` and `rotation` properties of the root node MUST NOT be set. If the root node has either of those properties set, the OCIF file is invalid.
 
 
 ### Nesting Canvases
