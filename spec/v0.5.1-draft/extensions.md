@@ -19,21 +19,23 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
 ### Table of Contents
 
 <!-- TOC -->
-* [OCIF Extensions](#ocif-extensions)
-  * [Abstract](#abstract)
-  * [Status of this Document](#status-of-this-document)
-    * [Table of Contents](#table-of-contents)
-* [Node Extensions](#node-extensions)
-  * [Ports Node](#ports-node)
-  * [Node Transforms](#node-transforms)
-  * [Anchored Node](#anchored-node)
-  * [Text Style Node](#text-style-node)
-* [Relation Extensions](#relation-extensions)
-  * [Hyperedge Relation](#hyperedge-relation)
-  * [Parent-Child Relation](#parent-child-relation)
-  * [Changes](#changes)
-    * [From v0.4 to v0.5.1-draft](#from-v04-to-v05)
-    * [Up to v0.4](#up-to-v04)
+- [OCIF Extensions](#ocif-extensions)
+  - [Abstract](#abstract)
+  - [Status of this Document](#status-of-this-document)
+    - [Table of Contents](#table-of-contents)
+- [Node Extensions](#node-extensions)
+  - [Ports Node](#ports-node)
+  - [Node Transforms](#node-transforms)
+  - [Anchored Node](#anchored-node)
+  - [Text Style Node](#text-style-node)
+  - [Theme Node](#theme-node)
+    - [Theme Selection](#theme-selection)
+- [Relation Extensions](#relation-extensions)
+  - [Hyperedge Relation](#hyperedge-relation)
+  - [Parent-Child Relation](#parent-child-relation)
+  - [Changes](#changes)
+    - [From v0.4 to v0.5.1-draft](#from-v04-to-v05)
+    - [Up to v0.4](#up-to-v04)
 <!-- TOC -->
 
 # Node Extensions

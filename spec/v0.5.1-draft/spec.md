@@ -61,6 +61,8 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
   - [Oval](#oval)
   - [Arrow](#arrow)
   - [Path](#path)
+  - [Root Node](#root-node)
+    - [Nesting Canvases](#nesting-canvases)
 - [Relations](#relations)
   - [Group Relation](#group-relation)
   - [Edge Relation](#edge-relation)
