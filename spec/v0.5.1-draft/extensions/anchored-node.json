@@ -29,7 +29,7 @@
           "maxItems": 3
         }
       ],
-      "default": [0, 0]
+      "default": [0.0, 0.0]
     },
     "bottomRightAnchor": {
       "description": "Bottom-right anchor as percentage coordinates",
@@ -51,7 +51,7 @@
           "maxItems": 3
         }
       ],
-      "default": [1, 1]
+      "default": [1.0, 1.0]
     },
     "topLeftOffset": {
       "description": "Top left offset as absolute coordinates",
@@ -73,7 +73,7 @@
           "maxItems": 3
         }
       ],
-      "default": [0, 0]
+      "default": [0.0, 0.0]
     },
     "bottomRightOffset": {
       "description": "Bottom-right offset as absolute coordinates",
@@ -95,7 +95,7 @@
           "maxItems": 3
         }
       ],
-      "default": [0, 0]
+      "default": [0.0, 0.0]
     }
   },
   "required": ["type"]
