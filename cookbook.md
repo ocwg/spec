@@ -1,6 +1,15 @@
 # OCIF Cookbook
-
 **Open Canvas Interchange Format (OCIF) Cookbook**
+
+<!-- TOC -->
+* [OCIF Cookbook](#ocif-cookbook)
+  * [Canvas App Users](#canvas-app-users)
+  * [Canvas App Developers](#canvas-app-developers)
+    * [Using OCIF Core](#using-ocif-core)
+    * [Using OCIF Extensions](#using-ocif-extensions)
+    * [Transclusion](#transclusion)
+    * [Developing OCIF Extensions](#developing-ocif-extensions)
+<!-- TOC -->
 
 A collection of examples and best practices (recipes) for using OCIF.
 It is intended to help developers and designers to understand how to use OCIF in their applications.
@@ -15,6 +24,58 @@ This way, you can share your work with others or use it in different apps.
 OCIF defines no mechanism how the file is transported.
 If your canvas app does not support OCIF, consider opening a ticket with the developers to request support for OCIF.
 Or be the developer yourself and use the OCIF documentation to implement support for OCIF in your favorite app.
+
+## Canvas Editing in a Text Editor
+Here are some examples, how to create an OCIF file by hand. This helps to understand OCIF and lets you learn how to edit and tweak existing OCIF files, created by apps.
+
+### The Simple Sticky Note 📝
+Scenario: You want to represent a single yellow sticky note on a digital canvas with the text "Buy milk". This is the most basic "Hello, World!" example for OCIF.
+
+OCIF Concepts Illustrated:
+
+- nodes: A single visual item on the canvas.
+- resources: The content for the node (the text).
+- position: Where the note is placed on the canvas.
+- Core Structure: The basic boilerplate of an OCIF file.
+
+```json
+{
+  "ocif": "https://canvasprotocol.org/ocif/v0.5.1-draft",
+  "nodes": [
+    {
+      "id": "sticky-note-milk",
+      "position": [ 100, 100 ],
+      "size": [ 150, 75 ],
+      "resource": "res_milk",
+      "data": [
+        {
+          "type": "@ocif/node/rect",
+          "fillColor": "#FFFF00"
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "res_milk",
+      "representations": [
+        {
+          "mimeType": "text/plain",
+          "content": "Buy milk"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Example Breakdown:
+- The file has a nodes array with one node object. This node has an id, a position like [100, 100], and a resource property pointing to the ID `res_milk`.
+- The resources array contains an object with the id: `res_milk` and its representations holding the inline content: `{"mimeType": "text/plain", "content": "Buy milk"}`.
+- A `@ocif/node/rect` extension has been added to the node's data to give it a yellow `fillColor`.
+
+
+
 
 ## Canvas App Developers
 
