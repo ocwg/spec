@@ -632,7 +632,7 @@ JSON schema: [path-node.json](core/path-node.json)
 
 
 ## Root Node
-Every canvas has a defined or implied _root node_.
+Every canvas has **one** defined or implied _root node_.
 The root node itself SHOULD not be rendered, only its interior.
 If no root node is defined, an implied root with ID `rootNode` is used.
 
@@ -649,12 +649,17 @@ The root node represents the entire OCIF file, and it does not make sense for a 
 
 
 ### Nesting Canvases
-A [node](#node) 'A' in a canvas (now called 'host canvas') may use a [resource](#resource) of type `application/ocif+json` (the [recommended IANA MIME type](#practical-recommendations) for OCIF files). That resource defines another canvas (now called 'sub-canvas'). Per definition, the sub-canvas has an explicit or implicit [root node](#root-node).
-From the perspective of the host canvas, node 'A' and the sub-canvas root node **are the same node**.
+A [node](#node) 'A' in a canvas (now called 'host canvas') may use a [resource](#resource) of type `application/ocif+json` (the [recommended IANA MIME type](#practical-recommendations) for OCIF files).
+That resource defines another canvas (now called 'sub-canvas').
+Per definition, the sub-canvas has an explicit or implicit [root node](#root-node).
+From the perspective of the host canvas, node 'A' and the sub-canvas root node 'B' **are the same node**.
 
-The properties of the **host** canvas node 'A' extend and overwrite the properties of the imported **child** canvas root node. This allows re-using existing canvases in different ways.
-That is, the host node 'A' is interpreted as a JSON Merge Patch ([RFC 7396](https://www.rfc-editor.org/info/rfc7396)) document against the sub-canvas root node.
-There is one exception: `data`-extension arrays are always _merged_:
+The properties of the **host** canvas node 'A' extend and overwrite the properties of the imported **child** canvas root node. This even overwrites the `id` property, so that the former 'B' is now 'A' in the host canvas.
+NOTE: All OCIF definitions referring to node 'B' are now also interpreted as referring to 'A'.
+This allows re-using existing canvases in different ways.
+That is, the host node 'A' is interpreted as a JSON Merge Patch ([RFC 7396](https://www.rfc-editor.org/info/rfc7396)) document against the sub-canvas root node 'B'.
+
+There is one exception: `data`-extension arrays are always _merged_ (see [extension mechanism](#extension-mechanism)):
 Both arrays are appended, first the sub-canvas root nodes extensions, then the host nodes 'A' extensions.
 Later entries overwrite earlier entries for the same `type` of extension.
 
@@ -1087,6 +1092,7 @@ Within the repo, there SHOULD be two files:
   - This schema MUST use the same URI as the extension.
   - It SHOULD have a `description` property, describing briefly the purpose of the extension.
   - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/v0.5.1-draft`.
+  - If the extension is defined to extend just one kind of element (like all initial extensions), that kind of element SHOULD be part of the name (`node`,`relation`,`resource` or `canvas`).
 
 As an example, look at the fictive [Circle Extension](#node-extension-circle) in the appendix.
 
