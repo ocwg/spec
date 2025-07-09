@@ -943,7 +943,37 @@ They allow adding custom data to **nodes**, **relations**, **resources**, and th
 - **type**: The type of the extension. This is a URI or a simple name.
   If a name is used, that name must be present in the [schemas](#schemas) section, where it is mapped to a URI.
 
-For an example of an extension, see the [appendix](#appendix), [Node Extension: Circle](#node-extension-circle).
+If an element uses multiple extensions of the same type (same `type` property), the JSON fragments of the objects are by default considered to overwrite each other, as defined in [JSON Merge Path RFC 7386](https://datatracker.ietf.org/doc/html/rfc7386).
+As an example, if a node has these extensions in its `data` array:
+```json
+[
+    {
+      "type": "https://example.com/ns/ocif-node/my-extension/1.0",
+      "fruit": "apple",
+      "color": "blue"
+    },
+    {
+      "type": "https://example.com/ns/ocif-node/my-extension/1.0",
+      "color": "red",
+      "city": "Karlsruhe"
+    }
+]
+```
+the OCIF-using app should treat this as if the file stated
+```json
+[
+    {
+      "type": "https://example.com/ns/ocif-node/my-extension/1.0",
+      "fruit": "apple",
+      "color": "red",
+      "city": "Karlsruhe"
+    }
+]
+```
+This makes combining files by hand easier and uses the same mechanism as [parent-child inheritance](extensions.md#parent-child-relation) and [nested canvases](#nesting-canvases) (when merging host node and imported root node).
+
+For an example of an extension, see the fictional [appendix](#appendix), [Node Extension: Circle](#node-extension-circle).
+In practice, the `@ocif/node/oval` extension can be used.
 
 ## Defining Extensions
 
