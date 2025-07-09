@@ -590,7 +590,7 @@ If a non-root node is not a child of another node, it is implicitly a child of t
 
 The `size` property of the root node effectively defines a canvas size, much like the [viewbox](https://www.w3.org/TR/SVGTiny12/coords.html#ViewBoxAttribute) of an SVG file. However, while a viewbox in SVG allows setting the root position, the coordinate system of an OCIF file always starts at the top-left corner at (0,0).
 
-The root node represents the entire OCIF file, and it does not make sense for a node to have a transform relative to itself. Therefore, the `position` and `rotation` properties of the root node MUST NOT be set. If the root node has either of those properties set, the OCIF file is invalid.
+The root node represents the entire OCIF file, and it does not make sense for a node to have a transform relative to itself. Therefore, the `position` and `rotation` properties of the root node MUST NOT be set. If the root node has either of those properties set, the app should ignore their values and emit a warning.
 
 
 ### Nesting Canvases
