@@ -136,7 +136,7 @@ Optional fields:
 
 - Name: `@ocif/rel/parent-child`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/parent-child-rel.json`
-- Doc: [spec/v0.5-draft/extensions.md#parent-child-relation](spec/v0.5-draft/extensions.md#parent-child-relation)
+- Doc: [spec/v0.5-draft/spec.md#parent-child-relation](spec/v0.5-draft/spec.md#parent-child-relation)
 - Version: v0.5
 - Author: Open Canvas Working Group
 

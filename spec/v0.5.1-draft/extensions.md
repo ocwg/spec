@@ -19,23 +19,22 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
 ### Table of Contents
 
 <!-- TOC -->
-- [OCIF Extensions](#ocif-extensions)
-  - [Abstract](#abstract)
-  - [Status of this Document](#status-of-this-document)
-    - [Table of Contents](#table-of-contents)
-- [Node Extensions](#node-extensions)
-  - [Ports Node](#ports-node)
-  - [Node Transforms](#node-transforms)
-  - [Anchored Node](#anchored-node)
-  - [Text Style Node](#text-style-node)
-  - [Theme Node](#theme-node)
-    - [Theme Selection](#theme-selection)
-- [Relation Extensions](#relation-extensions)
-  - [Hyperedge Relation](#hyperedge-relation)
-  - [Parent-Child Relation](#parent-child-relation)
-  - [Changes](#changes)
-    - [From v0.4 to v0.5.1-draft](#from-v04-to-v05)
-    - [Up to v0.4](#up-to-v04)
+* [OCIF Extensions](#ocif-extensions)
+  * [Abstract](#abstract)
+  * [Status of this Document](#status-of-this-document)
+    * [Table of Contents](#table-of-contents)
+* [Node Extensions](#node-extensions)
+  * [Ports Node](#ports-node)
+  * [Node Transforms](#node-transforms)
+  * [Anchored Node](#anchored-node)
+  * [Text Style Node](#text-style-node)
+  * [Theme Node](#theme-node)
+    * [Theme Selection](#theme-selection)
+* [Relation Extensions](#relation-extensions)
+  * [Hyperedge Relation](#hyperedge-relation)
+  * [Changes](#changes)
+    * [From v0.4 to v0.5.1-draft](#from-v04-to-v051-draft)
+    * [Up to v0.4](#up-to-v04)
 <!-- TOC -->
 
 # Node Extensions
@@ -342,39 +341,6 @@ An hyperedge relation connecting two nodes as input (n1,n2) with one node as out
 
 JSON schema: [hyperedge-rel.json](extensions/hyperedge-rel.json)
 
-## Parent-Child Relation
-
-- Name: `@ocif/rel/parent-child`
-- URI: `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/parent-child-rel.json`
-
-A parent-child relation models a strict hierarchical relationship between nodes or relations.
-It can be used to model inheritance, containment, or other hierarchical relationships.
-
-| Property        | JSON Type | OCIF Type        | Required     | Contents                                | Default |
-|-----------------|-----------|------------------|--------------|-----------------------------------------|:--------|
-| `parent`        | `string`  | [ID](spec.md#id) | optional     | ID of the parent.                       | empty   |
-| `child`         | `string`  | [ID](spec.md#id) | **required** | ID of the child.                        |         |
-| `inherit`       | `boolean` |                  | optional     | Inherit properties.                     | `false` |
-| `cascadeDelete` | `boolean` |                  | optional     | Delete children when parent is deleted. | `true`  |
-
-- **parent**: The ID of the parent node or relation. There MUST be only one parent per child.
-  - If empty, the [root node of the canvas](spec.md#root-node) is the parent node. This is relevant for [node transforms](#node-transforms).
-
-- **child**: The ID of the child node or relation. A parent can have multiple children (expressed my multiple parent-child relations).
-
-- **inherit**: A boolean flag indicating if the child should inherit properties from the parent. Default is `false`.
-
-  - The Exact semantics of inheritance are defined by the application.
-  - In general, when looking for JSON properties of a child and finding them undefined, an app should look for the same value in the parent.
-    The chain of parents should be followed until a root is reached or a cycle is detected.
-
-- **cascadeDelete**: A boolean flag indiciating if the children should be deleted when the parent is deleted. Default it `true`.
-
-Semantics:
-
-- If a parent is deleted, all children, which inherit from the parent, SHOULD also be deleted. (see **cascadeDelete** property)
-
-JSON schema: [parent-child-rel.json](extensions/parent-child-rel.json)
 
 
 ## Changes
@@ -382,6 +348,7 @@ JSON schema: [parent-child-rel.json](extensions/parent-child-rel.json)
 ### From v0.4 to v0.5.1-draft
 - "Relative Node" has been replaced by "Node Transforms"
 - "Anchored Node" has been added
+- "Parent-Child Relation" has been moved to core spec
 
 ### Up to v0.4
 - Simplified language from "Ports Extension" to "Ports Node", from "Relative Constraints Extension" to "Relative Node."

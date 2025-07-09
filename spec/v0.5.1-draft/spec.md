@@ -45,60 +45,73 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
 ### Table of Contents
 
 <!-- TOC -->
-
-- [Open Canvas Interchange Format (OCIF)](#open-canvas-interchange-format-ocif)
-  - [Abstract](#abstract)
-  - [Status of this Document](#status-of-this-document)
-  - [Document Conventions](#document-conventions)
-    - [Table of Contents](#table-of-contents)
-- [Introduction](#introduction)
-  - [Hello World Example](#hello-world-example)
-- [File Structure](#file-structure)
-- [Nodes](#nodes)
-  - [Text Nodes?](#text-nodes)
-  - [Image Nodes?](#image-nodes)
-  - [Rectangle](#rectangle)
-  - [Oval](#oval)
-  - [Arrow](#arrow)
-  - [Path](#path)
-  - [Root Node](#root-node)
-    - [Nesting Canvases](#nesting-canvases)
-- [Relations](#relations)
-  - [Group Relation](#group-relation)
-  - [Edge Relation](#edge-relation)
-- [Assets](#assets)
-  - [Resources](#resources)
-    - [Representation](#representation)
-    - [Fallback](#fallback)
-  - [Schemas](#schemas)
-    - [Built-in Schema Mappings](#built-in-schema-mappings)
-- [Extensions](#extensions)
-  - [Defining Extensions](#defining-extensions)
-    - [How To Write an Extension Step-by-Step](#how-to-write-an-extension-step-by-step)
-  - [Exporting Data with Extensions](#exporting-data-with-extensions)
-  - [Handling Extension Data](#handling-extension-data)
-- [OCIF Types](#ocif-types)
-  - [Angle](#angle)
-  - [Color](#color)
-  - [ID](#id)
-  - [MIME Type](#mime-type)
-  - [Node](#node)
-  - [Relation](#relation)
-  - [Representation](#representation-1)
-  - [Resource](#resource)
-  - [Schema Entry](#schema-entry)
-  - [Schema Name](#schema-name)
-  - [URI](#uri)
-- [Practical Recommendations](#practical-recommendations)
-- [References](#references)
-- [Appendix](#appendix)
-  - [Built-in Schema Entries](#built-in-schema-entries)
-  - [Known extensions and suggested short names](#known-extensions-and-suggested-short-names)
-  - [Examples](#examples)
-    - [Node Extension: Circle](#node-extension-circle)
-    - [Advanced Examples](#advanced-examples)
-  - [OCWG URL Structure (Planned)](#ocwg-url-structure-planned)
-  - [Changes](#changes)
+* [Open Canvas Interchange Format (OCIF)](#open-canvas-interchange-format-ocif)
+  * [Abstract](#abstract)
+  * [Status of this Document](#status-of-this-document)
+  * [Document Conventions](#document-conventions)
+    * [Table of Contents](#table-of-contents)
+* [Introduction](#introduction)
+  * [Hello World Example](#hello-world-example)
+* [File Structure](#file-structure)
+  * [Canvas Extensions](#canvas-extensions)
+    * [Canvas Viewport](#canvas-viewport)
+* [Nodes](#nodes)
+  * [Size and Resource](#size-and-resource)
+  * [Text Nodes?](#text-nodes)
+  * [Image Nodes?](#image-nodes)
+  * [Rectangle](#rectangle)
+  * [Oval](#oval)
+  * [Arrow](#arrow)
+  * [Path](#path)
+  * [Root Node](#root-node)
+    * [Nesting Canvases](#nesting-canvases)
+      * [Partial Export](#partial-export)
+* [Relations](#relations)
+  * [Group Relation](#group-relation)
+  * [Edge Relation](#edge-relation)
+  * [Parent-Child Relation](#parent-child-relation)
+* [Assets](#assets)
+  * [Resources](#resources)
+    * [Representation](#representation)
+    * [Fallback](#fallback)
+  * [Schemas](#schemas)
+    * [Built-in Schema Mappings](#built-in-schema-mappings)
+* [Extensions](#extensions)
+  * [Extension Mechanism](#extension-mechanism)
+  * [Defining Extensions](#defining-extensions)
+    * [How To Write an Extension Step-by-Step](#how-to-write-an-extension-step-by-step)
+  * [Exporting Data with Extensions](#exporting-data-with-extensions)
+  * [Handling Extension Data](#handling-extension-data)
+* [OCIF Types](#ocif-types)
+  * [Angle](#angle)
+  * [Color](#color)
+  * [ID](#id)
+  * [MIME Type](#mime-type)
+  * [Node](#node)
+  * [Relation](#relation)
+  * [Representation](#representation-1)
+  * [Resource](#resource)
+  * [Schema Entry](#schema-entry)
+  * [Schema Name](#schema-name)
+  * [URI](#uri)
+  * [Vector](#vector)
+* [Practical Recommendations](#practical-recommendations)
+* [References](#references)
+* [Appendix](#appendix)
+  * [Built-in Schema Entries](#built-in-schema-entries)
+  * [Known extensions and suggested short names](#known-extensions-and-suggested-short-names)
+  * [Examples](#examples)
+    * [Node Extension: Circle](#node-extension-circle)
+    * [Advanced Examples](#advanced-examples)
+  * [OCWG URL Structure (Planned)](#ocwg-url-structure-planned)
+  * [Syntax Conventions](#syntax-conventions)
+  * [Changes](#changes)
+    * [From v0.4 to v0.5.1-draft](#from-v04-to-v051-draft)
+    * [From v0.3 to v0.4](#from-v03-to-v04)
+    * [From v0.2.1 to v0.3](#from-v021-to-v03)
+    * [From v0.2.0 to v0.2.1](#from-v020-to-v021)
+    * [From v0.1 to v0.2](#from-v01-to-v02)
+<!-- TOC -->
 
 # Introduction
 
@@ -369,9 +382,9 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 - **resource**: A reference to a resource, which can be an image, video, or audio file. See [resources](#resources).
 
   - Resource can be empty, in which case a node is acting as a transform for other nodes.
-  - Resource content is cropped/limited by the nodes boundaries. This is commonly called _clip children_. Only in this respect the resource content is a kind of child. In CSS, this is called `overflow: hidden`.
+  - Resource content is cropped/limited by the node boundaries. This is commonly called _clip children_. Only in this respect the resource content is a kind of child. In CSS, this is called `overflow: hidden`.
 
-  - Resources can define ornamental borders, e.g. a rectangle has a rectangular border, or an [oval](#oval) defines an oval border. The border itself is z-ordered in front of the resource content.
+  - Resources can define ornamental borders, e.g., a rectangle has a rectangular border, or an [oval](#oval) defines an oval border. The border itself is z-ordered in front of the resource content.
 
 - **resourceFit**: Given a node with dimensions 100 (height) x 200 (width) and a bitmap image (e.g., a .png) with a size of 1000 x 1000.
   How should this image be displayed? We re-use some options from CSS ([object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) property):
@@ -626,7 +639,7 @@ If no root node is defined, an implied root with ID `rootNode` is used.
 All text styles are already defined as default values of optional properties in the [text style](extensions.md#text-style-node) extension. A root node can define these values to set custom standard values for a whole canvas.
 
 The root node 'contains' all nodes that are not explicitly contained by another node.
-"Contain" in this context refers to the [parent-child](extensions.md#parent-child-relation) relation.
+"Contain" in this context refers to the [parent-child](spec.md#parent-child-relation) relation.
 The root node cannot be used as a child of another node within the same file, but instances may be child nodes in another file.
 If a non-root node is not a child of another node, it is implicitly a child of the root node.
 
@@ -639,7 +652,7 @@ The root node represents the entire OCIF file, and it does not make sense for a 
 A [node](#node) 'A' in a canvas (now called 'host canvas') may use a [resource](#resource) of type `application/ocif+json` (the [recommended IANA MIME type](#practical-recommendations) for OCIF files). That resource defines another canvas (now called 'sub-canvas'). Per definition, the sub-canvas has an explicit or implicit [root node](#root-node).
 From the perspective of the host canvas, node 'A' and the sub-canvas root node **are the same node**.
 
-The properties of the **host** canvas node 'A' extend and overwrite the properties of the imported **child** canvas root node. This allows to re-use existing canvases in different ways.
+The properties of the **host** canvas node 'A' extend and overwrite the properties of the imported **child** canvas root node. This allows re-using existing canvases in different ways.
 That is, the host node 'A' is interpreted as a JSON Merge Patch ([RFC 7396](https://www.rfc-editor.org/info/rfc7396)) document against the sub-canvas root node.
 There is one exception: `data`-extension arrays are always _merged_:
 Both arrays are appended, first the sub-canvas root nodes extensions, then the host nodes 'A' extensions.
@@ -668,7 +681,7 @@ Every relation has the following properties:
 | `node`   | `string`  | [ID](#id)                | optional     | ID of a visual node, which represents this relation. |
 
 Similar to nodes, there is a built-in base relation, which can use extensions.
-Contrary to nodes, the base extension has no pre-defined properties except the `id` and `data` properties.
+Contrary-to-nodes, the base extension has no pre-defined properties except the `id` and `data` properties.
 Thus, relations are very flexible.
 
 - **id**:
@@ -762,6 +775,41 @@ It has the following properties (in addition to standard [relation](#relation) p
 - **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject, predicate, object) as (start,rel,end).
 
 JSON schema: [edge-rel.json](core/edge-rel.json)
+
+
+## Parent-Child Relation
+
+- Name: `@ocif/rel/parent-child`
+- URI: `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/parent-child-rel.json`
+
+A parent-child relation models a strict hierarchical relationship between nodes or relations.
+It can be used to model inheritance, containment, or other hierarchical relationships.
+
+| Property        | JSON Type | OCIF Type        | Required     | Contents                                | Default |
+|-----------------|-----------|------------------|--------------|-----------------------------------------|:--------|
+| `parent`        | `string`  | [ID](spec.md#id) | optional     | ID of the parent.                       | empty   |
+| `child`         | `string`  | [ID](spec.md#id) | **required** | ID of the child.                        |         |
+| `inherit`       | `boolean` |                  | optional     | Inherit properties.                     | `false` |
+| `cascadeDelete` | `boolean` |                  | optional     | Delete children when parent is deleted. | `true`  |
+
+- **parent**: The ID of the parent node or relation. There MUST be only one parent per child.
+    - If empty, the [root node of the canvas](spec.md#root-node) is the parent node. This is relevant for [node transforms](extensions.md#node-transforms).
+
+- **child**: The ID of the child node or relation. A parent can have multiple children (expressed my multiple parent-child relations).
+
+- **inherit**: A boolean flag indicating if the child should inherit properties from the parent. Default is `false`.
+
+    - The Exact semantics of inheritance are defined by the application.
+    - In general, when looking for JSON properties of a child and finding them undefined, an app should look for the same value in the parent.
+      The chain of parents should be followed until a root is reached or a cycle is detected.
+
+- **cascadeDelete**: A boolean flag indiciating if the children should be deleted when the parent is deleted. Default it `true`.
+
+Semantics:
+
+- If a parent is deleted, all children, which inherit from the parent, SHOULD also be deleted. (see **cascadeDelete** property)
+
+JSON schema: [parent-child-rel.json](core/parent-child-rel.json)
 
 
 # Assets
@@ -1016,7 +1064,7 @@ the OCIF-using app should treat this as if the file stated
     }
 ]
 ```
-This makes combining files by hand easier and uses the same mechanism as [parent-child inheritance](extensions.md#parent-child-relation) and [nested canvases](#nesting-canvases) (when merging host node and imported root node).
+This makes combining files by hand easier and uses the same mechanism as [parent-child inheritance](spec.md#parent-child-relation) and [nested canvases](#nesting-canvases) (when merging host node and imported root node).
 
 For an example of an extension, see the fictional [appendix](#appendix), [Node Extension: Circle](#node-extension-circle).
 In practice, the `@ocif/node/oval` extension can be used.
@@ -1371,6 +1419,7 @@ A circle has a port at the geometric "top" position.
 - Added OCIF type `Vector` with support for 2D/3D vectors and scalar shortcuts
 - Made `type` property required for all core node and relation extensions
 - Made specific properties required in core extensions (e.g., `start`/`end` for arrows, `ports` for ports extension)
+- Added canvas-level extensions (`data` in OCIF document)
 
 **Extension Changes:**
 - Removed `@ocif/rel/set` relation - merged functionality into `@ocif/rel/group`
@@ -1379,7 +1428,8 @@ A circle has a port at the geometric "top" position.
 - Added `@ocif/node/anchored` - percentage-based positioning relative to parent bounds
 - Added `@ocif/node/textstyle` - font styling properties for text rendering
 - Added `@ocif/node/transforms` - geometric transforms including scale, offset, and rotation
-- Updated extension versioning to use explicit version numbers (e.g., `@ocif/node/ports/0.4.1`)
+- Updated extension versioning (but not core extensions) to use explicit version numbers (e.g., `@ocif/node/ports/0.4.1`)
+- Moved `@ocif/node/parent-child` from extensions to core
 
 ### From v0.3 to v0.4
 
