@@ -830,7 +830,7 @@ Schemas are used to define
   - Due to the openness of OCIF, the JSON schema for the OCIF document cannot capture all possible [extensions](#extensions).
 - the structure of [extensions](#extensions).
 
-Schemas are stored either inline in the `schemas` property of an OCIF document or externally/remote. See [assets](#assets) for storage options.
+Schemas are stored either (1) inline in the `schemas` property of an OCIF document or (2) externally/remote. See [assets](#assets) for storage options. There is a list of [built-in schema entries](#built-in-schema-entries) which need neither to be mentioned in the `schemas` property or have their schemas included.
 
 Each entry in the `schemas` array is an object with the following properties:
 
