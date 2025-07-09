@@ -252,7 +252,7 @@ The OCIF file is a JSON object with the following properties:
 JSON schema: [schema.json](schema.json)
 
 **Example** \
-A minimal OCIF file, no visible items
+A minimal valid OCIF file without any visible items, relations or assets.
 
 ```json
 {
@@ -261,7 +261,8 @@ A minimal OCIF file, no visible items
 ```
 
 **Example** \
-A small OCIF file, with one node and one resource
+A small OCIF file, with one node and one resource.
+Visually, this should render as a box placed with the top-left corner at (100,100), an application determined size, containing the text `Hello, World!`.
 
 ```json
 {
@@ -826,7 +827,7 @@ A schema in this specification refers to a [JSON Schema](https://json-schema.org
 Schemas are used to define
 
 - a whole OCIF document,
-  - Due to the openness of OCIF, the JSON schema for the OCIF document cannot capture all possible extensions.
+  - Due to the openness of OCIF, the JSON schema for the OCIF document cannot capture all possible [extensions](#extensions).
 - the structure of [extensions](#extensions).
 
 Schemas are stored either inline in the `schemas` property of an OCIF document or externally/remote. See [assets](#assets) for storage options.
