@@ -223,6 +223,7 @@ In OCIF, it looks like this:
   ],
 }
 ```
+More examples can be found in the [cookbook](./../../cookbook.md).
 
 # File Structure
 
