@@ -2,7 +2,7 @@
 
 **Open Canvas Interchange Format (OCIF) Cookbook**
 
-A collection of examples and best practices for using OCIF.
+A collection of examples and best practices (recipes) for using OCIF.
 It is intended to help developers and designers to understand how to use OCIF in their applications.
 
 ## Canvas App Users
