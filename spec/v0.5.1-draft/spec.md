@@ -106,7 +106,8 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
   * [OCWG URL Structure (Planned)](#ocwg-url-structure-planned)
   * [Syntax Conventions](#syntax-conventions)
   * [Changes](#changes)
-    * [From v0.4 to v0.5.1-draft](#from-v04-to-v051-draft)
+    * [From v0.5 to v0.5.1-draft](#from-v05-to-v051-draft)
+    * [From v0.4 to v0.5](#from-v04-to-v05)
     * [From v0.3 to v0.4](#from-v03-to-v04)
     * [From v0.2.1 to v0.3](#from-v021-to-v03)
     * [From v0.2.0 to v0.2.1](#from-v020-to-v021)
@@ -365,7 +366,7 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
   - The _coordinate system_ has the x-axis pointing to the right, the y-axis pointing down, and the z-axis pointing away from the screen. This is the same as in CSS, SVG, and most 2D and 3D graphics libraries. The origin is the top-left corner of the canvas.
   - The unit is logical pixels (as used in CSS for `px`).
   - The positioned point (to which the `position` refers) is the top-left corner of the node.
-  - The position is global. (The computation for this position can _additionally_ be stated using the [node transforms](extensions.md#node-transforms) extension).
+  - The position is global. The computation for this position -- a local position -- can _additionally_ be stated using the [node transforms](extensions.md#node-transforms) extension. When the OCIF file is generated, such computations should be applied and the resulting global position be written redundantly into this property.
   - The default for z-axis is `0` when importing 2D as 3D.
   - When importing 3D as 2D, the z-axis is ignored (but can be left as-is). When a position is changed, the z-axis CAN be set to 0. Yes, this implies that full round-tripping is not always possible.
   - Values on all three axes can be negative.
@@ -1417,7 +1418,19 @@ A circle has a port at the geometric "top" position.
 
 ## Changes
 
-### From v0.4 to v0.5.1-draft
+
+### From v0.5 to v0.5.1-draft
+
+**Core Specification Changes:**
+- Added a `rootNode` property to allow choosing a single node as root. This helps for nesting canvases, which is now also documented.
+- Added canvas-level extensions (`data` in OCIF document), such as the new _canvas viewport_ extension.
+- Move _parent-child-relation_ to main extensions.
+- Define how to read and combine multiple extensions of the same type
+- Fix some typos
+- Updated extension versioning (but not core extensions) to use explicit version numbers (e.g., `@ocif/node/ports/0.4.1`)
+- Moved `@ocif/node/parent-child` from extensions to core
+
+### From v0.4 to v0.5
 
 **Core Specification Changes:**
 - Removed `node.scale` property - moved to `@ocif/node/transforms` extension
@@ -1425,7 +1438,6 @@ A circle has a port at the geometric "top" position.
 - Added OCIF type `Vector` with support for 2D/3D vectors and scalar shortcuts
 - Made `type` property required for all core node and relation extensions
 - Made specific properties required in core extensions (e.g., `start`/`end` for arrows, `ports` for ports extension)
-- Added canvas-level extensions (`data` in OCIF document)
 
 **Extension Changes:**
 - Removed `@ocif/rel/set` relation - merged functionality into `@ocif/rel/group`
@@ -1434,16 +1446,14 @@ A circle has a port at the geometric "top" position.
 - Added `@ocif/node/anchored` - percentage-based positioning relative to parent bounds
 - Added `@ocif/node/textstyle` - font styling properties for text rendering
 - Added `@ocif/node/transforms` - geometric transforms including scale, offset, and rotation
-- Updated extension versioning (but not core extensions) to use explicit version numbers (e.g., `@ocif/node/ports/0.4.1`)
-- Moved `@ocif/node/parent-child` from extensions to core
 
 ### From v0.3 to v0.4
 
 - Changed @ocwg to @ocif
-- Prefaced all version numbers with `v` as in `v0.5.1-draft`
+- Prefaced all version numbers with `v` as in `v0.4`
 - Moved node `scale` property to [node transforms](extensions.md#node-transforms) extension.
 - Changed from @ocwg (Open Canvas Working Group) to @ocif (Open Canvas Interchange Format) in schema names.
-- Prefaced all version numbers with `v` as in `v0.5.1-draft`
+- Prefaced all version numbers with `v` as in `v0.4`
 - Added release instructions
 
 ### From v0.2.1 to v0.3
