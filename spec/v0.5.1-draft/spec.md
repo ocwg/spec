@@ -365,7 +365,7 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
   - The _coordinate system_ has the x-axis pointing to the right, the y-axis pointing down, and the z-axis pointing away from the screen. This is the same as in CSS, SVG, and most 2D and 3D graphics libraries. The origin is the top-left corner of the canvas.
   - The unit is logical pixels (as used in CSS for `px`).
   - The positioned point (to which the `position` refers) is the top-left corner of the node.
-  - The position is global. (The computation for this position can _additionally_ be stated using the [node transforms](extensions.md#node-transforms) extension).
+  - The position is global. The computation for this position -- a local position -- can _additionally_ be stated using the [node transforms](extensions.md#node-transforms) extension. When the OCIF file is generated, such computations should be applied and the resulting global position be written redundantly into this property.
   - The default for z-axis is `0` when importing 2D as 3D.
   - When importing 3D as 2D, the z-axis is ignored (but can be left as-is). When a position is changed, the z-axis CAN be set to 0. Yes, this implies that full round-tripping is not always possible.
   - Values on all three axes can be negative.
