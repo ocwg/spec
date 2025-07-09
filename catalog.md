@@ -17,28 +17,24 @@ Mandatory fields:
 
 Optional fields:
 
-- **Name**: The proposed short name of the extension.
-- **Version**: The version of the extension. It is already part of the URI.
-- **Author**: The author of the extension.
-
-The List:
-
-<!-- TOC -->
-
-- [OCIF Extensions List](#ocif-extensions-list)
-- [Node Extensions](#node-extensions)
-  - [Arrow Node](#arrow-node)
-  - [Oval Node](#oval-node)
-  - [Path Node](#path-node)
-  - [Rectangle Node](#rectangle-node)
-  - [Ports Node](#ports-node)
-  - [Anchored Node](#anchored-node)
-  - [Text Style Node](#text-style-node)
-  - [Transforms Node](#transforms-node)
-- [Relation Extensions](#relation-extensions)
-  - [Edge Relation](#edge-relation)
-  - [Group Relation](#group-relation)
-  - [Hyperedge Relation](#hyperedge-relation)
+- **Name**: The proposed short name of the extension.<!-- TOC -->
+* [OCIF Extensions List](#ocif-extensions-list)
+* [Node Extensions](#node-extensions)
+  * [Arrow Node](#arrow-node)
+  * [Oval Node](#oval-node)
+  * [Path Node](#path-node)
+  * [Rectangle Node](#rectangle-node)
+  * [Ports Node](#ports-node)
+  * [Anchored Node](#anchored-node)
+  * [Text Style Node](#text-style-node)
+  * [Transforms Node](#transforms-node)
+* [Relation Extensions](#relation-extensions)
+  * [Edge Relation](#edge-relation)
+  * [Group Relation](#group-relation)
+  * [Hyperedge Relation](#hyperedge-relation)
+  * [Parent-Child Relation](#parent-child-relation)
+* [Deprecated Extensions](#deprecated-extensions)
+<!-- TOC -->peredge-relation)
   - [Parent-Child Relation](#parent-child-relation)
 - [Deprecated Extensions](#deprecated-extensions)
 <!-- TOC -->
