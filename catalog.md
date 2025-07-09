@@ -1,14 +1,15 @@
 # OCIF Extensions List
 
-This document lists known OCIF extensions ([see OCIF spec v0.5](spec/v0.5-draft/spec.md)).
-Listing in this file is not required for an extension to be used in an OCIF document.
-Note the extensions can even be defined within an OCIF document, without an external schema file.
+This document lists known OCIF extensions ([see OCIF spec v0.5](spec/v0.5-draft/spec.md)) as service to the community.
+Getting listed in this file is not a requirement for an extension to be used in an OCIF document.
+Extensions can be defined within an OCIF document, without an external schema file.
+It is common practice for reusable extensions to publish a JSON schema file and a README.
 All this is described in the OCIF spec.
 
 Listing in this file is not an endorsement of an extension.
 This list is merely a convenience for developers and users to find extensions that might be useful for their use case.
 
-Mandatory fields:
+Mandatory fields in this catalog:
 
 - **URI**: The URI of the extension (its unique id).
 - **Schema**: Link to JSON schema.
