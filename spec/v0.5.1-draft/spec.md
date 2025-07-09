@@ -927,15 +927,14 @@ No two canvas applications are alike:
 There are apps for informal whiteboarding, formal diagramming, quick visual sketches, node-and-wire programming, and many other use cases.
 Each of these apps has radically different feature sets.
 Extensions are an integral part of OCIF.
-They allow adding custom data to nodes, relations, and resources.
+They allow adding custom data to **nodes**, **relations**, **resources**, and the whole **canvas**.
 
-- An extension is a JSON object (used as a "property bag") with one mandatory property: `type`.
-  Thus, `type` is a reserved property key.
-  All other property keys can be used by the extension.
+## Extension Mechanism
+- An extension _is_ a JSON object (used as a "property bag") with one mandatory, reserved property: `type`.
+  The extension can use all other property keys.
 - Arbitrary, nested JSON structures are allowed.
-- Extensions SHOULD define how the base properties play together with the extension properties and with other (known) extensions.
-- Nodes and relations can have multiple extensions within their `data` array.
-- Each extension is an object with a `type` property.
+- Extensions SHOULD define how the OCIF properties play together with the extension properties and ideally with other (known) extensions.
+- Elements (nodes, relations, resources, canvas) can have multiple extensions within their `data` array.
 
 | Property | JSON Type | OCIF Type                                  | Required     | Contents          |
 |----------|-----------|:-------------------------------------------|--------------|-------------------|
