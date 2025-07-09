@@ -229,14 +229,15 @@ More examples can be found in the [cookbook](./../../cookbook.md).
 
 The OCIF file is a JSON object with the following properties:
 
-| Property    | JSON Type | OCIF Type                       | Required     | Contents                          |
-|-------------|-----------|:--------------------------------|--------------|-----------------------------------|
-| `ocif`      | `string`  | [URI](#uri)                     | **required** | The URI of the OCIF schema        |
-| `rootNode`  | `string`  | [ID](#id)                       | optional     | A canvas root [node](#nodes)      |
-| `nodes`     | `array`   | [Node](#node)[]                 | optional     | A list of [nodes](#nodes)         |
-| `relations` | `array`   | [Relation](#relation)[]         | optional     | A list of [relations](#relations) |
-| `resources` | `array`   | [Resource](#resource)[]         | optional     | A list of [resources](#resources) |
-| `schemas`   | `array`   | [Schema Entry](#schema-entry)[] | optional     | Declared [schemas](#schemas)      |
+| Property    | JSON Type | OCIF Type                         | Required     | Contents                          |
+|-------------|-----------|:----------------------------------|--------------|-----------------------------------|
+| `ocif`      | `string`  | [URI](#uri)                       | **required** | The URI of the OCIF schema        |
+| `rootNode`  | `string`  | [ID](#id)                         | optional     | A canvas root [node](#nodes)      |
+| `data`      | `array`   | array of [Extension](#extensions) | optional     | Extended canvas data              |
+| `nodes`     | `array`   | [Node](#node)[]                   | optional     | A list of [nodes](#nodes)         |
+| `relations` | `array`   | [Relation](#relation)[]           | optional     | A list of [relations](#relations) |
+| `resources` | `array`   | [Resource](#resource)[]           | optional     | A list of [resources](#resources) |
+| `schemas`   | `array`   | [Schema Entry](#schema-entry)[]   | optional     | Declared [schemas](#schemas)      |
 
 - **OCIF**: The _Open Canvas Interchange Format_ schema URI.
   - The URI SHOULD contain the version number of the schema, either as a version number or as a date (preferred).
@@ -244,10 +245,19 @@ The OCIF file is a JSON object with the following properties:
     - `https://spec.canvasprotocol.org/v0.1` Retrospectively assigned URI for the first draft at https://github.com/ocwg/spec/blob/initial-draft/README.md
     - `https://spec.canvasprotocol.org/v0.2` This is a preliminary version, as described in this draft, for experiments
     - `https://spec.canvasprotocol.org/v0.3` This is the first stable version.
+
 - **rootNode**: An optional [root node](#root-node) id. It MUST point to a node defined within the `nodes` array.
+
+- **data**: Additional properties of the canvas.
+  The canvas may have any number of extensions. Each extension is a JSON object with a `type` property.
+  See [extensions](#extensions).
+
 - **nodes**: A list of nodes on the canvas. See [Nodes](#nodes) for details.
+
 - **relations**: A list of relations between nodes (and relations). See [Relations](#relations) for details.
+
 - **resources**: A list of resources used by nodes. See [Resources](#resources) for details.
+
 - **schemas**: A list of schema entries, which are used for relation types and extensions. See [Schemas](#schemas) for details.
 
 JSON schema: [schema.json](schema.json)
@@ -283,6 +293,37 @@ Visually, this should render as a box placed with the top-left corner at (100,10
   ]
 }
 ```
+
+## Canvas Extensions
+The canvas itself, the whole OCIF document, is also an element that can be extended.
+
+### Canvas Viewport
+The initial _viewport_ of an OCIF file can be defined with this viewport extension.
+
+- Name: `@ocif/canvas/viewport`
+- URI: `https://spec.canvasprotocol.org/v0.5.1-draft/core/viewport-canvas.json`
+
+A viewport is a rectangle that defines at what part of a canvas the app should initially pan and zoom.
+The viewport is defined relative to the canvas coordinate system, which is defined by its explicit or implicit [root node](#root-node).
+A user's monitor and window sizing define an effective aspect-ratio.
+The view should be centered within the available screen space.
+The viewport should be shown as large as possible, while maintaining its defined aspect-ratio.
+Thus, the effective rendered view might be showing more of the canvas on the top and bottom or on the left and right, than stated in the viewport.
+
+| Property   | JSON Type | OCIF Type | Required     | Contents                                | Default     |
+|------------|-----------|-----------|--------------|-----------------------------------------|-------------|
+| `position` | `array`   | number[]  | **required** | Coordinate as (x,y) or (x,y,z).         | [0,0]       |
+| `size`     | `array`   | number[]  | **required** | The size of the viewport per dimension. | `[100,100]` |
+
+- **position**:
+  The top-left corner of the viewport.
+
+- **size**:
+  The width and height (in 3D: also depth) of the viewport.
+
+
+JSON schema: [viewport-canvas.json](core/viewport-canvas.json)
+
 
 # Nodes
 
@@ -608,6 +649,9 @@ Later entries overwrite earlier entries for the same `type` of extension.
 NOTE: When exporting a node from a canvas (and all its child nodes per parent-child relation), that node should become the root node of the exported sub-canvas. For consistency, all effective values, which may be inherited, need to be copied onto the exported root node.
 
 
+
+
+
 # Relations
 
 Relations are used to indicate relationships between Nodes on the canvas.
@@ -718,6 +762,7 @@ It has the following properties (in addition to standard [relation](#relation) p
 - **rel**: The type of relation represented by the edge. This is optional but can be used to indicate the kind of relation between the source and target elements. Do not confuse with the `type` of the OCIF relation. This field allows representing an RDF triple (subject, predicate, object) as (start,rel,end).
 
 JSON schema: [edge-rel.json](core/edge-rel.json)
+
 
 # Assets
 
