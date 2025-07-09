@@ -439,7 +439,8 @@ We separate global coordinates (core spec) from relative positioning (extensions
 We keep global node properties (position, size, rotation) in core spec and create dedicated extensions:
 - `@ocif/node/anchored` for percentage-based positioning relative to parent bounds
 - `@ocif/node/transforms` for relative transforms (position offset, rotation, scale)
-- Remove global `node.scale` property from core spec
+- Remove global `node.scale` property from core spec, as many apps dont need it.
+- Rotation was considered as central as position and size, so rotation remains in core, although it is also a kind of affine transform.
 
 Discussed in [GitHub #52](https://github.com/orgs/ocwg/discussions/52) and Meeting 025.
 
