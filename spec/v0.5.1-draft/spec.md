@@ -73,6 +73,7 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
   * [Text Style Node Extension](#text-style-node-extension)
   * [Theme Node Extension](#theme-node-extension)
     * [Theme Selection](#theme-selection)
+  * [Page Node Extension](#page-node-extension)
 * [Relations](#relations)
 * [Relation Extensions](#relation-extensions)
   * [Group Relation Extension](#group-relation-extension)
@@ -909,6 +910,25 @@ Example for Selecting a Theme on a Node:
 ```
 
 
+## Page Node Extension
+
+- Name: `@ocif/node/page`
+- URI: `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/page-node.json`
+
+The page node extension allows marking a node as a _page_.
+Several infinite canvas tools have a built-in page concept.
+
+| Property     | JSON Type | OCIF Type | Required | Contents              | Default |
+|--------------|-----------|-----------|----------|-----------------------|---------|
+| `pageNumber` | `number`  | number    | optional | The page number.      | `1`     |
+| `label`      | `string`  | string    | optional | A label for the page. | --      |
+
+- **pageNumber**:
+  Like in a book, pages can have a number. This number defines the order of pages, when listed. The first page should be numbered `1`.
+- **label**:
+  A label for the page. To be displayed, for example, in a special widget for selecting the current page.
+
+NOTE: When combined with the _root node_ concept, the root node is usually _not_ a page. However, it may have a number of page nodes (nodes with the page node extension) as child nodes (as indicted by the parent-child relation).
 
 
 
@@ -1767,7 +1787,7 @@ A circle has a port at the geometric "top" position.
 - Fix some typos
 - Updated extension versioning (but not core extensions) to use explicit version numbers (e.g., `@ocif/node/ports/0.4.1`)
 - Moved `@ocif/node/parent-child` from extensions to core
-
+- Added _page node extension_.
 
 
 ### From v0.4 to v0.5
