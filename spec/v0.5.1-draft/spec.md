@@ -84,6 +84,9 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
   * [Resources](#resources)
     * [Representation](#representation)
     * [Fallback](#fallback)
+    * [Nodes as Resources](#nodes-as-resources)
+      * [Semantics](#semantics)
+      * [Discussion](#discussion)
   * [Schemas](#schemas)
     * [Built-in Schema Mappings](#built-in-schema-mappings)
 * [Extensions](#extensions)
@@ -163,7 +166,7 @@ The arrow represents a relation of the kind "is capital of."
 
 ![Hello World Example image](./hello-world-example.png)
 
-In OCIF, it looks like this:
+In OCIF, it looks like this (using JSON5 here):
 
 ```json5
 {
@@ -1189,6 +1192,7 @@ OCIF knows two kinds of assets, [resources](#resources) and [schemas](#schemas).
 
 Resources are the hypermedia assets that nodes display.
 They are stored separately from Nodes to allow for asset reuse and efficiency.
+Additionally, nodes can be used a resources, too. See XXXX.
 
 Resources can be referenced by nodes or relations.
 They are stored in the `resources` property of the OCIF file.
@@ -1278,6 +1282,77 @@ Valid resource representations are
   ]
 }
 ```
+
+### Nodes as Resources
+Motivation: Using a node B as a resource in another node A can be seen as a form of _transclusion_.
+This is especially useful if a node contains a complex inner life, such as a number of child nodes (via parent-child)
+_and_ should appear in multiple places on the canvas.
+
+Nodes to be used as resources are not explicitly added to the `resources` array.
+Instead, every node in the OCIF document, is automatically available as a resources, too.
+They are addressed by prefixing the node id with `#`.
+
+Implicitly, the following mapping can be assumed:
+
+*Example* Node:
+
+```json
+{
+  "nodes": [
+    {
+      "id": "berlin-node",
+      "position": [100, 100],
+      "size": [100, 50],
+      "resource": "berlin-res",
+      "data": [
+        {
+          "type": "@ocif/node/rect",
+          "strokeWidth": 3,
+          "strokeColor": "#000000",
+          "fillColor": "#00FF00"
+        }
+      ]
+    }
+  ]
+}
+```
+*Example*: Node generates this implicit resource:
+
+```json5
+{
+  "resources": [
+    {
+      "id": "#berlin-node",
+      "representations": [ {
+          "mimeType": "application/ocif+json",
+          "content": "..." /* the JSON content of the node object */
+      } ]
+    }
+  ]
+}
+```
+#### Semantics
+If a node A contains a node B as its resource (we call this *importing*):
+
+- All properties and extensions of node B are copied into an empty node A'.
+- Then the original node properties and extensions of A are copied also into A', possibly overwriting things.
+    - In particular, the effective position and size is controlled by node A.
+- The temporary node A' is used instead of A.
+
+#### Discussion
+Given node C with child node D (via parent-child relation extension.
+A imports C.
+B imports C.
+
+A and B cannot both have D as child, because D needs a unique parent.
+Solution: The parent-child tree of C is logically duplicated, resulting in more nodes (deep copy).
+So we get A with child A-D (this is a node which has been generated on the fly and which must remember that it is a copy of D).
+A canvas app should treat changes on A-D as changes on D.
+For the user, A-D and D need to behave almost identical -- except for position and size.
+
+Relative positions should work seamlessly.
+
+
 
 ## Schemas
 
