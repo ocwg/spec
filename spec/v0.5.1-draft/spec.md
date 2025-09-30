@@ -1285,13 +1285,15 @@ Valid resource representations are
 
 ### Nodes as Resources
 Motivation: Using a node B as a resource in another node A can be seen as a form of _transclusion_.
-This is especially useful if a node contains a complex inner life, such as a number of child nodes (via parent-child)
-_and_ should appear in multiple places on the canvas.
+This is _especially_ useful if
 
-Nodes to be used as resources are not explicitly added to the `resources` array.
-Instead, every node in the OCIF document, is automatically available as a resources, too.
+- a node contains a complex inner life, such as a number of carefully placed child nodes (via parent-child)
+_and_
+- the node should appear in multiple places on the canvas.
+
+Every node in an OCIF document is automatically available as a resource, too.
 They are addressed by prefixing the node id with `#`.
-
+Nodes need not be added to the `resources` array.
 Implicitly, the following mapping can be assumed:
 
 *Example* Node:
@@ -1316,7 +1318,8 @@ Implicitly, the following mapping can be assumed:
   ]
 }
 ```
-*Example*: Node generates this implicit resource:
+*Example*: Node generates this implicit resource (not explicitly present in the `resources` array)
+
 
 ```json5
 {
@@ -1347,24 +1350,12 @@ Implicitly, the following mapping can be assumed:
 #### Semantics
 If a node A contains a node B as its resource (we call this *importing*):
 
-- All properties and extensions of node B are copied into an empty node A'.
-- Then the original node properties and extensions of A are copied also into A', possibly overwriting things.
-    - In particular, the effective position and size is controlled by node A.
-- The temporary node A' is used instead of A.
+- Node B is first rendered by the app into a bitmap or vector image.
+The actual node B might or might not be visible on the canvas.
+The app should produce an internal representation taking node Bs size into account.
 
-#### Discussion
-Given node C with child node D (via parent-child relation extension.
-A imports C.
-B imports C.
-
-A and B cannot both have D as child, because D needs a unique parent.
-Solution: The parent-child tree of C is logically duplicated, resulting in more nodes (deep copy).
-So we get A with child A-D (this is a node which has been generated on the fly and which must remember that it is a copy of D).
-A canvas app should treat changes on A-D as changes on D.
-For the user, A-D and D need to behave almost identical -- except for position and size.
-
-Relative positions should work seamlessly.
-
+- The resulting bitmap or vector image (depends on the render stack used by an app) is then treated like any other bitmap or vector resource: It has a size and some content. This virtual resource is now render by all importing nodes, including node A:
+Node A renders the resource (bitmap or vector), using all defined mechanisms, including node As `position`, `size` and `resourceFit`.
 
 
 ## Schemas
