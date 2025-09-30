@@ -1324,8 +1324,21 @@ Implicitly, the following mapping can be assumed:
     {
       "id": "#berlin-node",
       "representations": [ {
-          "mimeType": "application/ocif+json",
-          "content": "..." /* the JSON content of the node object */
+          "mimeType": "application/ocif-node+json",
+          "content": {
+            "id": "berlin-node",
+            "position": [100, 100],
+            "size": [100, 50],
+            "resource": "berlin-res",
+            "data": [
+              {
+                "type": "@ocif/node/rect",
+                "strokeWidth": 3,
+                "strokeColor": "#000000",
+                "fillColor": "#00FF00"
+              }
+            ]
+          }
       } ]
     }
   ]
