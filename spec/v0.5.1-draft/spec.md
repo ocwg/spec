@@ -931,7 +931,7 @@ Several infinite canvas tools have a built-in page concept.
 - **label**:
   A label for the page. To be displayed, for example, in a special widget for selecting the current page.
 
-NOTE: When combined with the _root node_ concept, the root node is usually _not_ a page. However, it may have a number of page nodes (nodes with the page node extension) as child nodes (as indicted by the parent-child relation).
+NOTE: When combined with the _root node_ concept, the root node is usually _not_ a page. However, it may have a number of page nodes (nodes with the page node extension) as child nodes (as indicated by the parent-child relation).
 
 
 
