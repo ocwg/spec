@@ -1285,11 +1285,10 @@ Valid resource representations are
 
 ### Nodes as Resources
 Motivation: Using a node B as a resource in another node A can be seen as a form of _transclusion_.
-This is _especially_ useful if
-
-- a node contains a complex inner life, such as a number of carefully placed child nodes (via parent-child)
-_and_
-- the node should appear in multiple places on the canvas.
+In HTML, an `IFRAME` on page A can show a page B.
+Similarly, by using another node as a resource, the importing node establishes another view (in CSS terms, a _view port_) on the canvas.
+This allows a node B to be seen in multiple places on the canvas:
+Once at the original location of B and additionally in n other places where n other nodes use node B as a resource.
 
 Every node in an OCIF document is automatically available as a resource, too.
 They are addressed by prefixing the node id with `#`.
@@ -1350,12 +1349,17 @@ Implicitly, the following mapping can be assumed:
 #### Semantics
 If a node A contains a node B as its resource (we call this *importing*):
 
-- Node B is first rendered by the app into a bitmap or vector image.
+- Node A established a kind of 'viewport' onto node B.
+- Technically, yhe app first 'renders' node B, e.g., into a bitmap or vector buffer.
 The actual node B might or might not be visible on the canvas.
-The app should produce an internal representation taking node Bs size into account.
+Other nodes might be placed on top of node B.
+In any case, node B is rendered in isolation, only taking all of its (transitive) children into account.
+The app should produce an internal representation taking node Bs size (via node Bs data and the resource of node B) into account.
 
-- The resulting bitmap or vector image (depends on the render stack used by an app) is then treated like any other bitmap or vector resource: It has a size and some content. This virtual resource is now render by all importing nodes, including node A:
-Node A renders the resource (bitmap or vector), using all defined mechanisms, including node As `position`, `size` and `resourceFit`.
+- The resulting view (most commonly internally represented as a bitmap or vector buffer) is then treated like any other image bitmap or image vector resource: It has a size and some content.
+This virtual resource is now render by all importing nodes, including node A:
+Node A renders the resource, using all defined mechanisms, including node As `position`, `size` and `resourceFit`. Different from normal resources, here the intention is to create a live view (not a static image) into the canvas. Whenever the way B looks is changed, the other places where node B is imported should be updated, too.
+
 
 
 ## Schemas
