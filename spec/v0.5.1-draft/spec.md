@@ -404,14 +404,18 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
   - `none`: All pixels are displayed in the available space unscaled. The example would be cropped down to the 100 x 200 area top-left. No auto-centering.
   - `containX`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.2`, so that it is 200 px wide and 200 px heigh.
-   This is called `keep-width` in Godot.
+  NOTE: This is called `keep-width` in Godot.
+  Empty space may be visible above and below the image.
+  Never crops the image.
   - `containY`: Scaled by keeping the aspect ratio, so that the image height matches the item height. This results in the image being displayed at a scale of `0.1`, so that it is 100 px high and 100 px wide. The image is now fully visible, but there are boxes of empty space left and right of the image.
-   This is called `keep-height` in Godot.
+  Never crops the image.
+  NOTE: This is called `keep-height` in Godot.
   - `contain`: Scaled by keeping the aspect ratio of the image, so that the image fits into the item for both height and width.
-    The image is auto-centered vertically and horizontally.
-    Empty space left and right or top and bottom might appear.
-    NOTE: This is identical to auto-selecting one of the two previous options.
-    This is called 'keep aspect centered' in Godot.
+  The image is auto-centered vertically and horizontally.
+  Empty space left and right _or_ top and bottom might appear.
+    Never crops the image.
+  NOTE: This is identical to auto-selecting one of the two previous options.
+  This is called 'keep aspect centered' in Godot.
   - `cover`: Scaled by keeping the aspect ratio of the image, so that the image fits into the item for one of height and width while the other dimension overlaps. The overlap is cropped away and not visible. The entire view area is filled.
   - `fill`: Aspect ratio is ignored and the image is simply stretched to match the width and height of the view box.
   - `tile`: If the image is larger than the viewport, it just gets cropped. If it is smaller, it gets repeated in both dimensions. CSS calls this `background-repeat: repeat`.
