@@ -4,6 +4,11 @@
   "description": "Edge relation extension",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/rel/edge",
+      "description": "Identifies the edge relation extension."
+    },
     "start": {
       "type": "string",
       "description": "ID of start (source) element."
@@ -26,5 +31,5 @@
       "description": "The ID of a node that visually represents the edge."
     }
   },
-  "required": ["start", "end"]
+  "required": ["type", "start", "end"]
 }

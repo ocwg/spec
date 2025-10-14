@@ -4,6 +4,11 @@
   "description": "Group relation extension",
   "type": "object",
   "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/rel/group",
+      "description": "Identifies the group relation extension."
+    },
     "members": {
       "type": "array",
       "description": "IDs of members of the group",
@@ -18,5 +23,5 @@
       "default": true
     }
   },
-  "required": ["members"]
+  "required": ["type", "members"]
 }

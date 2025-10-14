@@ -137,7 +137,15 @@
           "type": "string",
           "description": "The content of the resource. This is the actual data of the resource as a string. Can be base64-encoded."
         }
-      }
+      },
+      "oneOf": [
+        {
+          "required": ["content"]
+        },
+        {
+          "required": ["location"]
+        }
+      ]
     },
     "schema": {
       "type": "object",
