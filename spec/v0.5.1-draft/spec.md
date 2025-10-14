@@ -564,7 +564,7 @@ A core node has already a position, size, rotation, scale.
 - **strokeColor**:
   The color of the stroke. Default is white (`#FFFFFF`). Inspired from SVG `stroke`.
 - **fillColor**:
-  The color of the fill. Default is none / fully transparent.
+  The color of the fill. Default is none, meaning fully transparent and allowing clicks to pass through.
 
 z-order: The stroke (`strokeWidth`, `strokeColor`) SHOULD be rendered "on top" of a resource, while the fill (`fillColor`) SHOULD be rendered "behind" the resource.
 So a _fillColor_ can be used for a background-color.
