@@ -298,7 +298,7 @@ A minimal valid OCIF file without any visible items, relations or assets.
 
 **Example** \
 A small OCIF file, with one node and one resource.
-Visually, this should render as a box placed with the top-left corner at (100,100), an application determined size, containing the text `Hello, World!`.
+Visually, this should render as a box placed with the top-left corner at (100,100), an application-determined size, containing the text `Hello, World!`.
 
 ```json
 {
@@ -825,7 +825,7 @@ This extension is mainly useful to split the space of one node into several auto
 - Relative positioning requires anchoring to a parent item.
 
 - The parent position is interpreted as the root of a local coordinate system.
-NOTE: Parent extensions such as [node transforms](#node-transforms-extension) may have altered the parents coordinate system. In any case, the effective coordinate system of the parent after appllyting all extensions on it, is used.
+NOTE: Parent extensions such as [node transforms](#node-transforms-extension) may have altered the parents coordinate system. In any case, the effective coordinate system of the parent after applying all extensions on it, is used.
 
 - The parent size is added to the position and yields the coordinate of the _one_ unit.
 This is (1,1) in 2D and (1,1,1) in 3D.
@@ -974,7 +974,7 @@ Every relation has the following properties:
 | `node`   | `string`  | [ID](#id)                | optional     | ID of a visual node, which represents this relation. |
 
 Similar to nodes, there is a built-in base relation, which can use extensions.
-Contrary-to-nodes, the base extension has no pre-defined properties except the `id` and `data` properties.
+Contrary tonodes, the base extension has no pre-defined properties except the `id` and `data` properties.
 Thus, relations are very flexible.
 
 - **id**:
@@ -1055,7 +1055,7 @@ JSON schema: [group-rel.json](extensions/group-rel.json)
 - URI: `https://spec.canvasprotocol.org/v0.5.1-draft/core/edge-rel.json`
 
 An edge relates two elements (nodes and/or relation, mixing types is allowed).
-It supports directed and undirected bi-edges.
+It supports directed and undirected (bi-) edges.
 
 It has the following properties (in addition to standard [relation](#relation) properties):
 
@@ -1160,7 +1160,7 @@ Edge weight is a common requirement, and no extensions are needed for this simpl
 An enum with three values:
 
 - `in` (edge is going **into** the hyper-edge),
-- `out` (edge is going **out** from thy hyper-edge),
+- `out` (edge is going **out** from the hyper-edge),
 - `undir` (edge is attached **undirected**). This is the default.
 
 This allows representing cases such as:
@@ -1202,7 +1202,7 @@ OCIF knows two kinds of assets, [resources](#resources) and [schemas](#schemas).
 
 Resources are the hypermedia assets that nodes display.
 They are stored separately from Nodes to allow for asset reuse and efficiency.
-Additionally, nodes can be used a resources, too. See XXXX.
+Additionally, nodes can be used as resources, too. See XXXX.
 
 Resources can be referenced by nodes or relations.
 They are stored in the `resources` property of the OCIF file.
@@ -1360,7 +1360,7 @@ Implicitly, the following mapping can be assumed:
 If a node A contains a node B as its resource (we call this *importing*):
 
 - Node A established a kind of 'viewport' onto node B.
-- Technically, yhe app first 'renders' node B, e.g., into a bitmap or vector buffer.
+- Technically, the app first 'renders' node B, e.g., into a bitmap or vector buffer.
 The actual node B might or might not be visible on the canvas.
 Other nodes might be placed on top of node B.
 In any case, node B is rendered in isolation, only taking all of its (transitive) children into account.
