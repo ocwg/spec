@@ -1761,10 +1761,6 @@ It is also valid to additionally copy these schema entries in.
     {
       "name": "@ocif/node/ports",
       "uri": "https://spec.canvasprotocol.org/v0.6/extensions/ports-node.json"
-    },
-    {
-      "name": "@ocif/node/relative",
-      "uri": "https://spec.canvasprotocol.org/v0.6/extensions/relative-node.json"
     }
   ]
 }
