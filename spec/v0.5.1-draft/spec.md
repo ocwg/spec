@@ -384,7 +384,7 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
 - **size**: The size of the node in dimensions. I.e., this is **x-axis** ("width" at position `0`), **y-axis** ("height" at position `1`), and **z-axis** ("depth" at position `2`).
 
-  - Size might be omitted if a linked resource defines the size. E.g., raster images such as PNG an JPEG define their size in pixels. SVG can have a `viewbox` defined, but may also omit it. Text can be wrapped at any width, so a size property is clearly required. In general, a size property is really useful as a fall-back to display at least a kind of rectangle if the resource cannot be displayed as intended. Size can only be omitted if _all_ resource representations define a size.\
+  - Size might be omitted if a linked resource defines the size. E.g., raster images such as PNG and JPEG define their size in pixels. SVG can have a `viewbox` defined, but may also omit it. Text can be wrapped at any width, so a size property is clearly required. In general, a size property is really useful as a fall-back to display at least a kind of rectangle if the resource cannot be displayed as intended. Size can only be omitted if _all_ resource representations define a size.\
   - See also [Size and Resource](#size-and-resource)
 
 - **data**: Additional properties of the node.
@@ -402,7 +402,7 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
   How should this image be displayed? We re-use some options from CSS ([object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) property):
 
   - `none`: All pixels are displayed in the available space unscaled. The example would be cropped down to the 100 x 200 area top-left. No auto-centering.
-  - `containX`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.2`, so that it is 200 px wide and 200 px heigh.
+  - `containX`: Scaled by keeping the aspect ratio, so that the image width matches the item width. This results in the image being displayed at a scale of `0.2`, so that it is 200 px wide and 200 px high.
   NOTE: This is called `keep-width` in Godot.
   Empty space may be visible above and below the image.
   Never crops the image.
@@ -567,7 +567,7 @@ A core node has already a position, size, rotation, scale.
   The color of the fill. Default is none, meaning fully transparent and allowing clicks to pass through.
 
 z-order: The stroke (`strokeWidth`, `strokeColor`) SHOULD be rendered "on top" of a resource, while the fill (`fillColor`) SHOULD be rendered "behind" the resource.
-So a _fillColor_ can be used for a background-color.
+So a _fillColor_ can be used for a background color.
 
 These properties are meant to customize the built-in default stroke of a canvas app.
 I.e., if all shapes in a canvas app are red and a node is using the rectangle extension but defines no color, the node should be red as well. The defaults listed in the table are just examples and can be different in different canvas apps.
@@ -825,7 +825,7 @@ This extension is mainly useful to split the space of one node into several auto
 - Relative positioning requires anchoring to a parent item.
 
 - The parent position is interpreted as the root of a local coordinate system.
-NOTE: Parent extensions such as [node transforms](#node-transforms-extension) may have altered the parents coordinate system. In any case, the effective coordinate system of the parent after applying all extensions on it, is used.
+NOTE: Parent extensions such as node transforms may have altered the parent's coordinate system. In any case, the effective coordinate system of the parent after applying all extensions on it, is used.
 
 - The parent size is added to the position and yields the coordinate of the _one_ unit.
 This is (1,1) in 2D and (1,1,1) in 3D.
@@ -974,7 +974,7 @@ Every relation has the following properties:
 | `node`   | `string`  | [ID](#id)                | optional     | ID of a visual node, which represents this relation. |
 
 Similar to nodes, there is a built-in base relation, which can use extensions.
-Contrary tonodes, the base extension has no pre-defined properties except the `id` and `data` properties.
+Contrary to nodes, the base extension has no pre-defined properties except the `id` and `data` properties.
 Thus, relations are very flexible.
 
 - **id**:
@@ -1093,7 +1093,7 @@ It can be used to model inheritance, containment, or other hierarchical relation
 - **parent**: The ID of the parent node or relation. There MUST be only one parent per child.
     - If empty, the [root node of the canvas](spec.md#root-node) is the parent node. This is relevant for [node transforms](spec.md#node-transforms-extension).
 
-- **child**: The ID of the child node or relation. A parent can have multiple children (expressed my multiple parent-child relations).
+- **child**: The ID of the child node or relation. A parent can have multiple children (expressed by multiple parent-child relations).
 
 - **inherit**: A boolean flag indicating if the child should inherit properties from the parent. Default is `false`.
 
@@ -1123,7 +1123,7 @@ Hyperedges can also be used to model simple bi-edges.
 Conceptually, a hyper-edge is an entity that has a number of _endpoints_.
 For each endpoint, we allow defining the directionality of the connection.
 The endpoints are explicitly defined as an ordered list, i.e., endpoints can be addressed by their position in the list.
-Such a model allows representing all kinds of hyper-edges, even rather obscure one.
+Such a model allows representing all kinds of hyper-edges, even rather obscure ones.
 
 A hyper-edge in OCIF has the following properties:
 
@@ -1359,7 +1359,7 @@ Implicitly, the following mapping can be assumed:
 #### Semantics
 If a node A contains a node B as its resource (we call this *importing*):
 
-- Node A established a kind of 'viewport' onto node B.
+- Node A establishes a kind of 'viewport' onto node B.
 - Technically, the app first 'renders' node B, e.g., into a bitmap or vector buffer.
 The actual node B might or might not be visible on the canvas.
 Other nodes might be placed on top of node B.
@@ -1367,7 +1367,7 @@ In any case, node B is rendered in isolation, only taking all of its (transitive
 The app should produce an internal representation taking node Bs size (via node Bs data and the resource of node B) into account.
 
 - The resulting view (most commonly internally represented as a bitmap or vector buffer) is then treated like any other image bitmap or image vector resource: It has a size and some content.
-This virtual resource is now render by all importing nodes, including node A:
+This virtual resource is now rendered by all importing nodes, including node A:
 Node A renders the resource, using all defined mechanisms, including node As `position`, `size` and `resourceFit`. Different from normal resources, here the intention is to create a live view (not a static image) into the canvas. Whenever the way B looks is changed, the other places where node B is imported should be updated, too.
 
 Transclusions may not form 'loops', that is, a node MAY NOT directly or indirectly import itself. If such a loop is present, all stated imports of the loop MUST be ignored and a warning SHOULD be given.
@@ -1497,7 +1497,7 @@ They allow adding custom data to **nodes**, **relations**, **resources**, and th
 - **type**: The type of the extension. This is a URI or a simple name.
   If a name is used, that name must be present in the [schemas](#schemas) section, where it is mapped to a URI.
 
-If an element uses multiple extensions of the same type (same `type` property), the JSON fragments of the objects are by default considered to overwrite each other, as defined in [JSON Merge Path RFC 7386](https://datatracker.ietf.org/doc/html/rfc7386).
+If an element uses multiple extensions of the same type (same `type` property), the JSON fragments of the objects are by default considered to override each other, as defined in JSON Merge Path RFC 7386.
 As an example, if a node has these extensions in its `data` array:
 ```json
 [
@@ -1549,7 +1549,7 @@ Within the repo, there SHOULD be two files:
   - It MAY have a `title`. If a title is used, it should match the proposed short name, e.g. `@ocif/node/oval` or `@ocif/node/ports/v0.5.1-draft`.
   - If the extension is defined to extend just one kind of element (like all initial extensions), that kind of element SHOULD be part of the name (`node`,`relation`,`resource` or `canvas`).
 
-As an example, look at the fictive [Circle Extension](#node-extension-circle) in the appendix.
+As an example, look at the fictitious [Circle Extension](#node-extension-circle) in the appendix.
 
 ### How To Write an Extension Step-by-Step
 
