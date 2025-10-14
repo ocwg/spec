@@ -111,7 +111,6 @@ Open Canvas Interchange Format (OCIF) v0.5.1-draft © 2025 by Open Canvas Workin
 * [References](#references)
 * [Appendix](#appendix)
   * [Built-in Schema Entries](#built-in-schema-entries)
-  * [Known extensions and suggested short names](#known-extensions-and-suggested-short-names)
   * [Examples](#examples)
     * [Node Extension: Circle](#node-extension-circle)
     * [Advanced Examples](#advanced-examples)
@@ -327,7 +326,7 @@ The canvas itself, the whole OCIF document, is also an element that can be exten
 The initial _viewport_ of an OCIF file can be defined with this viewport extension.
 
 - Name: `@ocif/canvas/viewport`
-- URI: `https://spec.canvasprotocol.org/v0.5.1-draft/core/viewport-canvas.json`
+- URI: `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/viewport-canvas.json`
 
 A viewport is a rectangle that defines at what part of a canvas the app should initially pan and zoom.
 The viewport is defined relative to the canvas coordinate system, which is defined by its explicit or implicit [root node](#root-node).
@@ -1707,7 +1706,7 @@ The whole canvas is interpreted either as 2D or 3D.
 ## Built-in Schema Entries
 
 The materialized list of schema entries, as explained in [built-in schema mappings](#built-in-schema-mappings).
-Note that core extensions have no version number of their own (in the short name).
+Note that the OCIF extensions have no version number of their own (in the short name).
 They are versioned together with the OCIF spec.
 The following block can be assumed to be present in every OCIF document.
 It is also valid to additionally copy these schema entries in.
@@ -1717,56 +1716,42 @@ It is also valid to additionally copy these schema entries in.
   "schemas": [
     {
       "name": "@ocif/node/arrow",
-      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/core/arrow-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/arrow-node.json"
     },
     {
       "name": "@ocif/node/oval",
-      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/core/oval-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/oval-node.json"
     },
     {
       "name": "@ocif/node/path",
-      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/core/path-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/path-node.json"
     },
     {
       "name": "@ocif/node/rect",
-      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/core/rect-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/rect-node.json"
     },
     {
       "name": "@ocif/rel/edge",
-      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/core/edge-rel.json"
+      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/edge-rel.json"
     },
     {
       "name": "@ocif/rel/group",
-      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/core/group-rel.json"
-    }
-  ]
-}
-```
-
-## Known extensions and suggested short names
-
-The following block _cannot_ be assumed to be present in every OCIF document.
-All used extensions must be linked in the schema section.
-For an updated list of known extensions, see the [catalog.md](../../catalog.md).
-
-
-```json
-{
-  "schemas": [
+      "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/group-rel.json"
+    },
     {
-      "name": "@ocif/rel/hyperedge/0.4.1",
+      "name": "@ocif/rel/hyperedge",
       "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/hyperedge-rel.json"
     },
     {
-      "name": "@ocif/rel/parent-child/0.4.1",
+      "name": "@ocif/rel/parent-child",
       "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/parent-child-rel.json"
     },
     {
-      "name": "@ocif/node/ports/0.4.1",
+      "name": "@ocif/node/ports",
       "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/ports-node.json"
     },
     {
-      "name": "@ocif/node/relative/0.4.1",
+      "name": "@ocif/node/relative",
       "uri": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/relative-node.json"
     }
   ]
@@ -1860,9 +1845,8 @@ A circle has a port at the geometric "top" position.
 - `https://spec.canvasprotocol.org/v0.5.1-draft/spec.md` - OCIF specification version; this is also its [URI](#uri). Links in the text to the schema.
 - `https://spec.canvasprotocol.org/v0.5.1-draft/schema.json` - General OCIF JSON schema
 - Extension URIs (some selected exemplars):
-  - `https://spec.canvasprotocol.org/v0.5.1-draft/core/rect-node.json` - URI for the rectangle node extension
-  - `https://spec.canvasprotocol.org/v0.5.1-draft/core/edge-rel.json` - URI for the rectangle relation extension (core)
-  - `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/ports-node.json` - The _ports_ extension schema for nodes in version 0.4; this is also its [URI](#uri)
+  - `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/rect-node.json` - URI for the rectangle node extension
+  - `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/edge-rel.json` - URI for the rectangle relation extension
 
 ## Syntax Conventions
 - All JSON property names are camelCased. This makes it the easiest to name variables in a programming language.
@@ -1872,7 +1856,8 @@ A circle has a port at the geometric "top" position.
 
 ### From v0.5 to v0.5.1-draft
 
-**Core Specification Changes:**
+**Specification Changes:**
+- Merged _Core Extensions_ and _Extended Extensions_
 - Added a `rootNode` property to allow choosing a single node as root. This helps for nesting canvases, which is now also documented.
 - Added canvas-level extensions (`data` in OCIF document), such as the new _canvas viewport_ extension.
 - Move _parent-child-relation_ to main extensions.
