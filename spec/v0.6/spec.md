@@ -655,7 +655,7 @@ JSON schema: [arrow-node.json](extensions/arrow-node.json)
 ## Path Extension
 
 - Name: `@ocif/node/path`
-- URI: `https://spec.canvasprotocol.org/v0.6/core/path-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.6/extensions/path-node.json`
 
 A path is a visual node extension, to define the visual appearance of a node as a path.
 The rendering of resources inside a path is not defined by OCIF, but by the canvas app.
@@ -1009,7 +1009,7 @@ If this is your first read of the spec, skip over the details of the relation ty
 ## Group Relation Extension
 
 - Name: `@ocif/rel/group`
-- URI: `https://spec.canvasprotocol.org/v0.6/core/group-rel.json`
+- URI: `https://spec.canvasprotocol.org/v0.6/extensions/group-rel.json`
 
 A group relation is a relation that groups nodes together.
 Groups are known as "Groups" in most canvas apps,
@@ -1056,7 +1056,7 @@ JSON schema: [group-rel.json](extensions/group-rel.json)
 ## Edge Relation Extension
 
 - Name: `@ocif/rel/edge`
-- URI: `https://spec.canvasprotocol.org/v0.6/core/edge-rel.json`
+- URI: `https://spec.canvasprotocol.org/v0.6/extensions/edge-rel.json`
 
 An edge relates two elements (nodes and/or relation, mixing types is allowed).
 It supports directed and undirected (bi-) edges.
@@ -1454,9 +1454,9 @@ A schema array with two schemas:
 The syntax `{var}` denotes placeholders.
 To simplify the use of OCIF, a set of built-in schema mappings is defined:
 
-1. Any [Schema Name](#schema-name) of the form `@ocif/rel/{suffix}` maps to a schema [URI](#uri) `https://spec.canvasprotocol.org/v0.6/core/{suffix}-rel.json`.
+1. Any [Schema Name](#schema-name) of the form `@ocif/rel/{suffix}` maps to a schema [URI](#uri) `https://spec.canvasprotocol.org/v0.6/extensions/{suffix}-rel.json`.
 
-2. A schema name of the form `@ocif/node/{suffix}` maps to a schema URI `https://spec.canvasprotocol.org/v0.6/core/{suffix}-node.json`.
+2. A schema name of the form `@ocif/node/{suffix}` maps to a schema URI `https://spec.canvasprotocol.org/v0.6/extensions/{suffix}-node.json`.
 
 Here `v0.6` is the current version identifier of the OCIF spec. Later OCIF specs will have different versions and thus different URIs.
 
@@ -1467,11 +1467,11 @@ Built-in Entries:
   "schemas": [
     {
       "name": "@ocif/node/${ext-type}",
-      "uri": "https://spec.canvasprotocol.org/v0.6/core/${ext-type}-node.json"
+      "uri": "https://spec.canvasprotocol.org/v0.6/extensions/${ext-type}-node.json"
     },
     {
       "name": "@ocif/rel/${ext-type}",
-      "uri": "https://spec.canvasprotocol.org/v0.6/core/${ext-type}-rel.json"
+      "uri": "https://spec.canvasprotocol.org/v0.6/extensions/${ext-type}-rel.json"
     }
   ]
 }
