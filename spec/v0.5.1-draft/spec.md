@@ -758,6 +758,7 @@ JSON schema: [ports-node.json](extensions/ports-node.json)
 
 The node transform extension allows customizing the local coordinate system of a node relative to the parent coordinate system.
 This is a concept commonly found in game engines and infinitely zoomable canvases.
+For some cases, the [Anchored Node Extension](#anchored-node-extension) can be a better fit.
 
 The default parent coordinate system is the global, canvas-wide coordinate system.
 If the [parent-child-relation](#parent-child-relation-extension) is used, the defined parent node MUST be used as the one,
@@ -819,12 +820,19 @@ JSON schema: [transform-node.json](extensions/transforms-node.json)
 - Name: `@ocif/node/anchored`
 - URI: `https://spec.canvasprotocol.org/v0.5.1-draft/extensions/anchored-node.json`
 
-Relative positioning requires anchoring to a parent item.
-The parent position is interpreted as the root of a local coordinate system.
-The parent size is added to the position and yields the coordinate of the _one_.
+This extension is mainly useful to split the space of one node into several auto-resized areas. For placing elements like in a vector-drawing application, but relative to the parent node, the [node transforms](#node-transforms-extension) is often a better tool.
+
+- Relative positioning requires anchoring to a parent item.
+
+- The parent position is interpreted as the root of a local coordinate system.
+NOTE: Parent extensions such as [node transforms](#node-transforms-extension) may have altered the parents coordinate system. In any case, the effective coordinate system of the parent after appllyting all extensions on it, is used.
+
+- The parent size is added to the position and yields the coordinate of the _one_ unit.
 This is (1,1) in 2D and (1,1,1) in 3D.
-Now nodes can be positioned relative to the parent using relative positions.
-The coordinates in [0,1]x[0,1] (or [0,1]x[0,1]x[0,1] in 3D) cover any position within the parent item.
+
+- Now nodes can be positioned relative to the parent using relative positions.
+
+NOTE: The coordinates in [0,1]x[0,1] (or [0,1]x[0,1]x[0,1] in 3D) cover any position within the parent item.
 These percentage-coordinates are now used to position the item.
 
 | Property            | JSON Type                  | OCIF Type             | Required     | Contents            | Default         |
