@@ -1360,6 +1360,8 @@ The app should produce an internal representation taking node Bs size (via node 
 This virtual resource is now render by all importing nodes, including node A:
 Node A renders the resource, using all defined mechanisms, including node As `position`, `size` and `resourceFit`. Different from normal resources, here the intention is to create a live view (not a static image) into the canvas. Whenever the way B looks is changed, the other places where node B is imported should be updated, too.
 
+Transclusions may not form 'loops', that is, a node MAY NOT directly or indirectly import itself. If such a loop is present, all stated imports of the loop MUST be ignored and a warning SHOULD be given.
+
 
 
 ## Schemas
