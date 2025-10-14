@@ -335,6 +335,8 @@ The view should be centered within the available screen space.
 The viewport should be shown as large as possible, while maintaining its defined aspect-ratio.
 Thus, the effective rendered view might be showing more of the canvas on the top and bottom or on the left and right, than stated in the viewport.
 
+NOTE: To achieve this, the application should calculate a zoom factor as min(canvas_width / viewport_width, canvas_height / viewport_height). The view should then be centered by calculating the top-left pan offset as x: (canvas_width - viewport_width * zoom) / 2 and y: (canvas_height - viewport_height * zoom) / 2.
+
 | Property   | JSON Type | OCIF Type | Required     | Contents                                | Default     |
 |------------|-----------|-----------|--------------|-----------------------------------------|-------------|
 | `position` | `array`   | number[]  | **required** | Coordinate as (x,y) or (x,y,z).         | [0,0]       |
@@ -765,6 +767,8 @@ If the [parent-child-relation](#parent-child-relation-extension) is used, the de
 from which the reference coordinate system is used.
 
 The transforms affect the local coordinate system, which is used to display resources (see [spec](spec.md#size-and-resource)) and child nodes. The child nodes have global coordinates, and the node transform extension can provide the "recipe" how to calculate the global positions of a node when, e.g., the parent has been moved, rotated, or scaled.
+
+NOTE: If both a global position and a Node Transforms Extension are present, an importing application MUST treat the global position as the authoritative value for rendering. For interactive editing, if a parent node is modified, the application SHOULD recalculate and update the global position of its children using the offset from the Node Transforms Extension. If a conflict is detected on initial load, a warning SHOULD be issued, and the global position MUST be preferred.
 
 Transforms are chainable. For example, a node A may transform its coordinate system relative to the canvas. Node B may transform relative to the coordinate system of its parent A. Then node C transforms again relative to its parent B. The resulting scale, rotation, and offset computation requires computing first A, then B, then C.
 
