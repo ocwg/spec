@@ -550,7 +550,7 @@ To be placed inside the `data` `array`.
 ## Rectangle Extension
 
 - Name: `@ocif/node/rect`
-- URI: `https://spec.canvasprotocol.org/v0.6/core/rect-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.6/extensions/rect-node.json`
 
 A rectangle is a visual node [extension](#extensions), to define the visual appearance of a node as a rectangle.
 A core node has already a position, size, rotation, scale.
@@ -579,7 +579,7 @@ JSON schema: [rect-node.json](extensions/rect-node.json)
 ## Oval Extension
 
 - Name: `@ocif/node/oval`
-- URI: `https://spec.canvasprotocol.org/v0.6/core/oval-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.6/extensions/oval-node.json`
 
 An oval is a visual node extension, to define the visual appearance of a node as an oval.
 An oval in a square bounding box is a circle.
@@ -592,7 +592,7 @@ JSON schema: [oval-node.json](extensions/oval-node.json)
 ## Arrow Extension
 
 - Name: `@ocif/node/arrow`
-- URI: `https://spec.canvasprotocol.org/v0.6/core/arrow-node.json`
+- URI: `https://spec.canvasprotocol.org/v0.6/extensions/arrow-node.json`
 
 An arrow is a visual node that connects two point coordinates.
 It should be rendered as a straight line, with optional direction markers at the start and end.
