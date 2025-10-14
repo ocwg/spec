@@ -1878,7 +1878,8 @@ A circle has a port at the geometric "top" position.
 - Updated extension versioning (but not core extensions) to use explicit version numbers (e.g., `@ocif/node/ports/0.4.1`)
 - Moved `@ocif/node/parent-child` from extensions to core
 - Added _page node extension_.
-
+- Clarification on fillColor
+- Conflict Resolution for Node Transforms
 
 ### From v0.4 to v0.5
 
