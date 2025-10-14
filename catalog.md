@@ -1,6 +1,6 @@
 # OCIF Extensions List
 
-This document lists known OCIF extensions ([see OCIF spec v0.5](spec/v0.5.1-draft/spec.md)) as service to the community.
+This document lists known OCIF extensions ([see OCIF spec](spec/v0.6/spec.md)) as service to the community.
 Getting listed in this file is not a requirement for an extension to be used in an OCIF document.
 Extensions can be defined within an OCIF document, without an external schema file.
 It is common practice for reusable extensions to publish a JSON schema file and a README.
@@ -46,7 +46,7 @@ Optional fields:
 
 - Name: `@ocif/node/arrow`
 - URI: `https://spec.canvasprotocol.org/v0.5/core/arrow-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#arrow](spec/v0.5.1-draft/spec.md#arrow-extension)
+- Doc: [spec/v0.6/spec.md#arrow](spec/v0.6/spec.md#arrow-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -54,7 +54,7 @@ Optional fields:
 
 - Name: `@ocif/node/oval`
 - URI: `https://spec.canvasprotocol.org/v0.5/core/oval-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#oval](spec/v0.5.1-draft/spec.md#oval-extension)
+- Doc: [spec/v0.6/spec.md#oval](spec/v0.6/spec.md#oval-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -62,7 +62,7 @@ Optional fields:
 
 - Name: `@ocif/node/path`
 - URI: `https://spec.canvasprotocol.org/v0.5/core/path-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#path](spec/v0.5.1-draft/spec.md#path-extension)
+- Doc: [spec/v0.6/spec.md#path](spec/v0.6/spec.md#path-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -70,7 +70,7 @@ Optional fields:
 
 - Name: `@ocif/node/rect`
 - URI: `https://spec.canvasprotocol.org/v0.5/core/rect-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#rectangle](spec/v0.5.1-draft/spec.md#rectangle-extension)
+- Doc: [spec/v0.6/spec.md#rectangle](spec/v0.6/spec.md#rectangle-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -78,7 +78,7 @@ Optional fields:
 
 - Name: `@ocif/node/ports`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/ports-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#ports-node](spec/v0.5.1-draft/spec.md#ports-node-extension)
+- Doc: [spec/v0.6/spec.md#ports-node](spec/v0.6/spec.md#ports-node-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -86,7 +86,7 @@ Optional fields:
 
 - Name: `@ocif/node/anchored`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/anchored-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#anchored-node](spec/v0.5.1-draft/spec.md#anchored-node-extension)
+- Doc: [spec/v0.6/spec.md#anchored-node](spec/v0.6/spec.md#anchored-node-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -94,7 +94,7 @@ Optional fields:
 
 - Name: `@ocif/node/textstyle`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/textstyle-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#text-style-node](spec/v0.5.1-draft/spec.md#text-style-node-extension)
+- Doc: [spec/v0.6/spec.md#text-style-node](spec/v0.6/spec.md#text-style-node-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -102,7 +102,7 @@ Optional fields:
 
 - Name: `@ocif/node/transforms`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/transforms-node.json`
-- Doc: [spec/v0.5.1-draft/spec.md#transforms-node](spec/v0.5.1-draft/spec.md#node-transforms-extension)
+- Doc: [spec/v0.6/spec.md#transforms-node](spec/v0.6/spec.md#node-transforms-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -112,7 +112,7 @@ Optional fields:
 
 - Name: `@ocif/rel/edge`
 - URI: `https://spec.canvasprotocol.org/v0.5/core/edge-rel.json`
-- Doc: [spec/v0.5.1-draft/spec.md#edge-relation](spec/v0.5.1-draft/spec.md#edge-relation-extension)
+- Doc: [spec/v0.6/spec.md#edge-relation](spec/v0.6/spec.md#edge-relation-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -120,7 +120,7 @@ Optional fields:
 
 - Name: `@ocif/rel/group`
 - URI: `https://spec.canvasprotocol.org/v0.5/core/group-rel.json`
-- Doc: [spec/v0.5.1-draft/spec.md#group-relation](spec/v0.5.1-draft/spec.md#group-relation-extension)
+- Doc: [spec/v0.6/spec.md#group-relation](spec/v0.6/spec.md#group-relation-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -128,7 +128,7 @@ Optional fields:
 
 - Name: `@ocif/rel/hyperedge`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/hyperedge-rel.json`
-- Doc: [spec/v0.5.1-draft/spec.md#hyperedge-relation](spec/v0.5.1-draft/spec.md#hyperedge-relation-extension)
+- Doc: [spec/v0.6/spec.md#hyperedge-relation](spec/v0.6/spec.md#hyperedge-relation-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 
@@ -136,7 +136,7 @@ Optional fields:
 
 - Name: `@ocif/rel/parent-child`
 - URI: `https://spec.canvasprotocol.org/v0.5/extensions/parent-child-rel.json`
-- Doc: [spec/v0.5.1-draft/spec.md#parent-child-relation](spec/v0.5.1-draft/spec.md#parent-child-relation-extension)
+- Doc: [spec/v0.6/spec.md#parent-child-relation](spec/v0.6/spec.md#parent-child-relation-extension)
 - Version: v0.5
 - Author: Open Canvas Working Group
 

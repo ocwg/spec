@@ -29,7 +29,7 @@ When creating a new version of the spec:
       ```
       / https://github.com/ocwg/spec/blob/main/spec/vX.X/spec.md 302
       ```
-    - Excluding the `/spec` directory, find and replace the previous version with the new version (i.e., replace `v0.5.1-draft` with `v0.5.1-draft.1`).
+    - Excluding the `/spec` directory, find and replace the previous version with the new version (i.e., replace `v0.6` with `v0.6.1`).
         - That will update the Cookbook, Catalog, Examples, and README.md
 6. Update the version numbers on the [website](https://github.com/ocwg/canvasprotocol.org/blob/main/index.html).
 7. Consider notifying people in Discord and sending a Newsletter update.

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.canvasprotocol.org/v0.5.1-draft/extensions/textstyle-node.json",
+  "$id": "https://spec.canvasprotocol.org/v0.6/extensions/textstyle-node.json",
   "title": "@ocif/node/textstyle",
   "description": "Text style extension for rendering plain text and structured text",
   "type": "object",
