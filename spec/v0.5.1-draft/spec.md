@@ -423,7 +423,7 @@ NOTE: JSON numbers allow integer and floating-point values, so does OCIF.
 
 - **relation**:
   The ID of the relation defining the semantics of the visual node (e.g., an [arrow](#arrow-extension)).
-  The [relation](#relation) should point back to this visual node using its `node` property.
+  The [relation](#relation) SHOULD point back to this visual node using its `node` property. It MAY NOT point to another visual node.
   - Deletion semantics: If a visual node is deleted, which has a `relation` stated, that underlying relation should also be deleted.
 
 
