@@ -438,9 +438,9 @@ For text resources, the text settings (e.g., font size and line height) define h
 The `scale` factor can also be manually overwritten using the [node transforms](spec.md#node-transforms-extension).
 
 
-## Text Nodes?
+## "Text Nodes"
 
-There is no special text node in OCIF. Text is just a resource, which can be displayed by any node.
+There is no special text node in OCIF. Text is a kind of resource. A node can display a resource.
 See [Resources](#resources) for details on text resources.
 
 **Example:** A node showing "Hello, World!" as text.
@@ -470,9 +470,9 @@ See [Resources](#resources) for details on text resources.
 
 TIP: Additional node extensions (e.g. [Rectangle](#rectangle-extension)) can be used to "style" the text node, e.g., by adding a background color or a border.
 
-## Image Nodes?
+## "Image Nodes"
 
-There is no special image node in OCIF. An image is just a resource, which can be displayed by any node.
+There is no special image node in OCIF. An image is another kind of resource, which can be displayed by any node.
 
 **Example:** A node showing an image.
 
