@@ -32,14 +32,14 @@ Quick checklist:
 
 - [ ] Create a new announcement post in [GitHub Discussions](https://github.com/orgs/ocwg/discussions)
   - Use the Announcements category
-  - Title format: "OCIF [version] Candidate Recommendation"
+  - Title format: "OCIF [version] is released"
   - Include: version number, status, key features/changes, call to action for implementers
   - Reference [example 0.5 announcement](https://github.com/orgs/ocwg/discussions/57)
 
 ### 4. Send Email Announcement
 
 - [ ] Draft email announcement via [Buttondown](https://buttondown.com/ocwg)
-  - Subject format: "OCIF [version] and Candidate Recommendation"
+  - Subject format: "OCIF [version] is released"
   - Include TL;DR summary
   - Link to the GitHub Discussion post
   - Link to https://spec.canvasprotocol.org
@@ -49,9 +49,7 @@ Quick checklist:
 
 - [ ] Post in OCWG Discord #general channel
   - Link to GitHub Discussion post
-  - Link to https://spec.canvasprotocol.org
   - Brief summary of key changes
-
 - [ ] Post to Twitter and Bluesky (@jessmartin or designated account)
   - Link to GitHub Discussion post
   - Link to https://spec.canvasprotocol.org
