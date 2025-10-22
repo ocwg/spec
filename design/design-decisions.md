@@ -437,9 +437,10 @@ So the `type` property is the single reserved property name in the spec. Should 
 We separate global coordinates (core spec) from relative positioning (extensions). Apps have different capabilities - some support only global coordinates while others need relative positioning.
 
 We keep global node properties (position, size, rotation) in core spec and create dedicated extensions:
-- `@ocif/node/anchored` for percentage-based positioning relative to parent bounds  
+- `@ocif/node/anchored` for percentage-based positioning relative to parent bounds
 - `@ocif/node/transforms` for relative transforms (position offset, rotation, scale)
-- Remove global `node.scale` property from core spec
+- Remove global `node.scale` property from core spec, as many apps dont need it.
+- Rotation was considered as central as position and size, so rotation remains in core, although it is also a kind of affine transform.
 
 Discussed in [GitHub #52](https://github.com/orgs/ocwg/discussions/52) and Meeting 025.
 
@@ -449,7 +450,7 @@ We add `node.resource-fit` property with CSS-like object-fit semantics to contro
 ## Extension Consolidation and Schema Versioning (v0.5)
 We merge similar extensions and require explicit versioning to reduce spec complexity and eliminate redundancy:
 - Merge `@ocif/rel/set` functionality into `@ocif/rel/group` with added `cascadeDelete` property
-- Deprecate `@ocif/node/relative` in favor of `@ocif/node/transforms` extension  
+- Deprecate `@ocif/node/relative` in favor of `@ocif/node/transforms` extension
 - Make `type` property required for all core extensions
 - Use explicit version numbers for extensions (e.g., `@ocif/node/ports/v0.5`)
 

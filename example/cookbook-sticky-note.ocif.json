@@ -1,0 +1,20 @@
+{
+  "ocif": "https://canvasprotocol.org/ocif/v0.6",
+  "nodes": [
+    {
+      "id": "sticky-note-milk", "position": [ 100, 100 ], "size": [ 150, 75 ], "resource": "res_milk", "data": [
+      {
+        "type": "@ocif/node/rect", "fillColor": "#FFFF00"
+      }
+    ]
+    }
+  ], "resources": [
+  {
+    "id": "res_milk", "representations": [
+    {
+      "mimeType": "text/plain", "content": "Buy milk"
+    }
+  ]
+  }
+]
+}
