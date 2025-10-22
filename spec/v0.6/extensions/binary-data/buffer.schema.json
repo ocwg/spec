@@ -1,0 +1,23 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "buffer.schema.json",
+	"title": "@ocif/canvas/buffer",
+	"type": "object",
+	"description": "A buffer is a chunk of raw binary data. Buffer data may be stored in one of three ways: in an external file, in a base64-encoded string, or in the case of binary OCIF files (`.ocb`), the buffer at index 0 is used for the data chunk after the JSON at the end of the file. As an analogy, if a buffer view is a partition and an accessor is a file system, then a buffer is the whole disk.",
+	"properties": {
+		"byteLength": {
+			"type": "integer",
+			"description": "The length of the buffer in bytes. MUST NOT be negative. The actual size of the buffer data MAY be a few bytes larger than the declared length, in which case the extra bytes are unused, but MUST NOT be smaller. If the data is compressed, this refers to the uncompressed size. This property is required.",
+			"minimum": 0
+		},
+		"compression": {
+			"type": "string",
+			"description": "The compression algorithm used for the buffer data. MUST be a 4-byte string matching the binary compression format indicator magic number. For example, `Zstd` for Zstandard compression. If not specified, the buffer is uncompressed."
+		},
+		"uri": {
+			"type": "string",
+			"description": "The URI of the buffer. This may either be a relative URI to an external file, or a base64-encoded string with the prefix `data:mimetype;base64,` where mimetype is the MIME type of the data, usually `application/octet-stream`, so the header would be `data:application/octet-stream;base64,` followed by the base64-encoded data. For a binary OCIF file, buffers with data stored in chunks MUST NOT have a URI defined."
+		}
+	},
+	"required": ["byteLength"]
+}

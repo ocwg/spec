@@ -1,0 +1,30 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "buffer-view.schema.json",
+	"title": "@ocif/canvas/buffer-view",
+	"type": "object",
+	"description": "A buffer view is a slice of a buffer, defining a region of the buffer that stores data. As an analogy, if a buffer is a disk and an accessor is a file system, then a buffer view is a partition.",
+	"properties": {
+		"id": {
+			"type": "string",
+			"description": "A unique identifier for the buffer view."
+		},
+		"buffer": {
+			"type": "integer",
+			"description": "The index of the buffer that contains the data for this buffer view. This is a reference to a buffer in the OCIF file's document-level buffers array. Buffers are only intended to be referenced by buffer views, therefore they are referenced by index rather than by ID to discourage direct access in other OCIF contexts.",
+			"minimum": 0
+		},
+		"byteLength": {
+			"type": "integer",
+			"description": "The length of the buffer view in bytes. The declared byte offset plus the declared byte length MUST NOT exceed the buffer's byte length. This property is required.",
+			"minimum": 0
+		},
+		"byteOffset": {
+			"type": "integer",
+			"description": "The start offset of the buffer view in bytes. This is relative to the start of the buffer. For example, if the byte offset is 100, then byte 0 of the buffer view is byte 100 of the buffer. The declared byte offset plus the declared byte length MUST NOT exceed the buffer's byte length. This property is optional and defaults to 0.",
+			"minimum": 0,
+			"default": 0
+		}
+	},
+	"required": ["id", "buffer", "byteLength"]
+}
