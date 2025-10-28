@@ -3,6 +3,7 @@
   "title": "OCIF core v0.6.1",
   "description": "The schema for the Open Canvas Interchange Format (OCIF) Core document structure.",
   "type": "object",
+  "allOf": [{ "$ref": "#/$defs/item" }],
   "properties": {
     "ocif": {
       "type": "string",
@@ -38,14 +39,27 @@
     }
   },
   "$defs": {
-    "node": {
-      "type": "object",
-      "description": "A node in the OCIF document",
+    "item": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "A unique identifier for the node."
+          "description": "A unique identifier for the item."
         },
+        "data": {
+          "type": "array",
+          "description": "Data for the item, including data supplied by extension schemas."
+        },
+        "comment": {
+          "type": "string",
+          "description": "A comment or description of the item. This MUST NOT be used for any functional purpose by software that processes OCIF files, it is only allowed to be used for the purpose of annotating an example OCIF file with additional information when reading the raw text of the file manually, like a comment in a programming language."
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "description": "A node in the OCIF document",
+      "allOf": [{ "$ref": "#/$defs/item" }],
+      "properties": {
         "position": {
           "type": "array",
           "description": "Coordinate as (x,y) or (x,y,z).",
@@ -69,10 +83,6 @@
           "description": "Fitting resource in item",
           "enum": ["none", "containX", "containY", "contain", "cover", "fill", "tile"]
         },
-        "data": {
-          "type": "array",
-          "description": "Extended node data"
-        },
         "rotation": {
           "type": "number",
           "description": "+/- 360 degrees"
@@ -87,15 +97,8 @@
     "relation": {
       "type": "object",
       "description": "A relation between nodes",
+      "allOf": [{ "$ref": "#/$defs/item" }],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier for the relation."
-        },
-        "data": {
-          "type": "array",
-          "description": "Additional data for the relation."
-        },
         "node": {
           "type": "string",
           "description": "ID of a visual node, which represents this relation."
@@ -106,11 +109,8 @@
     "resource": {
       "type": "object",
       "description": "A resource in the OCIF document",
+      "allOf": [{ "$ref": "#/$defs/item" }],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier for the resource."
-        },
         "representations": {
           "type": "array",
           "description": "A list of representations of the resource.",

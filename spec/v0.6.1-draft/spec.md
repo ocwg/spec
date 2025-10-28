@@ -324,6 +324,7 @@ Visually, this should render as a box placed with the top-left corner at (100,10
 ## Canvas Extensions
 
 The canvas itself, the whole OCIF document, is also an element that can be extended.
+It is an OCIF item, so extensions are added to the `data` `array`.
 
 ### Canvas Viewport
 
@@ -353,6 +354,18 @@ NOTE: To achieve this, the application should calculate a zoom factor as min(can
   The width and height (in 3D: also depth) of the viewport.
 
 JSON schema: [viewport-canvas.json](extensions/viewport-canvas.json)
+
+# Items
+
+OCIF uses an abstract base type called *item*, which is extended by the node, relation, resource, and document types. It defines these common properties:
+
+| Property  | JSON Type | OCIF Type                         | Contents                              |
+| --------- | --------- | --------------------------------- | ------------------------------------- |
+| `id`      | `string`  | [ID](#id)                         | A unique identifier for the item.     |
+| `data`    | `array`   | array of [Extension](#extensions) | Extended item data                    |
+| `comment` | `string`  | string                            | A comment or description of the item. |
+
+Comments exist to annotate OCIF files with additional information when reading the raw text of the file manually, like a comment in a programming language. They MUST NOT be used for any functional purpose by software that processes OCIF files.
 
 # Nodes
 
