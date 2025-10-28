@@ -1,0 +1,94 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "accessor.schema.json",
+	"title": "@ocif/canvas/accessor",
+	"type": "object",
+	"description": "An accessor is a typed interpretation of the data in a buffer view. As an analogy, if a buffer is a disk and a buffer view is a partition, then an accessor is a file system.",
+	"properties": {
+		"id": {
+			"type": "string",
+			"description": "A unique identifier for the accessor."
+		},
+		"bufferView": {
+			"type": "string",
+			"description": "The ID of the buffer view that contains the data for this accessor. This is a reference to a buffer view in the OCIF file's document-level `bufferViews` array."
+		},
+		"primitiveType": {
+			"type": "string",
+			"description": "The primitive data type used for each primitive component in the accessor.",
+			"anyOf": [
+				{
+					"const": "float8",
+					"description": "8-bit or 1-byte IEEE-like quarter-precision floating point number with 1 sign bit, 4 exponent bits, 3 mantissa bits, max finite value 240."
+				},
+				{
+					"const": "float16",
+					"description": "16-bit or 2-byte IEEE 754 half-precision floating point number."
+				},
+				{
+					"const": "float32",
+					"description": "32-bit or 4-byte IEEE 754 single-precision floating point number."
+				},
+				{
+					"const": "float64",
+					"description": "64-bit or 8-byte IEEE 754 double-precision floating point number."
+				},
+				{
+					"const": "float128",
+					"description": "128-bit or 16-byte IEEE 754 quadruple-precision floating point number."
+				},
+				{
+					"const": "int8",
+					"description": "8-bit or 1-byte two's complement signed integer."
+				},
+				{
+					"const": "int16",
+					"description": "16-bit or 2-byte two's complement signed integer."
+				},
+				{
+					"const": "int32",
+					"description": "32-bit or 4-byte two's complement signed integer."
+				},
+				{
+					"const": "int64",
+					"description": "64-bit or 8-byte two's complement signed integer."
+				},
+				{
+					"const": "int128",
+					"description": "128-bit or 16-byte two's complement signed integer."
+				},
+				{
+					"const": "uint8",
+					"description": "8-bit or 1-byte unsigned integer."
+				},
+				{
+					"const": "uint16",
+					"description": "16-bit or 2-byte unsigned integer."
+				},
+				{
+					"const": "uint32",
+					"description": "32-bit or 4-byte unsigned integer."
+				},
+				{
+					"const": "uint64",
+					"description": "64-bit or 8-byte unsigned integer."
+				},
+				{
+					"const": "uint128",
+					"description": "128-bit or 16-byte unsigned integer."
+				},
+				{
+					"type": "string",
+					"description": "An extension-defined primitive type."
+				}
+			]
+		},
+		"vectorSize": {
+			"type": "integer",
+			"description": "The number of primitives in each element of the accessor. For scalars this is 1, for 2D vectors this is 2, for 3D vectors this is 3, for 4D vectors this is 4, and so on. Matrices can be encoded as many-dimensional vectors, such as a 4x4 matrix with this property set to 16. This number MUST be a positive integer. If not specified, the default is 1, which means each primitive is a scalar element.",
+			"minimum": 1,
+			"default": 1
+		}
+	},
+	"required": ["id", "bufferView", "primitiveType"]
+}
