@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/node/transforms",
+  "description": "Geometric transforms for nodes",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "@ocif/node/transforms"
+    },
+    "scale": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Scale factor for the node. The array contains the scale factor for each dimension."
+    },
+    "offset": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Relative position of the child node relative to the parent node. The numbers given in the array are vector-added to the position of the source node."
+    },
+    "rotation": {
+      "type": "number",
+      "description": "Relative angle in degrees. The rotation is added to the rotation of parent coordinate system."
+    },
+    "rotationAxis": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Rotation axis for 3D rotation. Default is [0,0,1] (z-axis).",
+      "default": [0, 0, 1]
+    }
+  },
+  "required": ["type"]
+}

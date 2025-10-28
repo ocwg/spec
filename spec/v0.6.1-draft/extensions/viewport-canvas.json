@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ocif/canvas/viewport",
+  "description": "A viewport is a rectangle that defines at what part of a canvas the app should initially pan and zoom.",
+  "type": "object",
+  "properties": {
+    "position": {
+      "description": "The top-left corner of the viewport.",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 3,
+      "default": [0, 0]
+    },
+    "size": {
+      "description": "The width and height (in 3D: also depth) of the viewport.",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 3,
+      "default": [100, 100]
+    }
+  },
+  "required": ["position", "size"]
+}
