@@ -35,6 +35,10 @@
       "items": {
         "$ref": "#/$defs/schema"
       }
+    },
+    "data": {
+      "type": "array",
+      "description": "Canvas-level extensions"
     }
   },
   "$defs": {

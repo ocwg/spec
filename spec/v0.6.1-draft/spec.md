@@ -324,6 +324,25 @@ Visually, this should render as a box placed with the top-left corner at (100,10
 ## Canvas Extensions
 
 The canvas itself, the whole OCIF document, is also an element that can be extended.
+Like for nodes and relations, canvas-level extensions are carried in an array named `data` on the root object of the OCIF file. Each entry in this array is an extension object with a `type` that identifies the extension and any extension-specific properties. Applications MAY add any number of canvas extensions; unknown extensions MUST be ignored.
+
+Example:
+
+```json
+{
+  "ocif": "https://spec.canvasprotocol.org/v0.6.1/schema.json",
+  "data": [
+    {
+      "type": "@ocif/canvas/viewport",
+      "position": [0, 0],
+      "size": [1000, 800]
+    }
+  ],
+  "nodes": [],
+  "relations": [],
+  "resources": []
+}
+```
 
 ### Canvas Viewport
 
@@ -342,7 +361,7 @@ Thus, the effective rendered view might be showing more of the canvas on the top
 NOTE: To achieve this, the application should calculate a zoom factor as min(canvas_width / viewport_width, canvas_height / viewport_height). The view should then be centered by calculating the top-left pan offset as x: (canvas_width - viewport_width _ zoom) / 2 and y: (canvas_height - viewport_height _ zoom) / 2.
 
 | Property   | JSON Type | OCIF Type | Required     | Contents                                | Default     |
-| ---------- | --------- | --------- | ------------ | --------------------------------------- | ----------- |
+|------------|-----------|-----------|--------------|-----------------------------------------|-------------|
 | `position` | `array`   | number[]  | **required** | Coordinate as (x,y) or (x,y,z).         | [0,0]       |
 | `size`     | `array`   | number[]  | **required** | The size of the viewport per dimension. | `[100,100]` |
 
@@ -361,7 +380,7 @@ Conceptually, a node is a rectangle (bounding box) on the canvas, often displayi
 A _Node_ is an `object` with the following properties:
 
 | Property      | JSON Type | OCIF Type                         | Required     | Contents                            | Default     |
-| ------------- | --------- | --------------------------------- | ------------ | ----------------------------------- | ----------- |
+|---------------|-----------|-----------------------------------|--------------|-------------------------------------|-------------|
 | `id`          | `string`  | [ID](#id)                         | **required** | A unique identifier for the node.   | n/a         |
 | `position`    | `array`   | number[]                          | recommended  | Coordinate as (x,y) or (x,y,z).     | [0,0]       |
 | `size`        | `array`   | number[]                          | recommended  | The size of the node per dimension. | `[100,100]` |
@@ -1825,7 +1844,11 @@ A circle has a port at the geometric "top" position.
 
 ## Changes
 
-### From v0.5 to v0.6.1
+### From v0.6 to v0.6.1
+
+- Explained canvas-level extensions better
+
+### From v0.5 to v0.6
 
 **Specification Changes:**
 
